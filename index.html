@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Woah — know what your body needs</title>
+<meta name="description" content="Woah turns your body's signals into one clear message every morning." />
+<meta name="theme-color" content="#000000" />
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    background: #000; color: #fff;
+    font-family: -apple-system, "SF Pro Text", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    min-height: 100svh; padding: 5vh 18px; gap: 20px; overflow-x: hidden;
+  }
+
+  .card {
+    position: relative; width: min(92vw, 430px); height: min(80svh, 580px);
+    border-radius: 42px; overflow: hidden;
+    background: #0b0b0f; border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 6px; padding: 34px 26px;
+  }
+  .card-glow {
+    position: absolute; left: 50%; top: 62%; width: 130%; aspect-ratio: 1;
+    transform: translate(-50%,-50%); border-radius: 50%;
+    background: radial-gradient(circle, rgba(30,200,150,0.20), rgba(30,200,150,0) 60%);
+    filter: blur(30px); pointer-events: none; transition: background 1.2s ease;
+  }
+
+  .stage {
+    position: relative; width: 100%;
+    display: flex; flex-direction: column; align-items: center; gap: 30px;
+    transition: opacity .5s ease;
+  }
+  .stage.fade { opacity: 0; }
+
+  .headline {
+    height: 72px; display: flex; align-items: center; justify-content: center;
+    text-align: center; font-size: clamp(24px, 6.6vw, 30px); font-weight: 600;
+    line-height: 1.12; letter-spacing: -0.01em; max-width: 15ch;
+  }
+
+  .bubble { position: relative; width: min(86vw, 300px); height: 112px; }
+  .bubble svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .bubble .bubble-text {
+    position: absolute; left: 0; right: 0; top: 0; bottom: 14px;
+    display: flex; align-items: center; justify-content: center; padding: 0 24px;
+    text-align: center; font-family: "New York", ui-serif, Georgia, serif; font-style: italic;
+    font-size: 16.5px; line-height: 1.45; color: rgba(255,255,255,0.95);
+  }
+
+  .orb-wrap { width: 100%; height: 212px; display: grid; place-items: center; }
+  canvas { width: 208px; height: 208px; display: block; }
+
+  .dots { display: flex; gap: 8px; }
+  .dots span { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.26); transition: all .3s ease; cursor: pointer; }
+  .dots span.on { background: #fff; width: 22px; border-radius: 4px; }
+
+  .cta {
+    position: relative; display: inline-flex; align-items: center; gap: 10px;
+    padding: 15px 30px; border-radius: 999px;
+    font-family: "New York", ui-serif, Georgia, serif;
+    font-size: 17px; font-weight: 500; letter-spacing: 0.04em;
+    color: #fff; text-decoration: none;
+    background: rgba(255,255,255,0.10);
+    backdrop-filter: blur(16px) saturate(180%); -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.18);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.45), inset 0 -6px 14px rgba(255,255,255,0.05), 0 10px 34px rgba(0,0,0,0.45);
+    transition: transform .2s ease, background .25s ease;
+  }
+  .cta::before { content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+    background: linear-gradient(180deg, rgba(255,255,255,0.28), rgba(255,255,255,0) 46%); mix-blend-mode: screen; }
+  .cta:hover { background: rgba(255,255,255,0.16); transform: translateY(-1px); }
+  .cta:active { transform: scale(0.985); }
+  .cta svg { width: 17px; height: 20px; fill: #fff; margin-top: -3px; }
+
+  .legal { font-size: 12px; color: rgba(255,255,255,0.32); }
+  .legal a { color: inherit; text-decoration: none; margin: 0 7px; }
+  .legal a:hover { color: rgba(255,255,255,0.6); }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="card-glow" id="glow"></div>
+    <div class="stage" id="stage">
+      <div class="headline" id="headline"></div>
+      <div class="bubble">
+        <svg viewBox="0 0 300 112" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M 23 1 H 283 A 16 16 0 0 1 299 17 V 76 A 22 22 0 0 1 277 98 H 179 L 165 110 L 157 98 H 15 A 14 14 0 0 1 1 84 V 23 A 22 22 0 0 1 23 1 Z"
+                fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.42)" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+        </svg>
+        <span class="bubble-text" id="bubble"></span>
+      </div>
+    </div>
+    <div class="orb-wrap"><canvas id="orb"></canvas></div>
+  </div>
+
+  <div class="dots" id="dots"></div>
+
+  <!-- Replace href with the real App Store URL once live -->
+  <a class="cta" href="#" aria-label="Woah on the App Store">
+    <svg viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+    App Store
+  </a>
+
+  <div class="legal">
+    <a href="https://petterhoglander-ai.github.io/woah-legal/privacy.html">Privacy</a>
+    <a href="https://petterhoglander-ai.github.io/woah-legal/terms.html">Terms</a>
+  </div>
+
+<script>
+const CARDS = [
+  { headline: "Meet Woah.", bubble: "Hi, I’m Woah. Health coach, sleep nerd, and your new friend.", status: 1.0, gold: 0.0 },
+  { headline: "A recovery score, every morning.", bubble: "Start every day with clarity. Know when to push, and when to recover.", status: 0.9, gold: 0.6 },
+  { headline: "Your habits, over time.", bubble: "Daily choices compound. I keep score of the long game so you don’t have to.", status: 0.9, gold: 0.6 },
+  { headline: "Bring your partner.", bubble: "Two bodies, one team. See how each other is really doing, and when to be kind.", status: 0.9, gold: 0.6 },
+  { headline: "Small nudges. Never noise.", bubble: "Personal, upbeat, a little funny. You’ll smile when they land.", status: 0.95, gold: 0.0 },
+];
+
+const stage = document.getElementById('stage');
+const hEl = document.getElementById('headline');
+const bEl = document.getElementById('bubble');
+const dotsEl = document.getElementById('dots');
+const glow = document.getElementById('glow');
+let idx = -1, timer = null;
+let curStatus = CARDS[0].status, curGold = CARDS[0].gold, targetStatus = curStatus, targetGold = curGold;
+
+CARDS.forEach((_, i) => { const d = document.createElement('span'); d.onclick = () => go(i); dotsEl.appendChild(d); });
+
+const GLOWCOL = [ "rgba(30,200,150,0.20)", "rgba(240,170,40,0.20)", "rgba(240,170,40,0.20)", "rgba(240,150,90,0.20)", "rgba(40,210,170,0.18)" ];
+
+function render(i) {
+  const c = CARDS[i];
+  hEl.textContent = c.headline;
+  bEl.textContent = c.bubble;
+  [...dotsEl.children].forEach((d, k) => d.classList.toggle('on', k === i));
+  glow.style.background = `radial-gradient(circle, ${GLOWCOL[i]}, rgba(0,0,0,0) 60%)`;
+  targetStatus = c.status; targetGold = c.gold;
+}
+function go(i) {
+  if (i === idx) return;
+  stage.classList.add('fade');
+  setTimeout(() => { idx = i; render(i); stage.classList.remove('fade'); }, 320);
+  resetTimer();
+}
+function next() { go((idx + 1) % CARDS.length); }
+function resetTimer() { clearInterval(timer); timer = setInterval(next, 5000); }
+
+idx = 0; render(0); resetTimer();
+
+const canvas = document.getElementById('orb');
+const gl = canvas.getContext('webgl', { alpha: true, premultipliedAlpha: true, antialias: true });
+
+const VERT = `attribute vec2 aPos; varying vec2 vUv; void main(){ vUv=aPos*0.5+0.5; gl_Position=vec4(aPos,0.0,1.0); }`;
+const FRAG = `
+precision highp float; varying vec2 vUv;
+uniform float uTime, uStatus, uLight, uGold; uniform vec2 uRes;
+#define PI 3.141592653589793
+float sat(float x){return clamp(x,0.0,1.0);} vec3 sat3(vec3 v){return clamp(v,0.0,1.0);}
+float hash21(vec2 p){p=fract(p*vec2(127.1,311.7));p+=dot(p,p+19.19);return fract(p.x*p.y);}
+float vnoise(vec2 p){vec2 i=floor(p),f=fract(p);vec2 u=f*f*(3.0-2.0*f);
+  return mix(mix(hash21(i),hash21(i+vec2(1.0,0.0)),u.x),mix(hash21(i+vec2(0.0,1.0)),hash21(i+vec2(1.0,1.0)),u.x),u.y);}
+vec3 thinFilm(float d,float n,float NoV){float sinI=sqrt(max(0.0,1.0-NoV*NoV));float sinT=sinI/n;
+  if(sinT>=1.0)return vec3(0.5);float cosT=sqrt(1.0-sinT*sinT);float opd=2.0*n*d*cosT;
+  vec3 lam=vec3(680.0,540.0,450.0);vec3 phase=2.0*PI*opd/lam;vec3 film=0.5+0.5*cos(phase);
+  return sat3(film*vec3(0.45,0.65,1.30));}
+void main(){
+  float t=uTime; float aspect=uRes.x/uRes.y;
+  vec2 p=vec2((vUv.x*2.0-1.0)*aspect,(vUv.y*2.0-1.0));
+  float ang=atan(p.y,p.x);
+  float wob=0.018*sin(2.0*ang+t*0.78)+0.010*sin(3.0*ang-t*0.58)+0.005*sin(5.0*ang+t*0.36)+0.003*sin(7.0*ang-t*0.47);
+  float breathe=1.0+0.010*sin(t*0.25+0.8); float R=(0.82+wob)*breathe;
+  float sdf=length(p)-R; float lightR=R;
+  if(sdf>0.05){ gl_FragColor=vec4(0.0); return; }
+  float edgeMask=smoothstep(0.05,-0.014,sdf);
+  float nz=sqrt(max(0.0,lightR*lightR-p.x*p.x-p.y*p.y));
+  vec3 N=normalize(vec3(p.x,p.y,nz)); float NoV=sat(dot(N,vec3(0.0,0.0,1.0)));
+  float rimBroad=pow(1.0-NoV,8.0); float rimNarrow=pow(1.0-NoV,14.0);
+  float n1=vnoise(vec2(ang*3.0+t*0.15,t*0.18)); float n2=vnoise(vec2(ang*5.5-t*0.22,t*0.09+2.0));
+  rimBroad*=0.62+0.28*n1+0.10*n2;
+  vec3 c1_recover=vec3(0.88,0.05,0.10),c1_caution=vec3(0.95,0.52,0.05),c1_ready=vec3(0.08,0.85,0.42);
+  vec3 c2_recover=vec3(0.62,0.03,0.16),c2_caution=vec3(0.85,0.20,0.04),c2_ready=vec3(0.04,0.58,0.70);
+  vec3 c3_recover=vec3(0.36,0.02,0.26),c3_caution=vec3(0.60,0.30,0.04),c3_ready=vec3(0.06,0.38,0.20);
+  float st=uStatus; float b1=sat(st*2.0); float b2=sat((st-0.5)*2.0);
+  vec3 rimC1_s=mix(mix(c1_recover,c1_caution,b1),c1_ready,b2);
+  vec3 rimC2_s=mix(mix(c2_recover,c2_caution,b1),c2_ready,b2);
+  vec3 rimC3_s=mix(mix(c3_recover,c3_caution,b1),c3_ready,b2);
+  vec3 c1_g=vec3(1.0,0.80,0.06),c2_g=vec3(0.95,0.40,0.02),c3_g=vec3(0.68,0.18,0.01);
+  float gm=uGold;
+  vec3 rimC1=mix(rimC1_s,c1_g,gm),rimC2=mix(rimC2_s,c2_g,gm),rimC3=mix(rimC3_s,c3_g,gm);
+  vec3 L1=normalize(vec3(cos(t*0.31),sin(t*0.31),0.55));
+  vec3 L2=normalize(vec3(cos(t*0.27+2.094),sin(t*0.27+2.094),0.45));
+  vec3 L3=normalize(vec3(cos(t*0.23+4.189),sin(t*0.23+4.189),0.60));
+  vec3 col=vec3(0.0);
+  float NdotL1=pow(max(0.0,dot(N,L1)),1.2)*(0.92+0.08*sin(t*0.22+1.3));
+  float NdotL2=pow(max(0.0,dot(N,L2)),1.6)*(0.90+0.10*sin(t*0.18+2.7));
+  float NdotL3=pow(max(0.0,dot(N,L3)),2.0);
+  col+=rimC1*NdotL1*rimBroad*1.20; col+=rimC2*NdotL2*rimBroad*0.90; col+=rimC3*NdotL3*rimBroad*0.55;
+  float d=195.0+46.0*sin(t*0.055)+22.0*sin(ang*2.0+t*0.14)+10.0*sin(ang*4.5-t*0.09);
+  d=clamp(d,145.0,280.0); vec3 film=thinFilm(d,1.35,NoV); col+=film*rimNarrow*mix(0.28,0.06,gm);
+  vec3 H=normalize(vec3(0.0,0.0,1.0)+L1); float spec=pow(sat(dot(N,H)),80.0);
+  vec3 specCol=mix(vec3(0.18,0.22,0.40),vec3(0.50,0.40,0.12),gm); col+=specCol*spec*rimNarrow*0.65;
+  col=col/(col+0.18); col=pow(max(col,vec3(0.0)),vec3(0.45));
+  float centerAlpha=0.20; float rimAlpha=pow(1.0-NoV,2.0);
+  float alpha=mix(centerAlpha,1.0,rimAlpha)*edgeMask;
+  gl_FragColor=vec4(col*alpha,alpha);
+}`;
+function compile(type,src){ const s=gl.createShader(type); gl.shaderSource(s,src); gl.compileShader(s);
+  if(!gl.getShaderParameter(s,gl.COMPILE_STATUS)) console.error(gl.getShaderInfoLog(s)); return s; }
+const prog=gl.createProgram();
+gl.attachShader(prog,compile(gl.VERTEX_SHADER,VERT)); gl.attachShader(prog,compile(gl.FRAGMENT_SHADER,FRAG));
+gl.linkProgram(prog); gl.useProgram(prog);
+const buf=gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+const aPos=gl.getAttribLocation(prog,'aPos'); gl.enableVertexAttribArray(aPos); gl.vertexAttribPointer(aPos,2,gl.FLOAT,false,0,0);
+const uTime=gl.getUniformLocation(prog,'uTime'),uRes=gl.getUniformLocation(prog,'uRes');
+const uStatus=gl.getUniformLocation(prog,'uStatus'),uLight=gl.getUniformLocation(prog,'uLight'),uGold=gl.getUniformLocation(prog,'uGold');
+gl.uniform1f(uLight,0.0);
+function resize(){ const dpr=Math.min(window.devicePixelRatio||1,2);
+  const w=canvas.clientWidth*dpr,h=canvas.clientHeight*dpr;
+  if(canvas.width!==w||canvas.height!==h){ canvas.width=w; canvas.height=h; gl.viewport(0,0,w,h); } }
+window.addEventListener('resize',resize);
+function frame(ms){ resize(); const t=ms*0.001;
+  curStatus += (targetStatus-curStatus)*0.04; curGold += (targetGold-curGold)*0.04;
+  gl.uniform1f(uTime,t); gl.uniform2f(uRes,canvas.width,canvas.height);
+  gl.uniform1f(uStatus,curStatus); gl.uniform1f(uGold,curGold);
+  gl.clearColor(0,0,0,0); gl.clear(gl.COLOR_BUFFER_BIT);
+  gl.drawArrays(gl.TRIANGLE_STRIP,0,4); requestAnimationFrame(frame);
+}
+frame(performance.now());
+document.addEventListener('visibilitychange', () => { if (!document.hidden) frame(performance.now()); });
+</script>
+</body>
+</html>
