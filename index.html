@@ -210,7 +210,7 @@
     border-radius: 26px;
     overflow: hidden;
     background: #0a0a0a;
-    box-shadow: 0 20px 56px rgba(0,0,0,0.5);
+    box-shadow: 0 10px 26px rgba(0,0,0,0.28);
     transition: filter .4s ease, box-shadow .4s ease, transform .4s var(--ease);
     /* Dim inactive tiles with brightness, not opacity — opacity would let the
        bright background video show through and read as a translucent plate. */
@@ -218,7 +218,7 @@
   }
   .shot.active {
     filter: brightness(1);
-    box-shadow: 0 26px 78px rgba(0,0,0,0.62);
+    box-shadow: 0 14px 34px rgba(0,0,0,0.34);
   }
   @media (hover: hover) and (pointer: fine) {
     .shot:hover { transform: translateY(-6px); filter: brightness(1); }
@@ -626,11 +626,14 @@ void main(){
     /* Scroll = dissolve. Opacity and a slow downward drift, driven by rAF,
        transform/opacity only. The shader pauses once fully faded. */
     let ticking = false;
+    // Base opacity: the orb never reaches full strength, so it reads as a
+    // subtle presence over the background video rather than competing with it.
+    const ORB_BASE = 0.5;
     function applyScroll() {
       ticking = false;
       const y = window.scrollY;
       const k = Math.min(1, y / (window.innerHeight * 0.72));
-      wrap.style.opacity = (1 - k).toFixed(3);
+      wrap.style.opacity = (ORB_BASE * (1 - k)).toFixed(3);
       if (!reduceMotion) {
         wrap.style.transform = 'translateY(' + (y * 0.14).toFixed(1) + 'px) scale(' + (1 + k * 0.05).toFixed(4) + ')';
       }
