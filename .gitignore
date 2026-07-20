@@ -1,2 +1,5 @@
 # internal prototype — do not publish
 orb.html
+
+# macOS junk
+.DS_Store

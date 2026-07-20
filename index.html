@@ -98,6 +98,22 @@
     overflow-x: hidden;
   }
 
+  /* ================= Background video — the backmost layer.
+     Fixed, muted, looping; sits behind the orb (both z-index 0, video first
+     in the DOM so it paints underneath). A dark scrim keeps text legible. */
+  .bg-video {
+    position: fixed; inset: 0; z-index: 0;
+    pointer-events: none; overflow: hidden;
+    background: var(--bg); /* fallback while the video loads / if it fails */
+  }
+  .bg-video video {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  .bg-video::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.20));
+  }
+
   /* ================= The orb — a vast, breathing background presence.
      Fixed behind everything; drifts and dissolves as you scroll. ========= */
   .orb-bg {
@@ -194,17 +210,18 @@
     border-radius: 26px;
     overflow: hidden;
     background: #0a0a0a;
-    border: 1px solid rgba(255,255,255,0.08);
     box-shadow: 0 20px 56px rgba(0,0,0,0.5);
-    transition: opacity .4s ease, box-shadow .4s ease, transform .4s var(--ease);
-    opacity: 0.92;
+    transition: filter .4s ease, box-shadow .4s ease, transform .4s var(--ease);
+    /* Dim inactive tiles with brightness, not opacity — opacity would let the
+       bright background video show through and read as a translucent plate. */
+    filter: brightness(0.9);
   }
   .shot.active {
-    opacity: 1;
-    box-shadow: 0 26px 78px rgba(0,0,0,0.62), 0 0 0 1px rgba(212,183,118,0.22);
+    filter: brightness(1);
+    box-shadow: 0 26px 78px rgba(0,0,0,0.62);
   }
   @media (hover: hover) and (pointer: fine) {
-    .shot:hover { transform: translateY(-6px); opacity: 1; }
+    .shot:hover { transform: translateY(-6px); filter: brightness(1); }
   }
 
   /* ---- Mobile: one screenshot at a time ---- */
@@ -379,6 +396,7 @@
   .legal a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
 
   @media (prefers-reduced-motion: reduce) {
+    .bg-video video { display: none; } /* honor reduced-motion: static backdrop only */
     .hero > * { animation: none; }
     .scroll-cue svg { animation: none; }
     .shot, .qr-pop, summary .mark { transition: none; }
@@ -388,6 +406,14 @@
 </head>
 <body>
   <script>document.documentElement.classList.add('js');</script>
+
+  <!-- Background video: the backmost layer, behind the orb and all content. -->
+  <div class="bg-video" aria-hidden="true">
+    <video autoplay muted loop playsinline preload="auto"
+           disablepictureinpicture disableremoteplayback poster="og-image.png">
+      <source src="bg-video.mp4" type="video/mp4" />
+    </video>
+  </div>
 
   <!-- The orb, now the room itself: a vast presence behind the page that
        dissolves as you scroll into the content. -->
