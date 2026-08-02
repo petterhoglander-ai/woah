@@ -402,10 +402,91 @@
     .shot, .qr-pop, summary .mark { transition: none; }
     .js .faq-head, .js .faq-item, .js .all-link { opacity: 1; transform: none; transition: none; }
   }
+
+  /* ================= Founding countdown bar — TEMPORARY CAMPAIGN =========
+     Runs until the deadline in the script at the bottom of this file, then
+     removes itself. It starts hidden and is only revealed by that script, so
+     a visitor can never be shown a dead or negative timer — not if the
+     campaign ends, not if JS fails, not if the page is served from cache.
+     To retire it: delete this block, the <aside> in <body>, and the
+     "Founding countdown" script. Nothing else references it. */
+  .founding-bar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 30;
+    display: none;
+    align-items: center; justify-content: center;
+    gap: clamp(9px, 1.6vw, 20px); flex-wrap: wrap;
+    padding: 9px clamp(44px, 5vw, 56px) 9px clamp(14px, 3vw, 28px);
+    background: rgba(12,10,7,0.86);
+    backdrop-filter: blur(18px) saturate(180%);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    border-bottom: 1px solid rgba(212,183,118,0.30);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.10), 0 12px 44px rgba(0,0,0,0.55);
+  }
+  .founding-bar.is-on { display: flex; }
+  .fb-text {
+    font-size: clamp(12.5px, 1.35vw, 14.5px); line-height: 1.35;
+    color: rgba(255,255,255,0.84); text-align: center; text-wrap: balance;
+  }
+  .fb-text em { font-family: var(--serif); font-style: italic; color: var(--gold); font-size: 1.08em; }
+  .fb-clock {
+    display: inline-flex; align-items: baseline; gap: 7px;
+    font-variant-numeric: tabular-nums; font-feature-settings: "tnum";
+    font-size: clamp(13px, 1.5vw, 15.5px); font-weight: 600;
+    color: #fff; white-space: nowrap;
+  }
+  .fb-clock span { display: inline-flex; align-items: baseline; gap: 2px; }
+  .fb-clock u {
+    text-decoration: none; font-size: 0.72em; font-weight: 500;
+    color: rgba(255,255,255,0.50);
+  }
+  .fb-cta {
+    flex-shrink: 0;
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 7px 16px; border-radius: 999px;
+    font-size: 13.5px; font-weight: 600; text-decoration: none; color: #14110c;
+    background: var(--gold);
+    transition: transform .2s var(--ease), filter .2s var(--ease);
+  }
+  .fb-cta:hover { filter: brightness(1.07); transform: translateY(-1px); }
+  .fb-cta:active { transform: scale(0.985); }
+  .fb-cta:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+  .fb-close {
+    position: absolute; top: 50%; right: clamp(8px, 1.6vw, 16px); transform: translateY(-50%);
+    width: 30px; height: 30px; display: grid; place-items: center;
+    border: 0; border-radius: 50%; cursor: pointer;
+    background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.62);
+    font-size: 17px; line-height: 1;
+    transition: background .2s var(--ease), color .2s var(--ease);
+  }
+  .fb-close:hover { background: rgba(255,255,255,0.14); color: #fff; }
+  .fb-close:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  /* Narrow phones: the sentence alone earns the full width, clock + CTA share
+     the row under it. Without this the CTA gets squeezed to two lines. */
+  @media (max-width: 560px) {
+    .founding-bar { gap: 8px 14px; padding-bottom: 10px; }
+    .fb-text { flex-basis: 100%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .fb-cta, .fb-close { transition: none; }
+  }
 </style>
 </head>
 <body>
   <script>document.documentElement.classList.add('js');</script>
+
+  <!-- Founding countdown bar (temporary campaign — see the matching CSS block
+       and the script at the bottom). Hidden until the script confirms the
+       deadline hasn't passed. -->
+  <aside class="founding-bar" id="foundingBar" aria-label="Founding membership offer">
+    <p class="fb-text">
+      <em>Founding membership</em> closes
+      <time id="fbDeadline" datetime="2026-08-05T21:59:59Z">Wednesday night</time>
+      — install before then and Woah stays free, for good.
+    </p>
+    <span class="fb-clock" id="fbClock" aria-hidden="true"></span>
+    <a class="fb-cta" href="https://apps.apple.com/se/app/woah-recovery/id6776171727">Get the app</a>
+    <button class="fb-close" id="fbClose" type="button" aria-label="Dismiss this message">&times;</button>
+  </aside>
 
   <!-- Background video: the backmost layer, behind the orb and all content. -->
   <div class="bg-video" aria-hidden="true">
@@ -717,6 +798,70 @@ void main(){
   } else {
     document.querySelectorAll('.faq-head, .faq-item, .all-link').forEach((el) => el.classList.add('in'));
   }
+
+  /* ================= Founding countdown (temporary campaign) =============
+     One absolute instant, not "three days from load": everyone counts down to
+     the same moment regardless of their clock's timezone, and a cached copy of
+     this page can't restart the campaign for a late visitor.
+
+     The bar stays hidden unless there is genuinely time left. That order
+     matters — reveal-then-check would flash an expired offer at exactly the
+     visitors who arrived too late, which is the one group it must not lie to. */
+  (function () {
+    var DEADLINE = Date.parse('2026-08-05T21:59:59Z');   // Wed 5 Aug, 23:59:59 CEST
+    var bar = document.getElementById('foundingBar');
+    if (!bar) return;
+
+    // Dismissal is remembered, so the bar asks once rather than nags. Private
+    // mode throws on localStorage, and a bar that shows anyway is far better
+    // than a page that dies here.
+    var STORE = 'woah.foundingBarDismissed';
+    try { if (localStorage.getItem(STORE)) return; } catch (e) {}
+
+    var clock = document.getElementById('fbClock');
+    var close = document.getElementById('fbClose');
+    var pad = function (n) { return n < 10 ? '0' + n : '' + n; };
+    var unit = function (v, label) {
+      return '<span>' + v + '<u>' + label + '</u></span>';
+    };
+
+    function retire() {
+      bar.remove();
+      document.body.style.paddingTop = '';
+    }
+
+    // The bar is fixed, so the hero would sit underneath it. Measure rather
+    // than hardcode: the text wraps to two rows on narrow phones, and a guessed
+    // height would either clip the brand or leave a gap.
+    function fit() {
+      document.body.style.paddingTop = bar.offsetHeight + 'px';
+    }
+
+    function tick() {
+      var left = DEADLINE - Date.now();
+      if (left <= 0) { retire(); return false; }
+      var s = Math.floor(left / 1000);
+      var d = Math.floor(s / 86400);
+      var h = Math.floor((s % 86400) / 3600);
+      var m = Math.floor((s % 3600) / 60);
+      var sec = s % 60;
+      clock.innerHTML = (d > 0 ? unit(d, 'd') : '') +
+                        unit(pad(h), 'h') + unit(pad(m), 'm') + unit(pad(sec), 's');
+      return true;
+    }
+
+    if (!tick()) return;      // already over — the bar never appears at all
+    bar.classList.add('is-on');
+    fit();
+
+    var timer = setInterval(function () { if (!tick()) clearInterval(timer); }, 1000);
+    window.addEventListener('resize', fit);
+    close.addEventListener('click', function () {
+      try { localStorage.setItem(STORE, '1'); } catch (e) {}
+      clearInterval(timer);
+      retire();
+    });
+  })();
 </script>
 </body>
 </html>
