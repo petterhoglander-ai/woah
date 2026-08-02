@@ -627,7 +627,21 @@
       disable_cookie: true,
       person_profiles: 'identified_only',
       autocapture: false,
-      disable_session_recording: true
+      disable_session_recording: true,
+      // Fire the page view ourselves. The automatic one did not produce a
+      // single request in this setup — verified live, zero capture calls on a
+      // clean load — and a silent miss is the worst failure mode for the only
+      // number this exists to produce. Explicit means exactly one per load.
+      capture_pageview: false,
+      // Not in the list the privacy policy promises, so it does not ship.
+      capture_pageleave: false,
+      // Captured here rather than by capture_pageview above, which produced no
+      // page view at all in this setup — verified against ingested data, not
+      // just the network panel: a load with the automatic setting left a
+      // $pageleave behind and no $pageview. `loaded` is the documented point
+      // at which the instance is ready, so the one event this exists to
+      // produce cannot go missing quietly.
+      loaded: function (ph) { ph.capture('$pageview'); }
     });
     // One deliberate conversion event, delegated from the document so it covers
     // every App Store link on the page — including the campaign bar's, which is
