@@ -91,5 +91,42 @@
 
 <p>See also: <a href="faq.html">FAQ</a> &middot; <a href="privacy.html">Privacy Policy</a> &middot; <a href="terms.html">Terms of Use</a></p>
 
+
+<!-- ================= Product analytics — cookieless, EU-hosted =============
+     persistence:'memory' keeps everything in page memory, so nothing is written
+     to cookies or localStorage and no consent banner is owed. The trade is real
+     and worth stating: a reload counts as a fresh visitor, so these numbers are
+     page views, not people.
+     person_profiles:'identified_only' means a visit never creates a person
+     record — site traffic therefore can't leak into the app's user counts,
+     which share this project.
+     Autocapture is off on purpose. Only two things are worth knowing here:
+     that a page was seen, and that someone left for the App Store. -->
+<script defer src="https://eu-assets.i.posthog.com/static/array.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', function () {
+    // Deferred scripts run before this event, so posthog is loaded by now.
+    // Guard anyway — a blocked or failed CDN must never throw on the page.
+    if (!window.posthog || !window.posthog.init) return;
+    posthog.init('phc_stdFgfqxUr5uxVDwpu2ee8iGZvsR9QasvRYLbtRyHKSt', {
+      api_host: 'https://eu.i.posthog.com',
+      persistence: 'memory',
+      disable_cookie: true,
+      person_profiles: 'identified_only',
+      autocapture: false,
+      disable_session_recording: true
+    });
+    // One deliberate conversion event, delegated from the document so it covers
+    // every App Store link on the page — including the campaign bar's, which is
+    // added by script — and records which one was actually hit.
+    document.addEventListener('click', function (e) {
+      var a = e.target && e.target.closest && e.target.closest('a[href*="apps.apple.com"]');
+      if (!a) return;
+      posthog.capture('appstore_click', {
+        placement: a.closest('.founding-bar') ? 'founding_bar' : 'page'
+      });
+    });
+  });
+</script>
 </body>
 </html>
