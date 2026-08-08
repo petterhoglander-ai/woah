@@ -479,9 +479,9 @@
        deadline hasn't passed. -->
   <aside class="founding-bar" id="foundingBar" aria-label="Founding membership offer">
     <p class="fb-text">
-      <em>Founding membership</em> closes
-      <time id="fbDeadline" datetime="2026-08-05T21:59:59Z">Wednesday night</time>
-      — install before then and Woah stays free, for good.
+      <em>Founding membership</em> — extended five more days, closing
+      <time id="fbDeadline" datetime="2026-08-13T21:59:59Z">Thursday night</time>.
+      Install before then and Woah stays free, for good.
     </p>
     <span class="fb-clock" id="fbClock" aria-hidden="true"></span>
     <a class="fb-cta" href="https://apps.apple.com/se/app/woah-recovery/id6776171727">Get the app</a>
@@ -811,14 +811,17 @@ void main(){
      matters — reveal-then-check would flash an expired offer at exactly the
      visitors who arrived too late, which is the one group it must not lie to. */
   (function () {
-    var DEADLINE = Date.parse('2026-08-05T21:59:59Z');   // Wed 5 Aug, 23:59:59 CEST
+    var DEADLINE = Date.parse('2026-08-13T21:59:59Z');   // Thu 13 Aug, 23:59:59 CEST
     var bar = document.getElementById('foundingBar');
     if (!bar) return;
 
     // Dismissal is remembered, so the bar asks once rather than nags. Private
     // mode throws on localStorage, and a bar that shows anyway is far better
     // than a page that dies here.
-    var STORE = 'woah.foundingBarDismissed';
+    // Versioned key: the extension is a new offer, and everyone who dismissed
+    // the first bar carries the old flag. Reusing the key would hide the
+    // extension from exactly the people who already saw the campaign once.
+    var STORE = 'woah.foundingBarDismissed.ext1';
     try { if (localStorage.getItem(STORE)) return; } catch (e) {}
 
     var clock = document.getElementById('fbClock');
