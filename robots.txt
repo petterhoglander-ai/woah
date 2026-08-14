@@ -1,4 +1,52 @@
 User-agent: *
 Allow: /
 
+# Answer engines. Allowed by the wildcard above; named explicitly so a future
+# tightening of the wildcard cannot silently cut them off.
+
+# OpenAI — OAI-SearchBot builds the index ChatGPT cites from.
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+# Anthropic
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Google AI surfaces (AI Overviews, Gemini)
+User-agent: Google-Extended
+Allow: /
+
+# Apple Intelligence
+User-agent: Applebot-Extended
+Allow: /
+
+# Others
+User-agent: bingbot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
 Sitemap: https://woah-recovery.app/sitemap.xml
