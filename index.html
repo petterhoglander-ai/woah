@@ -43,7 +43,51 @@
         "priceCurrency": "USD",
         "description": "The daily recovery score and core features are free. An optional Premium subscription unlocks history, the Lifestyle status, the AI coach and partner features."
       },
-      "author": { "@id": "https://woah-recovery.app/#org" }
+      "author": { "@id": "https://woah-recovery.app/#org" },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "ratingCount": "7",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "review": [
+        {
+          "@type": "Review",
+          "author": { "@type": "Person", "name": "iPap11" },
+          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+          "name": "Amazing App!",
+          "reviewBody": "I've used a few of these similar apps, but this one feels like the best of the bunch, it just works well for me."
+        },
+        {
+          "@type": "Review",
+          "author": { "@type": "Person", "name": "Yayy111" },
+          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+          "name": "Subtle nudges that actually land",
+          "reviewBody": "Lightweight app that keeps me on top of my recovery. Love the subtle but relevant and personal nudges — they land at the right moment without ever feeling naggy."
+        },
+        {
+          "@type": "Review",
+          "author": { "@type": "Person", "name": "AlFestrid" },
+          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+          "name": "I love it",
+          "reviewBody": "Love the design, and the partner function is great too"
+        },
+        {
+          "@type": "Review",
+          "author": { "@type": "Person", "name": "Pixll" },
+          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+          "name": "Great",
+          "reviewBody": "The best app I've tried in this category."
+        },
+        {
+          "@type": "Review",
+          "author": { "@type": "Person", "name": "Sportkakan" },
+          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+          "name": "Simple, fun, and refreshing",
+          "reviewBody": "Woah is a fun and easy-to-use app with a clean design. The concept feels fresh, good to do with your partner."
+        }
+      ]
     },
     {
       "@type": "Organization",
@@ -142,7 +186,7 @@
   /* Everything readable stacks above the orb — and never shrinks: the body is
      a flex column, and default flex-shrink would compress sections into the
      viewport instead of letting the page scroll. */
-  .hero, .faq-section, .legal { position: relative; z-index: 1; flex-shrink: 0; }
+  .hero, .reviews, .faq-section, .legal { position: relative; z-index: 1; flex-shrink: 0; }
 
   /* ================= Hero ================= */
   .hero {
@@ -314,6 +358,91 @@
   @keyframes drift { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
   .scroll-cue svg { animation: drift 2.6s ease-in-out 2.2s infinite; }
 
+  /* ================= App Store reviews — a slow, continuous roll =========
+     One track holds the five reviews twice. It slides exactly the distance
+     from card 1 to card 6, then restarts, so the loop has no visible seam.
+     The second run is aria-hidden: it is a visual duplicate, not more
+     content, and a screen reader must not read the same review twice. */
+  .reviews {
+    width: 100%;
+    padding: clamp(56px, 9vh, 112px) 0 clamp(4px, 1.5vh, 18px);
+  }
+  .rev-head { text-align: center; padding: 0 22px; margin-bottom: clamp(24px, 4.4vh, 44px); }
+  .rev-head h2 {
+    font-family: var(--serif); font-style: italic; font-weight: 300;
+    font-size: clamp(28px, 4.6vw, 42px);
+    line-height: 1.15; letter-spacing: -0.01em;
+    margin-top: 14px;
+  }
+  .rating-line {
+    display: inline-flex; align-items: center; gap: 10px;
+    margin-top: 16px;
+    font-size: 13.5px; letter-spacing: 0.02em;
+    color: rgba(255,255,255,0.60); /* ≥4.5:1 on black */
+  }
+
+  /* Star row — one sprite symbol, five uses. Decorative: the rating is
+     spelled out in words right beside it. */
+  .stars { display: inline-flex; gap: 3px; }
+  .stars svg { width: 13px; height: 13px; fill: var(--gold); display: block; }
+  .rev-card .stars svg { width: 14px; height: 14px; }
+
+  .rev-viewport {
+    overflow: hidden;
+    /* Cards dissolve at both edges instead of being chopped by the viewport */
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+            mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  }
+  .rev-track {
+    --rev-gap: clamp(14px, 2vw, 24px);
+    display: flex; align-items: stretch;
+    gap: var(--rev-gap);
+    width: max-content;
+    padding: 12px 0;
+    animation: roll 62s linear infinite;
+  }
+  /* -50% is half the track (5 cards + 4.5 gaps); the extra half-gap lands the
+     translate exactly on card 6, where card 1 stood. */
+  @keyframes roll { to { transform: translateX(calc(-50% - var(--rev-gap) / 2)); } }
+  .reviews:hover .rev-track,
+  .reviews:focus-within .rev-track { animation-play-state: paused; }
+
+  .rev-card {
+    flex: 0 0 clamp(256px, 26vw, 330px);
+    display: flex; flex-direction: column; gap: 9px;
+    padding: 22px 24px 19px;
+    border-radius: 26px;
+    background: rgba(8,8,8,0.70);
+    backdrop-filter: blur(14px) saturate(150%); -webkit-backdrop-filter: blur(14px) saturate(150%);
+    border: 1px solid rgba(212,183,118,0.26);
+    box-shadow: 0 14px 40px rgba(0,0,0,0.45);
+  }
+  .rev-card h3 {
+    font-size: 16.5px; font-weight: 600; line-height: 1.3;
+    letter-spacing: -0.005em; color: #fff;
+  }
+  .rev-card p { font-size: 15px; line-height: 1.62; color: rgba(255,255,255,0.68); }
+  .rev-card cite {
+    margin-top: auto; padding-top: 4px;
+    font-style: normal; font-size: 12.5px;
+    color: rgba(255,255,255,0.50); /* ≥4.5:1 on the card */
+  }
+
+  .rev-link {
+    display: flex; justify-content: center;
+    margin-top: clamp(18px, 3vh, 30px);
+  }
+  .rev-link a {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 6px;
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(15px, 1.8vw, 17px);
+    color: var(--gold); text-decoration: none;
+  }
+  .rev-link .arrow { display: inline-block; transition: transform .3s var(--ease); }
+  .rev-link a:hover .arrow { transform: translateX(5px); }
+  .rev-link a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 4px; }
+
   /* ================= Q&A section ================= */
   .faq-section {
     width: 100%; max-width: 720px;
@@ -401,6 +530,15 @@
     .scroll-cue svg { animation: none; }
     .shot, .qr-pop, summary .mark { transition: none; }
     .js .faq-head, .js .faq-item, .js .all-link { opacity: 1; transform: none; transition: none; }
+    /* The roll stops and the reviews become a static wrapped grid — never a
+       horizontal scroller, which would hide four of the five behind a gesture. */
+    .rev-track {
+      animation: none;
+      flex-wrap: wrap; justify-content: center;
+      width: 100%; padding: 12px 22px;
+    }
+    .rev-card[aria-hidden="true"] { display: none; }
+    .rev-viewport { -webkit-mask-image: none; mask-image: none; }
   }
 </style>
 </head>
@@ -457,6 +595,95 @@
       <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"><path d="M6 10l6 6 6-6"/></svg>
     </div>
   </header>
+
+  <!-- Star sprite: one path, used ten times per run. -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="star" viewBox="0 0 24 24"><path d="M12 1.8l3.1 6.5 7 .9-5.1 4.9 1.3 7-6.3-3.4-6.3 3.4 1.3-7L1.9 9.2l7-.9z"/></symbol>
+  </svg>
+
+  <section class="reviews" aria-label="App Store reviews">
+    <div class="rev-head">
+      <div class="section-eyebrow">App Store</div>
+      <h2>Five stars, morning after morning.</h2>
+      <div class="rating-line">
+        <span class="stars" aria-hidden="true">
+          <svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg>
+        </span>
+        <span>4.9 out of 5 on the App Store</span>
+      </div>
+    </div>
+
+    <div class="rev-viewport">
+      <div class="rev-track">
+        <figure class="rev-card">
+          <span class="stars" role="img" aria-label="5 out of 5 stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></span>
+          <h3>Amazing App!</h3>
+          <blockquote><p>I've used a few of these similar apps, but this one feels like the best of the bunch, it just works well for me&hellip;</p></blockquote>
+          <cite>iPap11</cite>
+        </figure>
+        <figure class="rev-card">
+          <span class="stars" role="img" aria-label="5 out of 5 stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></span>
+          <h3>Subtle nudges that actually land</h3>
+          <blockquote><p>Lightweight app that keeps me on top of my recovery. Love the subtle but relevant and personal nudges &mdash; they land at the right moment without ever feeling naggy.</p></blockquote>
+          <cite>Yayy111</cite>
+        </figure>
+        <figure class="rev-card">
+          <span class="stars" role="img" aria-label="5 out of 5 stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></span>
+          <h3>I love it</h3>
+          <blockquote><p>Love the design, and the partner function is great too</p></blockquote>
+          <cite>AlFestrid</cite>
+        </figure>
+        <figure class="rev-card">
+          <span class="stars" role="img" aria-label="5 out of 5 stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></span>
+          <h3>Great</h3>
+          <blockquote><p>The best app I've tried in this category.</p></blockquote>
+          <cite>Pixll</cite>
+        </figure>
+        <figure class="rev-card">
+          <span class="stars" role="img" aria-label="5 out of 5 stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></span>
+          <h3>Simple, fun, and refreshing</h3>
+          <blockquote><p>Woah is a fun and easy-to-use app with a clean design. The concept feels fresh, good to do with your partner.</p></blockquote>
+          <cite>Sportkakan</cite>
+        </figure>
+
+        <!-- Second run: pixels only, so the roll never shows a gap. -->
+        <figure class="rev-card" aria-hidden="true">
+          <span class="stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></span>
+          <h3>Amazing App!</h3>
+          <blockquote><p>I've used a few of these similar apps, but this one feels like the best of the bunch, it just works well for me&hellip;</p></blockquote>
+          <cite>iPap11</cite>
+        </figure>
+        <figure class="rev-card" aria-hidden="true">
+          <span class="stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></span>
+          <h3>Subtle nudges that actually land</h3>
+          <blockquote><p>Lightweight app that keeps me on top of my recovery. Love the subtle but relevant and personal nudges &mdash; they land at the right moment without ever feeling naggy.</p></blockquote>
+          <cite>Yayy111</cite>
+        </figure>
+        <figure class="rev-card" aria-hidden="true">
+          <span class="stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></span>
+          <h3>I love it</h3>
+          <blockquote><p>Love the design, and the partner function is great too</p></blockquote>
+          <cite>AlFestrid</cite>
+        </figure>
+        <figure class="rev-card" aria-hidden="true">
+          <span class="stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></span>
+          <h3>Great</h3>
+          <blockquote><p>The best app I've tried in this category.</p></blockquote>
+          <cite>Pixll</cite>
+        </figure>
+        <figure class="rev-card" aria-hidden="true">
+          <span class="stars"><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg></span>
+          <h3>Simple, fun, and refreshing</h3>
+          <blockquote><p>Woah is a fun and easy-to-use app with a clean design. The concept feels fresh, good to do with your partner.</p></blockquote>
+          <cite>Sportkakan</cite>
+        </figure>
+      </div>
+    </div>
+
+    <div class="rev-link">
+      <a href="https://apps.apple.com/se/app/woah-recovery/id6776171727?see-all=reviews" data-placement="reviews">Read them on the App Store<span class="arrow" aria-hidden="true">&rarr;</span></a>
+    </div>
+  </section>
 
   <section class="faq-section" aria-label="Questions and answers">
     <div class="faq-head">
@@ -761,14 +988,15 @@ void main(){
       loaded: function (ph) { ph.capture('$pageview'); }
     });
     // One deliberate conversion event, delegated from the document so it covers
-    // every App Store link on the page. `placement` is kept now that the
-    // founding bar is gone and 'page' is the only value left: the historical
-    // 'founding_bar' events are still in PostHog, and a property that vanishes
-    // mid-series breaks the charts that read it.
+    // every App Store link on the page. `placement` separates them: 'page' is
+    // the install CTA (and the historical 'founding_bar' events still sitting
+    // in PostHog — a property that vanishes mid-series breaks the charts that
+    // read it), 'reviews' is the read-the-reviews link, which is curiosity, not
+    // install intent, and must not inflate the conversion number.
     document.addEventListener('click', function (e) {
       var a = e.target && e.target.closest && e.target.closest('a[href*="apps.apple.com"]');
       if (!a) return;
-      posthog.capture('appstore_click', { placement: 'page' });
+      posthog.capture('appstore_click', { placement: a.getAttribute('data-placement') || 'page' });
     });
   });
 </script>
