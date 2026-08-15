@@ -246,11 +246,18 @@
     padding-block: 10px;
   }
   .track::-webkit-scrollbar { display: none; }
+  /* Tail spacer: without it the last tile can never reach the left edge, so
+     the last dots would all resolve to the same clamped scroll position and
+     light the wrong tile. With it, every tile has exactly one snap position. */
+  .track::after { content: ""; flex: 0 0 calc(100% - var(--shot-w)); }
 
   .shot {
     flex: 0 0 var(--shot-w);
     width: var(--shot-w);
-    scroll-snap-align: center;
+    /* start, not center: a centred first tile can only be reached by scrolling
+       to a negative offset, so mandatory snapping skipped past it and the
+       gallery opened on the second screenshot. */
+    scroll-snap-align: start;
     border-radius: 26px;
     overflow: hidden;
     background: #0a0a0a;
@@ -268,10 +275,18 @@
     .shot:hover { transform: translateY(-6px); filter: brightness(1); }
   }
 
-  /* ---- Mobile: one screenshot at a time ---- */
+  /* ---- Mobile: one and a half screenshots ----
+     The half tile on the right is the affordance: it says "there is more,
+     keep going" without an arrow, a hint or a caption. The tile width is
+     derived from the track rather than from vw, so the ratio stays exactly
+     1.5 at every phone width instead of drifting with the hero's padding.
+     The 300px cap is a vertical constraint, not a horizontal one: a tile is
+     351:760, so an uncapped 415px tile stands 898px tall and pushes the CTA
+     and the dots below the fold. Past roughly 510px wide the ratio opens up
+     beyond 1.5 — the peek, and with it the affordance, survives either way. */
   @media (max-width: 680px) {
-    :root { --shot-w: min(62vw, 300px); }
-    .track { width: var(--shot-w); }
+    :root { --shot-w: min(calc((100% - var(--gap)) / 1.5), 300px); }
+    .track { width: 100%; }
   }
   .shot img {
     display: block; width: 100%; height: auto;
@@ -902,23 +917,28 @@ void main(){
       d.setAttribute('aria-selected', on ? 'true' : 'false');
     });
   }
+  /* Offsets must be measured against the scroll container. `offsetLeft` is
+     measured from the nearest positioned ancestor — here .gallery, which sits
+     ~280px to the left of the track on desktop — so the old maths scrolled the
+     first screenshot half out of frame and shifted every dot by a tile. Rects
+     are immune to whatever the offset parent happens to be. */
+  function offsetInTrack(s) {
+    return s.getBoundingClientRect().left - track.getBoundingClientRect().left + track.scrollLeft;
+  }
   function scrollToShot(i) {
-    const s = shots[i];
-    const left = s.offsetLeft - (track.clientWidth - s.clientWidth) / 2;
-    track.scrollTo({ left, behavior: 'smooth' });
+    track.scrollTo({ left: offsetInTrack(shots[i]), behavior: 'smooth' });
   }
 
-  // Sync active shot to whichever is closest to the track centre
+  // Sync the active shot to whichever one the track is resting on — the tile
+  // at the leading edge, matching where scroll-snap-align: start puts it.
   let raf = null;
   function onScroll() {
     if (raf) return;
     raf = requestAnimationFrame(() => {
       raf = null;
-      const mid = track.scrollLeft + track.clientWidth / 2;
       let best = 0, bestDist = Infinity;
       shots.forEach((s, k) => {
-        const c = s.offsetLeft + s.clientWidth / 2;
-        const d = Math.abs(c - mid);
+        const d = Math.abs(offsetInTrack(s) - track.scrollLeft);
         if (d < bestDist) { bestDist = d; best = k; }
       });
       setActive(best);
