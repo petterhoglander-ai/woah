@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Blog — Woah</title>
+<meta name="description" content="Plain answers about recovery, HRV, sleep and what your Apple Watch data actually means, written by the person who built Woah." />
+<meta name="theme-color" content="#000000" />
+<meta name="apple-itunes-app" content="app-id=6776171727" />
+<link rel="canonical" href="https://woah-recovery.app/blog/" />
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png" />
+<link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+<meta property="og:title" content="Blog — Woah" />
+<meta property="og:description" content="Plain answers about recovery, HRV, sleep and what your Apple Watch data actually means." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://woah-recovery.app/blog/" />
+<meta property="og:image" content="https://woah-recovery.app/og-image.png" />
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Blog",
+ "@id": "https://woah-recovery.app/blog/",
+ "name": "Woah blog",
+ "description": "Plain answers about recovery, HRV, sleep and what your Apple Watch data actually means.",
+ "publisher": { "@type": "Organization", "name": "Woah", "url": "https://woah-recovery.app/" },
+ "blogPost": [
+  { "@type": "BlogPosting", "headline": "Best recovery apps for Apple Watch (2026): an honest comparison", "url": "https://woah-recovery.app/blog/best-recovery-apps-for-apple-watch.html", "datePublished": "2026-09-03", "author": { "@type": "Person", "name": "Petter Höglander" } },
+  { "@type": "BlogPosting", "headline": "Why is my HRV going down? (And what to actually do about it)", "url": "https://woah-recovery.app/blog/why-is-my-hrv-going-down.html", "datePublished": "2026-09-03", "author": { "@type": "Person", "name": "Petter Höglander" } }
+ ]
+}
+</script>
+<style>
+  @font-face {
+    font-family: "Literata";
+    font-style: italic;
+    font-weight: 200 700;
+    font-display: swap;
+    src: url("../fonts/literata-italic.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+2013-2014, U+2018-201D;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --gold: #D4B776;
+    --bg: #000;
+    --serif: "New York", "Literata", ui-serif, Georgia, serif;
+    --line: rgba(255,255,255,0.10);
+  }
+  body {
+    background: var(--bg); color: #fff;
+    font-family: -apple-system, "SF Pro Text", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100svh;
+    display: flex; flex-direction: column; align-items: center;
+    overflow-x: hidden;
+  }
+  .top {
+    position: relative; width: 100%;
+    display: flex; flex-direction: column; align-items: center;
+    gap: clamp(16px, 2.6vh, 24px);
+    padding: clamp(56px, 10vh, 110px) 22px clamp(36px, 6vh, 64px);
+    text-align: center;
+  }
+  .top::before {
+    content: ""; position: absolute; left: 50%; top: 40%;
+    width: min(88vw, 720px); aspect-ratio: 1;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(212,183,118,0.06), rgba(212,183,118,0.02) 42%, transparent 68%);
+    pointer-events: none;
+  }
+  .brand { font-size: 13px; font-weight: 600; letter-spacing: 0.44em; text-indent: 0.44em; color: var(--gold); text-transform: uppercase; text-decoration: none; }
+  .brand:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+  h1 { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: clamp(34px, 6.4vw, 58px); line-height: 1.1; letter-spacing: -0.015em; max-width: 16ch; }
+  .sub { font-family: var(--serif); font-style: italic; font-size: clamp(16px, 2vw, 19px); line-height: 1.55; color: rgba(255,255,255,0.58); max-width: 44ch; }
+
+  @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  .top > * { animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
+  .top > *:nth-child(2) { animation-delay: 0.08s; }
+  .top > *:nth-child(3) { animation-delay: 0.18s; }
+
+  main { width: 100%; max-width: 900px; padding: 0 22px clamp(48px, 8vh, 88px); animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both; }
+  .posts { list-style: none; display: grid; gap: 28px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+  .post a { display: block; color: inherit; text-decoration: none; border: 1px solid var(--line); border-radius: 22px; overflow: hidden; transition: border-color .25s ease, transform .2s ease; }
+  .post a:hover { border-color: rgba(212,183,118,0.45); transform: translateY(-2px); }
+  .post a:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+  .post img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+  .post .body { padding: 18px 20px 22px; }
+  .post .meta { font-size: 12px; letter-spacing: 0.02em; color: rgba(255,255,255,0.45); margin-bottom: 8px; }
+  .post h2 { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(20px, 2.6vw, 24px); line-height: 1.25; color: rgba(255,255,255,0.94); }
+  .post p { margin-top: 10px; font-size: 14.5px; line-height: 1.6; color: rgba(255,255,255,0.6); }
+
+  .legal { font-size: 12px; color: rgba(255,255,255,0.48); text-align: center; padding-bottom: 40px; }
+  .legal a { color: inherit; text-decoration: none; margin: 0 7px; }
+  .legal a:hover { color: rgba(255,255,255,0.75); }
+  .legal a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
+
+  @media (prefers-reduced-motion: reduce) { .top > *, main { animation: none; } .post a { transition: none; } }
+</style>
+</head>
+<body>
+
+  <header class="top">
+    <a class="brand" href="../index.html">Woah</a>
+    <h1>Data, explained.</h1>
+    <p class="sub">Plain answers about recovery, HRV, sleep and what your Apple Watch data actually means. Written by the person who built Woah.</p>
+  </header>
+
+  <main>
+    <ul class="posts">
+      <li class="post">
+        <a href="best-recovery-apps-for-apple-watch.html">
+          <img src="img/best-recovery-apps-for-apple-watch.jpg" alt="An iPhone with a dark screen and an Apple Watch on a kitchen table next to a cup of coffee" width="1376" height="774" loading="lazy" />
+          <div class="body">
+            <p class="meta"><time datetime="2026-09-03">3 September 2026</time> · 10 min read</p>
+            <h2>Best recovery apps for Apple Watch (2026): an honest comparison</h2>
+            <p>Six apps, prices checked on the day, ranked by how well they turn the Watch's data into an answer. I built one of them, so read with a raised eyebrow.</p>
+          </div>
+        </a>
+      </li>
+      <li class="post">
+        <a href="why-is-my-hrv-going-down.html">
+          <img src="img/why-is-my-hrv-going-down.jpg" alt="An Apple Watch, a glass of water and a pair of glasses on a bedside table in early morning light" width="1376" height="774" loading="lazy" />
+          <div class="body">
+            <p class="meta"><time datetime="2026-09-03">3 September 2026</time> · 7 min read</p>
+            <h2>Why is my HRV going down? (And what to actually do about it)</h2>
+            <p>The seven usual causes, how to tell a dip from a trend, and what to actually do today.</p>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </main>
+
+  <div class="legal">
+    <a href="../index.html">Home</a>
+    <a href="../faq.html">FAQ</a>
+    <a href="../support.html">Support</a>
+    <a href="https://petterhoglander-ai.github.io/woah-legal/privacy.html">Privacy</a>
+    <a href="https://petterhoglander-ai.github.io/woah-legal/terms.html">Terms</a>
+  </div>
+
+<script defer src="https://eu-assets.i.posthog.com/static/array.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', function () {
+    if (!window.posthog || !window.posthog.init) return;
+    posthog.init('phc_stdFgfqxUr5uxVDwpu2ee8iGZvsR9QasvRYLbtRyHKSt', {
+      api_host: 'https://eu.i.posthog.com',
+      persistence: 'memory',
+      disable_cookie: true,
+      person_profiles: 'identified_only',
+      autocapture: false,
+      disable_session_recording: true,
+      capture_pageview: false,
+      capture_pageleave: false,
+      loaded: function (ph) { ph.capture('$pageview'); }
+    });
+    document.addEventListener('click', function (e) {
+      var a = e.target && e.target.closest && e.target.closest('a[href*="apps.apple.com"]');
+      if (!a) return;
+      posthog.capture('appstore_click', { placement: 'blog' });
+    });
+  });
+</script>
+</body>
+</html>
