@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<!-- DRAFT: remove the robots meta and the .draft label on publish -->
+<meta name="robots" content="noindex,nofollow" />
+<title>Why Is My HRV Going Down? Causes and What to Do Today</title>
+<meta name="description" content="Your HRV keeps dropping and nobody says why. The seven usual causes, how to tell a dip from a trend, and what to actually do today." />
+<meta name="author" content="Petter Höglander" />
+<meta name="theme-color" content="#000000" />
+<meta name="apple-itunes-app" content="app-id=6776171727" />
+<link rel="canonical" href="https://woah-recovery.app/blog/why-is-my-hrv-going-down.html" />
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png" />
+<link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+<meta property="og:title" content="Why is my HRV going down? (And what to actually do about it)" />
+<meta property="og:description" content="The seven usual causes, how to tell a dip from a trend, and what to actually do today." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://woah-recovery.app/blog/why-is-my-hrv-going-down.html" />
+<meta property="og:image" content="https://woah-recovery.app/og-image.png" />
+<meta property="article:published_time" content="2026-09-03" />
+<meta property="article:author" content="Petter Höglander" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "@id": "https://woah-recovery.app/blog/why-is-my-hrv-going-down.html#article",
+   "headline": "Why is my HRV going down? (And what to actually do about it)",
+   "description": "Your HRV keeps dropping and nobody says why. The seven usual causes, how to tell a dip from a trend, and what to actually do today.",
+   "image": "https://woah-recovery.app/og-image.png",
+   "datePublished": "2026-09-03",
+   "dateModified": "2026-09-03",
+   "author": { "@type": "Person", "name": "Petter Höglander", "url": "https://woah-recovery.app/" },
+   "publisher": { "@type": "Organization", "name": "Woah", "url": "https://woah-recovery.app/", "logo": { "@type": "ImageObject", "url": "https://woah-recovery.app/icon-192.png" } },
+   "mainEntityOfPage": "https://woah-recovery.app/blog/why-is-my-hrv-going-down.html",
+   "inLanguage": "en"
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Is a low HRV dangerous?",
+     "acceptedAnswer": { "@type": "Answer", "text": "A low reading on its own is not. Chronically low HRV is associated with worse health outcomes in large studies, but that is a statistic about populations, not a diagnosis of you. If your HRV is consistently low for weeks and you also feel unwell, talk to a doctor." }
+    },
+    {
+     "@type": "Question",
+     "name": "What is a normal HRV for my age?",
+     "acceptedAnswer": { "@type": "Answer", "text": "Ranges are wide. People in their twenties often sit somewhere around 55 to 105 ms (RMSSD), people in their sixties around 25 to 45 ms, and plenty of healthy, fit people fall outside those numbers. Your own 30-day average is a far better reference than any chart." }
+    },
+    {
+     "@type": "Question",
+     "name": "Does Apple Watch measure HRV accurately?",
+     "acceptedAnswer": { "@type": "Answer", "text": "Accurately enough to see your own trend. It samples for short periods and reports SDNN, so do not compare the number with a Whoop or Oura value, and compare night readings with night readings." }
+    },
+    {
+     "@type": "Question",
+     "name": "How long does it take for HRV to recover after drinking?",
+     "acceptedAnswer": { "@type": "Answer", "text": "Usually one or two nights after a moderate amount, longer after a heavy one. The Finnish study measured the effect during the same night's sleep. Give it a couple of alcohol-free nights before you judge the trend." }
+    }
+   ]
+  }
+ ]
+}
+</script>
+<style>
+  @font-face {
+    font-family: "Literata";
+    font-style: italic;
+    font-weight: 200 700;
+    font-display: swap;
+    src: url("../fonts/literata-italic.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+2013-2014, U+2018-201D;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --gold: #D4B776;
+    --bg: #000;
+    --serif: "New York", "Literata", ui-serif, Georgia, serif;
+    --line: rgba(255,255,255,0.10);
+    --ink: rgba(255,255,255,0.86);
+    --ink-soft: rgba(255,255,255,0.62);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: #fff;
+    font-family: -apple-system, "SF Pro Text", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100svh;
+    display: flex; flex-direction: column; align-items: center;
+    overflow-x: hidden;
+  }
+
+  /* ================= Header ================= */
+  .top {
+    position: relative; width: 100%;
+    display: flex; flex-direction: column; align-items: center;
+    gap: clamp(14px, 2.2vh, 20px);
+    padding: clamp(56px, 10vh, 110px) 22px clamp(28px, 5vh, 48px);
+    text-align: center;
+  }
+  .top::before {
+    content: ""; position: absolute; left: 50%; top: 40%;
+    width: min(88vw, 720px); aspect-ratio: 1;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(212,183,118,0.06), rgba(212,183,118,0.02) 42%, transparent 68%);
+    pointer-events: none;
+  }
+  .brand {
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.44em; text-indent: 0.44em;
+    color: var(--gold); text-transform: uppercase;
+    text-decoration: none;
+  }
+  .brand:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+  .draft {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.3em; text-indent: 0.3em;
+    text-transform: uppercase; color: rgba(255,255,255,0.45);
+    border: 1px solid rgba(255,255,255,0.18); border-radius: 999px;
+    padding: 6px 12px 6px 14px;
+  }
+  h1 {
+    font-family: var(--serif); font-style: italic; font-weight: 300;
+    font-size: clamp(32px, 5.6vw, 52px);
+    line-height: 1.12; letter-spacing: -0.015em;
+    max-width: 20ch;
+  }
+  .byline {
+    font-size: 13px; letter-spacing: 0.02em;
+    color: rgba(255,255,255,0.5);
+  }
+  .byline b { font-weight: 600; color: rgba(255,255,255,0.72); }
+  .byline span + span::before { content: "·"; margin: 0 8px; color: rgba(255,255,255,0.3); }
+
+  @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  .top > * { animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
+  .top > *:nth-child(2) { animation-delay: 0.08s; }
+  .top > *:nth-child(3) { animation-delay: 0.18s; }
+  .top > *:nth-child(4) { animation-delay: 0.26s; }
+
+  /* ================= Article ================= */
+  main {
+    width: 100%; max-width: 680px;
+    padding: 0 22px clamp(48px, 8vh, 88px);
+    animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+  }
+  .lede {
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(18px, 2.3vw, 21px); line-height: 1.55;
+    color: rgba(255,255,255,0.72);
+    margin: 0 0 28px;
+  }
+  main p, main li {
+    font-size: 17px; line-height: 1.72;
+    color: var(--ink);
+  }
+  main p { margin: 0 0 18px; }
+  main h2 {
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    font-size: clamp(24px, 3.2vw, 30px); line-height: 1.25;
+    color: #fff;
+    margin: 44px 0 14px;
+  }
+  main h3 {
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.24em; text-indent: 0.24em; text-transform: uppercase;
+    color: rgba(212,183,118,0.8);
+    margin: 40px 0 12px;
+  }
+  main ul { list-style: none; margin: 0 0 18px; }
+  main ul li { padding-left: 20px; position: relative; margin-bottom: 10px; }
+  main ul li::before { content: ""; position: absolute; left: 0; top: 0.72em; width: 8px; height: 1px; background: var(--gold); }
+  main strong { color: #fff; font-weight: 600; }
+  main a { color: rgba(212,183,118,0.92); text-decoration: none; border-bottom: 1px solid rgba(212,183,118,0.35); }
+  main a:hover { border-bottom-color: rgba(212,183,118,0.9); }
+  main a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
+
+  .faq { border-top: 1px solid var(--line); margin-top: 8px; }
+  .faq details { border-bottom: 1px solid var(--line); }
+  .faq summary {
+    list-style: none; cursor: pointer;
+    display: flex; align-items: baseline; justify-content: space-between; gap: 18px;
+    padding: 18px 2px;
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    font-size: clamp(17px, 2.3vw, 20px); line-height: 1.4;
+    color: rgba(255,255,255,0.92);
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary .mark { flex: 0 0 auto; align-self: center; width: 20px; height: 20px; position: relative; opacity: 0.55; transition: transform .35s cubic-bezier(0.22,1,0.36,1), opacity .25s ease; }
+  .faq summary .mark::before, .faq summary .mark::after { content: ""; position: absolute; background: var(--gold); top: 50%; left: 50%; }
+  .faq summary .mark::before { width: 14px; height: 1px; transform: translate(-50%, -50%); }
+  .faq summary .mark::after  { width: 1px; height: 14px; transform: translate(-50%, -50%); }
+  .faq details[open] summary .mark { transform: rotate(45deg); opacity: 0.9; }
+  .faq .answer { padding: 0 34px 20px 2px; }
+  .faq .answer p { font-size: 15.5px; line-height: 1.75; color: var(--ink-soft); margin: 0; }
+
+  .sources { margin-top: 44px; padding-top: 22px; border-top: 1px solid var(--line); }
+  .sources ol { padding-left: 22px; }
+  .sources li { font-size: 13.5px; line-height: 1.6; color: rgba(255,255,255,0.55); margin-bottom: 8px; }
+  .sources li a { color: rgba(212,183,118,0.75); border-bottom: none; }
+
+  .author {
+    display: flex; gap: 16px; align-items: flex-start;
+    margin-top: 44px; padding: 20px 22px;
+    border: 1px solid var(--line); border-radius: 22px;
+  }
+  .author .dot { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, rgba(212,183,118,0.95), rgba(212,183,118,0.35) 60%, rgba(212,183,118,0.08)); }
+  .author p { font-size: 14.5px; line-height: 1.6; color: var(--ink-soft); margin: 0; }
+  .author p b { color: rgba(255,255,255,0.85); font-weight: 600; }
+
+  /* ================= Closing CTA + footer ================= */
+  .closing {
+    width: 100%;
+    display: flex; flex-direction: column; align-items: center;
+    gap: clamp(18px, 3vh, 26px);
+    padding: 0 22px clamp(44px, 7vh, 72px);
+    text-align: center;
+  }
+  .closing .lede { margin: 0; font-size: clamp(18px, 2.4vw, 22px); }
+  .cta {
+    position: relative; display: inline-flex; align-items: center; gap: 10px;
+    padding: 15px 30px; border-radius: 999px;
+    font-family: var(--serif);
+    font-size: 17px; font-weight: 500; letter-spacing: 0.04em;
+    color: #fff; text-decoration: none; cursor: pointer;
+    background: rgba(255,255,255,0.10);
+    backdrop-filter: blur(16px) saturate(180%); -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.18);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.45), inset 0 -6px 14px rgba(255,255,255,0.05), 0 10px 34px rgba(0,0,0,0.45);
+    transition: transform .2s ease, background .25s ease;
+  }
+  .cta::before { content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+    background: linear-gradient(180deg, rgba(255,255,255,0.28), rgba(255,255,255,0) 46%); mix-blend-mode: screen; }
+  .cta:hover { background: rgba(255,255,255,0.16); transform: translateY(-1px); }
+  .cta:active { transform: scale(0.985); }
+  .cta:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+  .cta svg { width: 17px; height: 20px; fill: #fff; margin-top: -3px; }
+
+  .legal { font-size: 12px; color: rgba(255,255,255,0.48); text-align: center; padding-bottom: 40px; }
+  .legal a { color: inherit; text-decoration: none; margin: 0 7px; }
+  .legal a:hover { color: rgba(255,255,255,0.75); }
+  .legal a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .top > *, main { animation: none; }
+    .faq summary .mark { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="top">
+    <a class="brand" href="../index.html">Woah</a>
+    <span class="draft">Draft · not published</span>
+    <h1>Why is my HRV going down? (And what to actually do about it)</h1>
+    <p class="byline"><span>By <b>Petter Höglander</b></span><span><time datetime="2026-09-03">3 September 2026</time></span><span>7 min read</span></p>
+  </header>
+
+  <main>
+    <article>
+      <p class="lede">Your HRV is going down. You have probably checked it a few mornings in a row now, and every morning it is a bit lower. And the app that shows you the number does not really say why.</p>
+
+      <p>Here is the short answer. HRV goes down when your body is dealing with something. A hard workout, a couple of drinks, a short night, a stressful week, a cold that has not shown up yet. One low morning means almost nothing. Several low mornings in a row means your body is asking for something, and the interesting part is figuring out what.</p>
+
+      <p>I spent years building sleep and fitness apps before I built Woah, and HRV is the number people worry about the most and understand the least. So let me try to explain it the way I wish someone had explained it to me.</p>
+
+      <h2>What HRV actually measures</h2>
+      <p>HRV, heart rate variability, is the small variation in time between your heartbeats. If your heart beats 60 times a minute, it is not beating exactly once per second. Sometimes the gap is 0.95 seconds, sometimes 1.05. That variation is HRV, measured in milliseconds.</p>
+      <p>More variation usually means your nervous system is in rest-and-recover mode. Less variation means it is in fight-or-flight mode, or simply busy with something. That is it. HRV is not a fitness score and it is not a health grade. It is a snapshot of how much your body is handling right now.</p>
+
+      <h2>Why one low reading means almost nothing</h2>
+      <p>The problem is that HRV is noisy. It moves a lot from one night to the next for reasons that have nothing to do with your health: when the watch happened to take the reading, how you were lying, whether you had just turned over.</p>
+      <p>It is also extremely personal. Someone whose normal is 30 ms and wakes up at 32 is fine. Someone whose normal is 65 ms and wakes up at 32 has had a rough night. Same number, completely different meaning. That is why comparing yourself to an age chart, or to your friend's Oura, is close to useless. The only comparison that means anything is you against your own normal.</p>
+      <p>The research says the same thing. When <a href="https://pubmed.ncbi.nlm.nih.gov/23852425/" rel="noopener">Plews and colleagues</a> looked at HRV in elite endurance athletes (Sports Medicine, 2013), single-day values were too noisy to guide anything. It was the 7-day rolling average that actually tracked how the athletes were adapting to training. One morning is weather. A week is climate.</p>
+
+      <h2>The seven things that usually push HRV down</h2>
+      <p><strong>1. Alcohol.</strong> The biggest and most predictable one. In a study of 4,098 Finnish adults (<a href="https://mental.jmir.org/2018/1/e23/" rel="noopener">Pietilä et al., JMIR Mental Health, 2018</a>), even a small amount of alcohol, roughly one drink, lowered the body's recovery during the first hours of sleep by about 9 percentage points. A moderate amount lowered it by 24, a large amount by 39. Being young or fit did not protect anyone. So if your HRV dropped after a couple of glasses of wine, that is not a mystery. That is Tuesday.</p>
+      <p><strong>2. A hard session in the last 24 to 72 hours.</strong> A hard workout lowers HRV the next morning. That is the point of training: the drop is the stimulus, and recovery is when it comes back up. If it is back within a day or two, good. If it stays down while you keep training hard, that is where overreaching starts.</p>
+      <p><strong>3. Sleep.</strong> Short, late, broken or irregular. Three nights of five hours or less is enough to knock HRV down measurably (<a href="https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2021.642548/full" rel="noopener">Bourdillon et al., Frontiers in Neuroscience, 2021</a>, had people sleep three hours a night for three nights and watched it happen). What people miss is timing. Going to bed two hours later than usual on Friday and sleeping in on Saturday also shows up in HRV, even if you got eight hours. Your body runs on a clock, not a total.</p>
+      <p><strong>4. You are getting sick.</strong> HRV often drops a day or two before you feel anything, and resting heart rate goes up at the same time. In Fitbit data from 2,745 people with confirmed covid (<a href="https://www.nature.com/articles/s41746-020-00363-7" rel="noopener">Natarajan et al., npj Digital Medicine, 2020</a>), heart rate and breathing rate went up and HRV went down around the illness, often before symptoms. Not always, and not only for covid. But if HRV is down, resting heart rate is up, and you did not train or drink, I would take it easy today.</p>
+      <p><strong>5. Stress.</strong> Mental stress does not feel like a workout, but your nervous system does not know the difference. A bad week at work can look exactly like a training block in your data.</p>
+      <p><strong>6. Heat, travel, altitude, dehydration.</strong> Boring, but real. A hot bedroom, a late flight, a night in a new place, a day where you forgot to drink water.</p>
+      <p><strong>7. The measurement itself.</strong> This one surprises people. Apple Watch does not measure HRV all night. It takes short samples, some during sleep and some during the day, and reports SDNN, which is a different calculation from the RMSSD that Whoop, Oura and Garmin use (<a href="https://www.apple.com/health/pdf/Heart_Rate_Calorimetry_Activity_on_Apple_Watch_November_2024.pdf" rel="noopener">Apple describes the method</a> in its own technical paper on heart rate measurement). So the numbers are not comparable between devices, and a single reading depends on when the watch happened to sample. If yesterday's "high" value was a daytime reading after a calm hour and today's "low" one was taken right after you rolled over, nothing happened. Compare nights with nights.</p>
+
+      <h2>Dip or trend? How to tell</h2>
+      <p>Here is the rule I use, and the one I built into Woah.</p>
+      <ul>
+        <li><strong>One morning below your normal.</strong> Ignore it. Live your day.</li>
+        <li><strong>Three mornings in a row below your 30-day average.</strong> Pay attention. Something is going on, and if you go through the list above you will usually find it.</li>
+        <li><strong>Two weeks or more below.</strong> Something structural. Sleep, workload, drinking, an illness you have not shaken. Worth changing something, or talking to a doctor if you also feel off.</li>
+      </ul>
+      <p>In Woah, your baseline is your own last 30 days, and the trend is your last 3 days against that. A falling trend does not just lower today's score. It lowers the ceiling of what the score can be, because a body that has been going downhill for three days is not going to be fully ready today no matter how last night looked. That is a design choice, not a law of physiology. But it matches what the rolling-average research says, and it stops one good night from hiding a bad week.</p>
+
+      <h2>What to actually do today when your HRV is low</h2>
+      <p>This is the part most articles skip. Ask yourself one question: was there a reason?</p>
+      <ul>
+        <li><strong>Yes, there was a reason</strong> (a hard session, drinks, a late night). Then the drop is expected. Do what you planned, maybe a bit shorter. Do not skip, do not go hard. Skip the alcohol tonight and it is usually back within a day or two.</li>
+        <li><strong>No obvious reason, and you feel fine.</strong> Still train, but easy. See what tomorrow says.</li>
+        <li><strong>No reason, and you feel off, or your resting heart rate is up too.</strong> Rest day. Walk, water, an early night. If it is an infection you will know by tomorrow, and you will be glad you did not do intervals.</li>
+        <li><strong>Three or more days down and getting worse.</strong> Take the whole week down a notch. Not zero. Just less.</li>
+      </ul>
+      <p>What brings HRV back up? Mostly boring things. Sleep at consistent times. No alcohol for a few nights. Easy movement, a walk or an easy ride. A few minutes of slow breathing, which does raise HRV in the moment and, with regular practice, a bit over time (<a href="https://pubmed.ncbi.nlm.nih.gov/35623448/" rel="noopener">Laborde et al.</a> did the meta-analysis in 2022; the effect is real but modest). Nothing you can buy.</p>
+
+      <h2>What I would stop doing</h2>
+      <ul>
+        <li>Stop checking the number every morning and reacting to it. Look at the trend once, then look at your day.</li>
+        <li>Stop comparing yourself to age charts, or to anyone else's watch.</li>
+        <li>Stop trying to "raise your HRV". It is a thermometer, not a goal. Fix the sleep and the drinking and the HRV follows on its own.</li>
+      </ul>
+
+      <h2>Where Woah fits</h2>
+      <p>Honestly, this article is one of the reasons I built Woah. Apple Health gives you the HRV number, the sleep, the resting heart rate, and then leaves you alone with them. Woah reads that data and gives you one score in the morning and one answer: how ready are you today, and what should you do about it. The 3-day trend, the drinks from last night, the resting heart rate creeping up, all of that is already inside the score. You do not have to do the math above every morning. That is the point. But if you want to do the math, now you can. (How the score is put together is in the <a href="../faq.html">FAQ</a>.)</p>
+
+      <h3>Questions people ask</h3>
+      <div class="faq">
+        <details>
+          <summary>Is a low HRV dangerous?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="answer"><p>A low reading on its own is not. Chronically low HRV is associated with worse health outcomes in large studies, but that is a statistic about populations, not a diagnosis of you. If your HRV is consistently low for weeks and you also feel unwell, talk to a doctor.</p></div>
+        </details>
+        <details>
+          <summary>What is a normal HRV for my age?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="answer"><p>Ranges are wide. People in their twenties often sit somewhere around 55 to 105 ms (RMSSD), people in their sixties around 25 to 45 ms, and plenty of healthy, fit people fall outside those numbers. Your own 30-day average is a far better reference than any chart.</p></div>
+        </details>
+        <details>
+          <summary>Does Apple Watch measure HRV accurately?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="answer"><p>Accurately enough to see your own trend. It samples for short periods and reports SDNN, so do not compare the number with a Whoop or Oura value, and compare night readings with night readings.</p></div>
+        </details>
+        <details>
+          <summary>How long does it take for HRV to recover after drinking?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="answer"><p>Usually one or two nights after a moderate amount, longer after a heavy one. The Finnish study measured the effect during the same night's sleep. Give it a couple of alcohol-free nights before you judge the trend.</p></div>
+        </details>
+      </div>
+
+      <div class="author">
+        <div class="dot" aria-hidden="true"></div>
+        <p><b>Petter Höglander</b> builds Woah. Before that he spent years building sleep and fitness apps for some of the biggest apps in the App Store. He wrote the recovery and sleep models Woah runs on, and he still checks his own HRV too often.</p>
+      </div>
+
+      <div class="sources">
+        <h3>Sources</h3>
+        <ol>
+          <li>Plews DJ, Laursen PB, Stanley J, Kilding AE, Buchheit M. Training adaptation and heart rate variability in elite endurance athletes: opening the door to effective monitoring. Sports Medicine. 2013;43(9):773–781. <a href="https://pubmed.ncbi.nlm.nih.gov/23852425/" rel="noopener">PubMed</a></li>
+          <li>Pietilä J, Helander E, Korhonen I, Myllymäki T, Kujala UM, Lindholm H. Acute effect of alcohol intake on cardiovascular autonomic regulation during the first hours of sleep in a large real-world sample of Finnish employees. JMIR Mental Health. 2018;5(1):e23. <a href="https://mental.jmir.org/2018/1/e23/" rel="noopener">JMIR</a></li>
+          <li>Bourdillon N, Jeanneret F, Nilchian M, Albertoni P, Ha P, Millet GP. Sleep deprivation deteriorates heart rate variability and photoplethysmography. Frontiers in Neuroscience. 2021;15:642548. <a href="https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2021.642548/full" rel="noopener">Frontiers</a></li>
+          <li>Natarajan A, Su HW, Heneghan C. Assessment of physiological signs associated with COVID-19 measured using wearable devices. npj Digital Medicine. 2020;3:156. <a href="https://www.nature.com/articles/s41746-020-00363-7" rel="noopener">Nature</a></li>
+          <li>Laborde S, Allen MS, Borges U, et al. Effects of voluntary slow breathing on heart rate and heart rate variability: a systematic review and a meta-analysis. Neuroscience &amp; Biobehavioral Reviews. 2022;138:104711. <a href="https://pubmed.ncbi.nlm.nih.gov/35623448/" rel="noopener">PubMed</a></li>
+          <li>Apple. Using Apple Watch to measure heart rate, calorimetry, and activity. Technical paper, November 2024. <a href="https://www.apple.com/health/pdf/Heart_Rate_Calorimetry_Activity_on_Apple_Watch_November_2024.pdf" rel="noopener">PDF</a></li>
+        </ol>
+      </div>
+    </article>
+  </main>
+
+  <div class="closing">
+    <p class="lede">Woah does this math every morning, from the data your watch already has.</p>
+    <a class="cta" href="https://apps.apple.com/se/app/woah-recovery/id6776171727" aria-label="Woah on the App Store">
+      <svg viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+      App Store
+    </a>
+  </div>
+
+  <div class="legal">
+    <a href="../index.html">Home</a>
+    <a href="../faq.html">FAQ</a>
+    <a href="../support.html">Support</a>
+    <a href="https://petterhoglander-ai.github.io/woah-legal/privacy.html">Privacy</a>
+    <a href="https://petterhoglander-ai.github.io/woah-legal/terms.html">Terms</a>
+  </div>
+
+<!-- ================= Product analytics — cookieless, EU-hosted =============
+     Same block as the other pages: memory persistence, no cookies, one explicit
+     $pageview, and appstore_click with placement so a click from an article is
+     separable from the landing page. -->
+<script defer src="https://eu-assets.i.posthog.com/static/array.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', function () {
+    if (!window.posthog || !window.posthog.init) return;
+    posthog.init('phc_stdFgfqxUr5uxVDwpu2ee8iGZvsR9QasvRYLbtRyHKSt', {
+      api_host: 'https://eu.i.posthog.com',
+      persistence: 'memory',
+      disable_cookie: true,
+      person_profiles: 'identified_only',
+      autocapture: false,
+      disable_session_recording: true,
+      capture_pageview: false,
+      capture_pageleave: false,
+      loaded: function (ph) { ph.capture('$pageview'); }
+    });
+    document.addEventListener('click', function (e) {
+      var a = e.target && e.target.closest && e.target.closest('a[href*="apps.apple.com"]');
+      if (!a) return;
+      posthog.capture('appstore_click', { placement: 'blog' });
+    });
+  });
+</script>
+</body>
+</html>
