@@ -18,7 +18,7 @@
 <meta property="og:description" content="Six apps ranked, with prices checked on 3 September 2026. Honest, including about my own app." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://woah-recovery.app/blog/best-recovery-apps-for-apple-watch.html" />
-<meta property="og:image" content="https://woah-recovery.app/og-image.png" />
+<meta property="og:image" content="https://woah-recovery.app/blog/img/best-recovery-apps-for-apple-watch.jpg" />
 <meta property="article:published_time" content="2026-09-03" />
 <meta property="article:author" content="Petter Höglander" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -31,7 +31,7 @@
    "@id": "https://woah-recovery.app/blog/best-recovery-apps-for-apple-watch.html#article",
    "headline": "Best recovery apps for Apple Watch (2026): an honest comparison",
    "description": "Athlytic, Bevel, Gentler Streak, Woah, Livity and Training Today ranked, with prices checked on 3 September 2026. Honest, including about my own app.",
-   "image": "https://woah-recovery.app/og-image.png",
+   "image": "https://woah-recovery.app/blog/img/best-recovery-apps-for-apple-watch.jpg",
    "datePublished": "2026-09-03",
    "dateModified": "2026-09-03",
    "author": {
@@ -166,6 +166,13 @@
   .top > *:nth-child(3) { animation-delay: 0.18s; }
   .top > *:nth-child(4) { animation-delay: 0.26s; }
 
+
+  /* ================= Hero + author photo ================= */
+  .hero { width: 100%; max-width: 900px; padding: 0 22px; margin: 0 auto clamp(28px, 4vh, 44px); animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.24s both; }
+  .hero img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 22px; border: 1px solid var(--line); }
+  .hero figcaption { font-size: 12px; color: rgba(255,255,255,0.4); text-align: center; margin-top: 10px; }
+  .author img.avatar { flex: 0 0 auto; width: 56px; height: 56px; border-radius: 50%; object-fit: cover; object-position: 50% 20%; border: 1px solid rgba(212,183,118,0.35); }
+
   /* ================= Article ================= */
   main {
     width: 100%; max-width: 680px;
@@ -295,6 +302,10 @@
     <p class="byline"><span>By <b>Petter Höglander</b></span><span><time datetime="2026-09-03">3 September 2026</time></span><span>10 min read</span></p>
   </header>
 
+  <figure class="hero">
+    <img src="img/best-recovery-apps-for-apple-watch.jpg" alt="An iPhone with a dark screen and an Apple Watch on a kitchen table next to a cup of coffee" width="1376" height="774" />
+  </figure>
+
   <main>
     <article>
       <p class="lede">Apple Watch collects everything a recovery score needs and then does not give you one. So you install an app. Here are the ones worth your time, ranked, with prices I checked today. One of them is mine, so read that part with that in mind.</p>
@@ -409,7 +420,7 @@
       </div>
 
       <div class="author">
-        <div class="dot" aria-hidden="true"></div>
+        <img class="avatar" src="img/petter.jpg" alt="Petter Höglander" width="56" height="56" />
         <p><b>Petter Höglander</b> builds Woah. Before that he spent years building sleep and fitness apps for some of the biggest apps in the App Store. He wrote the recovery and sleep models Woah runs on, and he ranked his own app fourth in this article on purpose.</p>
       </div>
 
