@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<!-- DRAFT: remove the robots meta and the .draft label on publish -->
+<meta name="robots" content="noindex,nofollow" />
+<title>Pasting Apple Health Data Into ChatGPT: What It Can't See</title>
+<meta name="description" content="You can export Apple Health to ChatGPT, and in the US connect it directly. Here is what the chat still can't see, and why that matters for your recovery." />
+<meta name="author" content="Petter Höglander" />
+<meta name="theme-color" content="#000000" />
+<meta name="apple-itunes-app" content="app-id=6776171727" />
+<link rel="canonical" href="https://woah-recovery.app/blog/chatgpt-apple-health-data.html" />
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png" />
+<link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+<meta property="og:title" content="Should you paste your Apple Health data into ChatGPT?" />
+<meta property="og:description" content="What ChatGPT gets right about your Apple Watch data, the four things it can't see, and what to do instead." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://woah-recovery.app/blog/chatgpt-apple-health-data.html" />
+<meta property="og:image" content="https://woah-recovery.app/blog/img/chatgpt-apple-health-data.jpg" />
+<meta property="article:published_time" content="2026-09-09" />
+<meta property="article:author" content="Petter Höglander" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "@id": "https://woah-recovery.app/blog/chatgpt-apple-health-data.html#article",
+   "headline": "Should you paste your Apple Health data into ChatGPT?",
+   "description": "You can export Apple Health to ChatGPT, and in the US connect it directly. Here is what the chat still can't see, and why that matters for your recovery.",
+   "image": "https://woah-recovery.app/blog/img/chatgpt-apple-health-data.jpg",
+   "datePublished": "2026-09-09",
+   "dateModified": "2026-09-09",
+   "author": { "@type": "Person", "name": "Petter Höglander", "url": "https://woah-recovery.app/" },
+   "publisher": { "@type": "Organization", "name": "Woah", "url": "https://woah-recovery.app/", "logo": { "@type": "ImageObject", "url": "https://woah-recovery.app/icon-192.png" } },
+   "mainEntityOfPage": "https://woah-recovery.app/blog/chatgpt-apple-health-data.html",
+   "inLanguage": "en"
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Can ChatGPT read my Apple Health data?",
+     "acceptedAnswer": { "@type": "Answer", "text": "In the US, yes. Since July 2026 ChatGPT Health can connect to Apple Health directly on iOS and the web, and it asks permission before using it. Everywhere else you export or paste. Either way it sees the values, not your baseline and not what you logged." }
+    },
+    {
+     "@type": "Question",
+     "name": "Is it safe to upload my Apple Health data to ChatGPT?",
+     "acceptedAnswer": { "@type": "Answer", "text": "OpenAI says connected Apple Health data is not used to train its models or target ads. The bigger practical risk is not privacy, it is trusting a number the chat made up. Treat the answer as a general explanation, not a reading of you." }
+    },
+    {
+     "@type": "Question",
+     "name": "Can ChatGPT calculate my recovery score or training load?",
+     "acceptedAnswer": { "@type": "Answer", "text": "It will give you a number if you ask, but there is no fixed model behind it, so the number changes with the phrasing. In the Washington Post test the same question produced grades from F to B. Use a tool that computes the score the same way every morning." }
+    },
+    {
+     "@type": "Question",
+     "name": "Does Woah send my Apple Health data to an AI?",
+     "acceptedAnswer": { "@type": "Answer", "text": "Not the raw data. The AI gets your daily values and derived scores, and a one-line summary of a workout when you ask about one. No surname, no email, no route. In on-device mode nothing leaves the phone." }
+    }
+   ]
+  }
+ ]
+}
+</script>
+<style>
+  @font-face {
+    font-family: "Literata";
+    font-style: italic;
+    font-weight: 200 700;
+    font-display: swap;
+    src: url("../fonts/literata-italic.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+2013-2014, U+2018-201D;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --gold: #D4B776;
+    --bg: #000;
+    --serif: "New York", "Literata", ui-serif, Georgia, serif;
+    --line: rgba(255,255,255,0.10);
+    --ink: rgba(255,255,255,0.86);
+    --ink-soft: rgba(255,255,255,0.62);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: #fff;
+    font-family: -apple-system, "SF Pro Text", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100svh;
+    display: flex; flex-direction: column; align-items: center;
+    overflow-x: hidden;
+  }
+
+  /* ================= Header ================= */
+  .top {
+    position: relative; width: 100%;
+    display: flex; flex-direction: column; align-items: center;
+    gap: clamp(14px, 2.2vh, 20px);
+    padding: clamp(56px, 10vh, 110px) 22px clamp(28px, 5vh, 48px);
+    text-align: center;
+  }
+  .top::before {
+    content: ""; position: absolute; left: 50%; top: 40%;
+    width: min(88vw, 720px); aspect-ratio: 1;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(212,183,118,0.06), rgba(212,183,118,0.02) 42%, transparent 68%);
+    pointer-events: none;
+  }
+  .brand {
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.44em; text-indent: 0.44em;
+    color: var(--gold); text-transform: uppercase;
+    text-decoration: none;
+  }
+  .brand:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+  .draft {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.3em; text-indent: 0.3em;
+    text-transform: uppercase; color: rgba(255,255,255,0.45);
+    border: 1px solid rgba(255,255,255,0.18); border-radius: 999px;
+    padding: 6px 12px 6px 14px;
+  }
+  h1 {
+    font-family: var(--serif); font-style: italic; font-weight: 300;
+    font-size: clamp(32px, 5.6vw, 52px);
+    line-height: 1.12; letter-spacing: -0.015em;
+    max-width: 20ch;
+  }
+  .byline {
+    font-size: 13px; letter-spacing: 0.02em;
+    color: rgba(255,255,255,0.5);
+  }
+  .byline b { font-weight: 600; color: rgba(255,255,255,0.72); }
+  .byline span + span::before { content: "·"; margin: 0 8px; color: rgba(255,255,255,0.3); }
+
+  @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  .top > * { animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
+  .top > *:nth-child(2) { animation-delay: 0.08s; }
+  .top > *:nth-child(3) { animation-delay: 0.18s; }
+  .top > *:nth-child(4) { animation-delay: 0.26s; }
+
+
+  /* ================= Hero + author photo ================= */
+  .hero { width: 100%; max-width: 900px; padding: 0 22px; margin: 0 auto clamp(28px, 4vh, 44px); animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.24s both; }
+  .hero img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 22px; border: 1px solid var(--line); }
+  .hero figcaption { font-size: 12px; color: rgba(255,255,255,0.4); text-align: center; margin-top: 10px; }
+  .author img.avatar { flex: 0 0 auto; width: 56px; height: 56px; border-radius: 50%; object-fit: cover; object-position: 50% 20%; border: 1px solid rgba(212,183,118,0.35); }
+
+  /* ================= Article ================= */
+  main {
+    width: 100%; max-width: 680px;
+    padding: 0 22px clamp(48px, 8vh, 88px);
+    animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+  }
+  .lede {
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(18px, 2.3vw, 21px); line-height: 1.55;
+    color: rgba(255,255,255,0.72);
+    margin: 0 0 28px;
+  }
+  main p, main li {
+    font-size: 17px; line-height: 1.72;
+    color: var(--ink);
+  }
+  main p { margin: 0 0 18px; }
+  main h2 {
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    font-size: clamp(24px, 3.2vw, 30px); line-height: 1.25;
+    color: #fff;
+    margin: 44px 0 14px;
+  }
+  main h3 {
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.24em; text-indent: 0.24em; text-transform: uppercase;
+    color: rgba(212,183,118,0.8);
+    margin: 40px 0 12px;
+  }
+  main ul { list-style: none; margin: 0 0 18px; }
+  main ul li { padding-left: 20px; position: relative; margin-bottom: 10px; }
+  main ul li::before { content: ""; position: absolute; left: 0; top: 0.72em; width: 8px; height: 1px; background: var(--gold); }
+  main strong { color: #fff; font-weight: 600; }
+  main a { color: rgba(212,183,118,0.92); text-decoration: none; border-bottom: 1px solid rgba(212,183,118,0.35); }
+  main a:hover { border-bottom-color: rgba(212,183,118,0.9); }
+  main a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
+
+  .faq { border-top: 1px solid var(--line); margin-top: 8px; }
+  .faq details { border-bottom: 1px solid var(--line); }
+  .faq summary {
+    list-style: none; cursor: pointer;
+    display: flex; align-items: baseline; justify-content: space-between; gap: 18px;
+    padding: 18px 2px;
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    font-size: clamp(17px, 2.3vw, 20px); line-height: 1.4;
+    color: rgba(255,255,255,0.92);
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary .mark { flex: 0 0 auto; align-self: center; width: 20px; height: 20px; position: relative; opacity: 0.55; transition: transform .35s cubic-bezier(0.22,1,0.36,1), opacity .25s ease; }
+  .faq summary .mark::before, .faq summary .mark::after { content: ""; position: absolute; background: var(--gold); top: 50%; left: 50%; }
+  .faq summary .mark::before { width: 14px; height: 1px; transform: translate(-50%, -50%); }
+  .faq summary .mark::after  { width: 1px; height: 14px; transform: translate(-50%, -50%); }
+  .faq details[open] summary .mark { transform: rotate(45deg); opacity: 0.9; }
+  .faq .answer { padding: 0 34px 20px 2px; }
+  .faq .answer p { font-size: 15.5px; line-height: 1.75; color: var(--ink-soft); margin: 0; }
+
+  .sources { margin-top: 44px; padding-top: 22px; border-top: 1px solid var(--line); }
+  .sources ol { padding-left: 22px; }
+  .sources li { font-size: 13.5px; line-height: 1.6; color: rgba(255,255,255,0.55); margin-bottom: 8px; }
+  .sources li a { color: rgba(212,183,118,0.75); border-bottom: none; }
+
+  .author {
+    display: flex; gap: 16px; align-items: flex-start;
+    margin-top: 44px; padding: 20px 22px;
+    border: 1px solid var(--line); border-radius: 22px;
+  }
+  .author .dot { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, rgba(212,183,118,0.95), rgba(212,183,118,0.35) 60%, rgba(212,183,118,0.08)); }
+  .author p { font-size: 14.5px; line-height: 1.6; color: var(--ink-soft); margin: 0; }
+  .author p b { color: rgba(255,255,255,0.85); font-weight: 600; }
+
+  /* ================= Closing CTA + footer ================= */
+  .closing {
+    width: 100%;
+    display: flex; flex-direction: column; align-items: center;
+    gap: clamp(18px, 3vh, 26px);
+    padding: 0 22px clamp(44px, 7vh, 72px);
+    text-align: center;
+  }
+  .closing .lede { margin: 0; font-size: clamp(18px, 2.4vw, 22px); }
+  .cta {
+    position: relative; display: inline-flex; align-items: center; gap: 10px;
+    padding: 15px 30px; border-radius: 999px;
+    font-family: var(--serif);
+    font-size: 17px; font-weight: 500; letter-spacing: 0.04em;
+    color: #fff; text-decoration: none; cursor: pointer;
+    background: rgba(255,255,255,0.10);
+    backdrop-filter: blur(16px) saturate(180%); -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.18);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.45), inset 0 -6px 14px rgba(255,255,255,0.05), 0 10px 34px rgba(0,0,0,0.45);
+    transition: transform .2s ease, background .25s ease;
+  }
+  .cta::before { content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+    background: linear-gradient(180deg, rgba(255,255,255,0.28), rgba(255,255,255,0) 46%); mix-blend-mode: screen; }
+  .cta:hover { background: rgba(255,255,255,0.16); transform: translateY(-1px); }
+  .cta:active { transform: scale(0.985); }
+  .cta:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+  .cta svg { width: 17px; height: 20px; fill: #fff; margin-top: -3px; }
+
+  .legal { font-size: 12px; color: rgba(255,255,255,0.48); text-align: center; padding-bottom: 40px; }
+  .legal a { color: inherit; text-decoration: none; margin: 0 7px; }
+  .legal a:hover { color: rgba(255,255,255,0.75); }
+  .legal a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .top > *, main { animation: none; }
+    .faq summary .mark { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="top">
+    <a class="brand" href="../index.html">Woah</a>
+    <span class="draft">Draft · not published</span>
+    <h1>Should you paste your Apple Health data into ChatGPT?</h1>
+    <p class="byline"><span>By <b>Petter Höglander</b></span><span><time datetime="2026-09-09">9 September 2026</time></span><span>7 min read</span></p>
+  </header>
+
+  <figure class="hero">
+    <img src="img/chatgpt-apple-health-data.jpg" alt="An Apple Watch with its screen off on a kitchen table next to a closed laptop and a cup of coffee, early morning light" width="1376" height="774" />
+  </figure>
+
+  <main>
+    <article>
+      <p class="lede">You ran 8 km this morning and it felt harder than it should have. So you did what a lot of people do now. You opened ChatGPT, typed in your heart rate and your pace, maybe added a screenshot from the Health app, and asked why.</p>
+
+      <p>Here is the short answer. The chat will give you a good general explanation, and it will probably be wrong about you. Not because the model is bad. Because of what it gets to see. A chatbot sees the numbers you paste, and nothing else. It does not know what your normal is, what you did last night, or what it told you last week. That is the whole problem, and I think it is worth understanding before you trust the answer.</p>
+
+      <h2>Can you get Apple Health data into ChatGPT?</h2>
+      <p>Yes, and it has become much easier in 2026. There are three ways, and they are not equally good.</p>
+      <p><strong>The manual export.</strong> Apple Health has an "Export All Health Data" button. It gives you a zip with one XML file that, after a few years with a watch, can run to several hundred megabytes (<a href="https://www.aihealthexport.com/guides/apple-health-chatgpt" rel="noopener">one export guide</a> puts it at 500 MB to 1 GB). A chat window does not read a file like that. It reads a slice of it, and you don't get to pick the slice.</p>
+      <p><strong>Screenshots.</strong> Fast, and the model can read a surprising amount. But a screenshot of a chart is a picture, not data. The model guesses the values from pixels. Fine for "what does this line mean", useless for "was Tuesday lower than my average".</p>
+      <p><strong>Export apps, and ChatGPT Health.</strong> A handful of apps now turn your Health data into a CSV or JSON made for pasting. And since July 23, 2026, ChatGPT Health <a href="https://www.macrumors.com/2026/07/23/chatgpt-apple-health-integration/" rel="noopener">connects to Apple Health directly</a> for users in the US, on iOS and the web, on every plan. It asks permission first, and OpenAI says the data is not used to train its models. Outside the US you are still on the export route.</p>
+      <p>So the copy and paste step is solvable. If that were the problem, I would not be writing this. The problem is what happens after the data is in.</p>
+
+      <h2>What ChatGPT is actually good at</h2>
+      <p>Let me be fair, because it is good at a lot. Ask it what HRV is, what a heart rate zone means, why sleep matters for recovery, and you get a patient, correct explanation, better than most articles. Ask it to explain a term your watch uses. Ask it whether a training plan looks reasonable. For general questions about the body it is excellent, and I use it for that myself.</p>
+      <p>Where it breaks is the question you were actually asking. Not "why do runs feel hard" but "why did my run feel hard". That is a question about you, and the chat has almost nothing about you.</p>
+
+      <h2>What the chat cannot see, even with your data</h2>
+      <p>Four things. They matter more than the export.</p>
+      <p><strong>It does not know your normal.</strong> Every number your watch produces only means something against your own baseline. A resting heart rate of 58 is great for one person and a warning for another. Geoffrey Fowler at the Washington Post <a href="https://www.washingtonpost.com/technology/2026/01/26/chatgpt-health-apple/" rel="noopener">gave ChatGPT ten years of his Apple Watch data</a> in January 2026, 29 million steps and 6 million heartbeat measurements, and one of the things it did was treat the jump in his resting heart rate every time he bought a new watch as a health signal. Different sensor, different number. A tool that knew his baseline would have seen that. A chat sees a line going up. (I wrote about why the baseline is the only comparison that counts in <a href="why-is-my-hrv-going-down.html">the HRV article</a>.)</p>
+      <p><strong>It does not know what you did.</strong> Your run on Thursday came after Wednesday. Whether Wednesday had two beers, a late night, a hard interval session or a stressful day at work changes the answer completely. None of that is in Apple Health, and none of it is in the paste. So the model reasons from the run alone, and the run alone cannot say why it felt hard. It will list six possible reasons. You already knew those.</p>
+      <p><strong>It starts from zero every time.</strong> This one surprised me the most in Fowler's test. Across conversations, ChatGPT kept forgetting his gender, his age and some recent vital signs. Every new chat is a new stranger. Whatever you told it last week about your knee, your goal or your sleep is gone unless you paste it again. Recovery is a pattern over weeks. A tool with no memory can only ever comment on a snapshot.</p>
+      <p><strong>It recomputes instead of reading.</strong> Ask a chatbot for your training load, your recovery score or how much a session cost you, and it will give you a number. It has to, you asked. But there is no model behind that number. Fowler asked about his heart risk more than once and the grade swung between an F and a B. The number changes with the phrasing, and nothing checks it. That is the part I find genuinely risky. A confident number with nothing underneath it looks exactly like a real one.</p>
+
+      <h2>How I built Woah to get around this</h2>
+      <p>I spent years building sleep and fitness apps before Woah, and this problem, data without the context to read it, is most of why I built it. So here is what Woah does differently. Not because the AI is smarter. Because of what it is handed.</p>
+      <ul>
+        <li><strong>No export.</strong> Woah reads Apple Health on the phone, directly. No file, no CSV, no screenshot. Whatever your Apple Watch (or your Garmin, Oura or Whoop, through Apple Health) wrote is already there when you open the app.</li>
+        <li><strong>The numbers are computed on your phone, not by the AI.</strong> Your recovery score, against your own 30-day baseline. Your sleep score. What a workout cost you, which is simply the next morning's score against the average of the 30 mornings before it. These are fixed calculations. The coach quotes them. It never recomputes them, and it never invents a training load, because there isn't one to invent.</li>
+        <li><strong>The coach gets the context, structured.</strong> When you ask about a run, the coach is handed a year of aggregates, 30 days of detail, today's numbers, how the last nights were shaped, and the last four weeks of training with the morning after each session and what was in your diary the evening before. Two beers on Wednesday, logged, is part of the answer on Thursday. If you did not log, it says so rather than guessing.</li>
+        <li><strong>It can look things up.</strong> Ask "compare this with my run two weeks ago" and it fetches that exact session, heart rate, zones and the morning after, and lines the two up. Same for any day in your history.</li>
+        <li><strong>It remembers, and you can read what it remembers.</strong> The coach keeps a short block of facts about you: an injury, that you run in the mornings, that you quit nicotine in May. You can open it, edit a line, or wipe it.</li>
+      </ul>
+      <p>It is still an AI. It still gets things wrong sometimes, and it is a wellness coach, not a doctor. But when it tells you the run felt hard because you slept five and a half hours after two drinks and had already done intervals the day before, that is read from your data, not guessed from a paste. (If you want to see the alternatives, I ranked them, mine included, in <a href="best-recovery-apps-for-apple-watch.html">the recovery apps comparison</a>.)</p>
+
+      <h2>What actually leaves your phone</h2>
+      <p>Since this whole article is about being careful with health data, here is the honest version for Woah. Raw Apple Health data is never uploaded anywhere by Woah. What goes to the AI when it writes your morning or answers a coach question is your daily values and the derived scores, and, for a workout question, a one-line summary of that session: kind, length, distance, heart rate, zones, the morning after, and what you logged around it. Never the route. Woah has no account and no login, so there is no email or surname attached to any of it. (Your first name travels with the notification texts so they can address you, and that is it.) And if you switch to the on-device mode, nothing leaves the phone at all. The full list is in the <a href="../faq.html">FAQ</a>.</p>
+      <p>That is a smaller footprint than pasting an export into a general chat, but I want to be precise: it is not zero, and an app that sends nothing to an AI could not write you a personal answer either.</p>
+
+      <h2>When I would still use ChatGPT</h2>
+      <p>Plenty of times. To understand a term. To sanity-check a training plan. To ask what the research says about sleep and alcohol. Anything general. What I would not do is paste a week of numbers and ask it what my body needs today. That is a question you can only answer with your own baseline, your own last night, and a tool that will still know you tomorrow.</p>
+
+      <h3>Questions people ask</h3>
+      <div class="faq">
+        <details>
+          <summary>Can ChatGPT read my Apple Health data?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="answer"><p>In the US, yes. Since July 2026 ChatGPT Health can connect to Apple Health directly on iOS and the web, and it asks permission before using it. Everywhere else you export or paste. Either way it sees the values, not your baseline and not what you logged.</p></div>
+        </details>
+        <details>
+          <summary>Is it safe to upload my Apple Health data to ChatGPT?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="answer"><p>OpenAI says connected Apple Health data is not used to train its models or target ads. The bigger practical risk is not privacy, it is trusting a number the chat made up. Treat the answer as a general explanation, not a reading of you.</p></div>
+        </details>
+        <details>
+          <summary>Can ChatGPT calculate my recovery score or training load?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="answer"><p>It will give you a number if you ask, but there is no fixed model behind it, so the number changes with the phrasing. In the Washington Post test the same question produced grades from F to B. Use a tool that computes the score the same way every morning.</p></div>
+        </details>
+        <details>
+          <summary>Does Woah send my Apple Health data to an AI?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="answer"><p>Not the raw data. The AI gets your daily values and derived scores, and a one-line summary of a workout when you ask about one. No surname, no email, no route. In on-device mode nothing leaves the phone.</p></div>
+        </details>
+      </div>
+
+      <div class="author">
+        <img class="avatar" src="img/petter.jpg" alt="Petter Höglander" width="56" height="56" />
+        <p><b>Petter Höglander</b> builds Woah. Before that he spent years building sleep and fitness apps for some of the biggest apps in the App Store. He wrote the recovery and sleep models Woah runs on, and the data pack its coach reads from.</p>
+      </div>
+
+      <div class="sources">
+        <h3>Sources</h3>
+        <ol>
+          <li>Fowler GA. I let ChatGPT analyze a decade of my Apple Watch data. Then I called my doctor. The Washington Post, January 2026. <a href="https://www.washingtonpost.com/technology/2026/01/26/chatgpt-health-apple/" rel="noopener">Washington Post</a></li>
+          <li>MacRumors. ChatGPT's Apple Health integration now rolling out to U.S. users. July 23, 2026. <a href="https://www.macrumors.com/2026/07/23/chatgpt-apple-health-integration/" rel="noopener">MacRumors</a></li>
+          <li>AI Health Export. How to get Apple Health data into ChatGPT (export size and format; a vendor guide). <a href="https://www.aihealthexport.com/guides/apple-health-chatgpt" rel="noopener">aihealthexport.com</a></li>
+          <li>Woah FAQ: "What does the AI see?" and "Where does my health data live?" <a href="../faq.html">woah-recovery.app/faq</a></li>
+        </ol>
+      </div>
+    </article>
+  </main>
+
+  <div class="closing">
+    <p class="lede">Woah reads the watch, knows your normal, and remembers what you told it. That is the whole difference.</p>
+    <a class="cta" href="https://apps.apple.com/se/app/woah-recovery/id6776171727" aria-label="Woah on the App Store">
+      <svg viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+      App Store
+    </a>
+  </div>
+
+  <div class="legal">
+    <a href="../index.html">Home</a>
+    <a href="../faq.html">FAQ</a>
+    <a href="../support.html">Support</a>
+    <a href="https://petterhoglander-ai.github.io/woah-legal/privacy.html">Privacy</a>
+    <a href="https://petterhoglander-ai.github.io/woah-legal/terms.html">Terms</a>
+  </div>
+
+<!-- ================= Product analytics — cookieless, EU-hosted =============
+     Same block as the other pages: memory persistence, no cookies, one explicit
+     $pageview, and appstore_click with placement so a click from an article is
+     separable from the landing page. -->
+<script defer src="https://eu-assets.i.posthog.com/static/array.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', function () {
+    if (!window.posthog || !window.posthog.init) return;
+    posthog.init('phc_stdFgfqxUr5uxVDwpu2ee8iGZvsR9QasvRYLbtRyHKSt', {
+      api_host: 'https://eu.i.posthog.com',
+      persistence: 'memory',
+      disable_cookie: true,
+      person_profiles: 'identified_only',
+      autocapture: false,
+      disable_session_recording: true,
+      capture_pageview: false,
+      capture_pageleave: false,
+      loaded: function (ph) { ph.capture('$pageview'); }
+    });
+    document.addEventListener('click', function (e) {
+      var a = e.target && e.target.closest && e.target.closest('a[href*="apps.apple.com"]');
+      if (!a) return;
+      posthog.capture('appstore_click', { placement: 'blog' });
+    });
+  });
+</script>
+</body>
+</html>
