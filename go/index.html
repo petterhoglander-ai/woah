@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Woah — opening the App Store</title>
+<meta name="theme-color" content="#000000" />
+<!-- This is a doorway, not a page. It must never be indexed, never rank, and
+     never appear in an answer engine as if it were content. -->
+<meta name="robots" content="noindex, nofollow" />
+<meta name="referrer" content="no-referrer-when-downgrade" />
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png" />
+<link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+<!-- No-JS fallback. It cannot carry the ?ct= from the query string, so it
+     sends the untagged campaign rather than no campaign at all: a visitor who
+     gets here without JavaScript still reaches the store, and the "untagged"
+     bucket in App Analytics says how often that happened. -->
+<meta http-equiv="refresh" content="3;url=https://apps.apple.com/app/id6776171727?pt=126693486&amp;ct=untagged&amp;mt=8" />
+<!-- Loaded early so the fetch is already in flight when the guard timer starts. -->
+<script defer src="https://eu-assets.i.posthog.com/static/array.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #000; color: #fff;
+    font-family: -apple-system, "SF Pro Text", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100svh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 18px; padding: 24px; text-align: center;
+  }
+  .mark {
+    font-family: "New York", ui-serif, Georgia, serif;
+    font-style: italic; font-weight: 300;
+    font-size: 34px; letter-spacing: 0.01em; color: #D4B776;
+  }
+  p { font-size: 15px; color: rgba(255,255,255,0.62); }
+  a { color: #fff; font-size: 15px; text-decoration: underline; text-underline-offset: 4px; }
+  /* Hidden until the automatic hop has plainly failed. A link offered in the
+     same instant as the redirect invites a second tap that lands nowhere. */
+  .manual { opacity: 0; animation: reveal 0s linear 2.5s forwards; }
+  @keyframes reveal { to { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { .manual { animation: none; opacity: 1; } }
+</style>
+</head>
+<body>
+  <div class="mark">Woah</div>
+  <p>Opening the App Store&hellip;</p>
+  <p class="manual"><a id="manual" href="https://apps.apple.com/app/id6776171727?pt=126693486&amp;ct=untagged&amp;mt=8">Tap here if nothing happens</a></p>
+
+<script>
+(function () {
+  // The destination is HARDCODED. Only the campaign tag is read from the query
+  // string, and only after being stripped to Apple's own character set. A page
+  // that redirected to a URL supplied by its caller would be an open redirect:
+  // anyone could hand out woah-recovery.app/go/?to=<anywhere> and borrow the
+  // domain's reputation for it.
+  var BASE = 'https://apps.apple.com/app/id6776171727';
+  var PT = '126693486';           // Apple provider ID — same one the Reddit links use
+  var CT_MAX = 40;                 // Apple's limit on the campaign token
+
+  function campaign() {
+    var raw = '';
+    try {
+      raw = new URLSearchParams(window.location.search).get('ct') || '';
+    } catch (e) { /* no URLSearchParams — fall through to the default */ }
+    var clean = String(raw).replace(/[^A-Za-z0-9_-]/g, '').slice(0, CT_MAX);
+    // A forgotten tag must be VISIBLE, not silent. The Reddit ad that ran a
+    // whole night with no destination taught this: the failure looked exactly
+    // like normal until someone counted. An "untagged" row in App Analytics
+    // announces itself; an absent ct parameter does not.
+    return clean || 'untagged';
+  }
+
+  var ct = campaign();
+  var dest = BASE + '?pt=' + PT + '&ct=' + encodeURIComponent(ct) + '&mt=8';
+
+  var link = document.getElementById('manual');
+  if (link) link.href = dest;
+
+  var jumped = false;
+  function jump() {
+    if (jumped) return;
+    jumped = true;
+    // replace(), not assign(): Back from the App Store must return to the ad,
+    // not to this page, which would bounce the visitor straight out again.
+    window.location.replace(dest);
+  }
+
+  // Analytics must never be able to hold the visitor here. Whatever happens to
+  // PostHog — blocked, slow, failed CDN — this fires.
+  var guard = setTimeout(jump, 900);
+
+  window.addEventListener('DOMContentLoaded', function () {
+    if (!window.posthog || !window.posthog.init) { clearTimeout(guard); jump(); return; }
+    try {
+      posthog.init('phc_stdFgfqxUr5uxVDwpu2ee8iGZvsR9QasvRYLbtRyHKSt', {
+        api_host: 'https://eu.i.posthog.com',
+        persistence: 'memory',
+        disable_cookie: true,
+        person_profiles: 'identified_only',
+        autocapture: false,
+        disable_session_recording: true,
+        capture_pageview: false,
+        capture_pageleave: false,
+        loaded: function (ph) {
+          // Deliberately NOT $pageview and NOT appstore_click. This is not a
+          // page anyone reads, and it is not intent expressed on the site: a
+          // visitor who lands here converts at 100% by construction, so
+          // folding it into either series would make both unreadable. Its own
+          // event, read on its own.
+          //
+          // sendBeacon survives the navigation that starts on the next line;
+          // an ordinary XHR would be cancelled by it.
+          ph.capture('ad_redirect', { ct: ct }, { transport: 'sendBeacon' });
+          clearTimeout(guard);
+          jump();
+        }
+      });
+    } catch (e) {
+      clearTimeout(guard);
+      jump();
+    }
+  });
+})();
+</script>
+</body>
+</html>
