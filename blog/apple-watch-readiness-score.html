@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="robots" content="noindex,nofollow" />
+<title>Apple Watch Readiness score: what a low score means</title>
+<meta name="description" content="Apple Watch now scores your readiness from 0 to 10. What goes into it, why a 4 is not a WHOOP 40, what to do on a low day, and what older watches can do." />
+<meta name="author" content="Petter Höglander" />
+<meta name="theme-color" content="#000000" />
+<meta name="apple-itunes-app" content="app-id=6776171727" />
+<link rel="canonical" href="https://woah-recovery.app/blog/apple-watch-readiness-score.html" />
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png" />
+<link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+<meta property="og:title" content="Apple Watch has a Readiness score now. What does a low one actually mean?" />
+<meta property="og:description" content="Apple Watch now scores your readiness from 0 to 10. What a low one means, how it compares with WHOOP and Oura, and what to do today." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://woah-recovery.app/blog/apple-watch-readiness-score.html" />
+<meta property="og:image" content="https://woah-recovery.app/blog/img/apple-watch-readiness-score.jpg" />
+<meta property="article:published_time" content="2026-09-17" />
+<meta property="article:author" content="Petter Höglander" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "@id": "https://woah-recovery.app/blog/apple-watch-readiness-score.html#article",
+   "headline": "Apple Watch has a Readiness score now. What does a low one actually mean?",
+   "description": "Apple Watch now scores your readiness from 0 to 10. What goes into it, why a 4 is not a WHOOP 40, what to do on a low day, and what older watches can do.",
+   "image": "https://woah-recovery.app/blog/img/apple-watch-readiness-score.jpg",
+   "datePublished": "2026-09-17",
+   "dateModified": "2026-09-17",
+   "author": {
+    "@type": "Person",
+    "name": "Petter Höglander",
+    "url": "https://woah-recovery.app/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Woah",
+    "url": "https://woah-recovery.app/",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://woah-recovery.app/icon-192.png"
+    }
+   },
+   "mainEntityOfPage": "https://woah-recovery.app/blog/apple-watch-readiness-score.html",
+   "inLanguage": "en"
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "What does a low Readiness score on Apple Watch mean?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "It means last night's signals, sleep, HRV, resting heart rate, temperature, breathing and your recent training load, looked less recovered than your own normal. Apple's bands are Recover (0 to 1) and Pace Yourself (2 to 4). Check which input moved before you decide what to do."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Which Apple Watch models have the Readiness score?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Apple Watch Series 12 and Apple Watch Ultra 4, from 18 September 2026. Older models do not get it, because it depends on the new Health Sensing System. You also need at least 7 nights of sleep tracking in the last 49 before the first score."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Is Apple's Readiness score the same as a WHOOP recovery score?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Same idea, different scale. Readiness runs from 0 to 10 with four verdicts; WHOOP Recovery runs from 0 to 100 percent with red under 34 and green from 67. Both compare you with your own baseline, and neither number translates directly into the other."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Should I skip my workout if my readiness score is low?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Not automatically. If there was an obvious reason, like a hard session or a short night, train easy or short. If there was no reason and you feel off, or your resting heart rate is up, rest. In research, HRV-guided training mainly reduced bad responses to training rather than making people faster."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Can I get a readiness score on an older Apple Watch?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Not Apple's. But the inputs, sleep, HRV and resting heart rate, are already in Apple Health on older watches, so you can compare them with your 30-day average by hand or use an app that reads Apple Health and does it for you."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+<style>
+  @font-face {
+    font-family: "Literata";
+    font-style: italic;
+    font-weight: 200 700;
+    font-display: swap;
+    src: url("../fonts/literata-italic.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+2013-2014, U+2018-201D;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --gold: #D4B776;
+    --bg: #000;
+    --serif: "New York", "Literata", ui-serif, Georgia, serif;
+    --line: rgba(255,255,255,0.10);
+    --ink: rgba(255,255,255,0.86);
+    --ink-soft: rgba(255,255,255,0.62);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: #fff;
+    font-family: -apple-system, "SF Pro Text", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100svh;
+    display: flex; flex-direction: column; align-items: center;
+    overflow-x: hidden;
+  }
+
+  /* ================= Header ================= */
+  .top {
+    position: relative; width: 100%;
+    display: flex; flex-direction: column; align-items: center;
+    gap: clamp(14px, 2.2vh, 20px);
+    padding: clamp(56px, 10vh, 110px) 22px clamp(28px, 5vh, 48px);
+    text-align: center;
+  }
+  .top::before {
+    content: ""; position: absolute; left: 50%; top: 40%;
+    width: min(88vw, 720px); aspect-ratio: 1;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(212,183,118,0.06), rgba(212,183,118,0.02) 42%, transparent 68%);
+    pointer-events: none;
+  }
+  .brand {
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.44em; text-indent: 0.44em;
+    color: var(--gold); text-transform: uppercase;
+    text-decoration: none;
+  }
+  .brand:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+  .draft {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.3em; text-indent: 0.3em;
+    text-transform: uppercase; color: rgba(255,255,255,0.45);
+    border: 1px solid rgba(255,255,255,0.18); border-radius: 999px;
+    padding: 6px 12px 6px 14px;
+  }
+  h1 {
+    font-family: var(--serif); font-style: italic; font-weight: 300;
+    font-size: clamp(32px, 5.6vw, 52px);
+    line-height: 1.12; letter-spacing: -0.015em;
+    max-width: 20ch;
+  }
+  .byline {
+    font-size: 13px; letter-spacing: 0.02em;
+    color: rgba(255,255,255,0.5);
+  }
+  .byline b { font-weight: 600; color: rgba(255,255,255,0.72); }
+  .byline span + span::before { content: "·"; margin: 0 8px; color: rgba(255,255,255,0.3); }
+
+  @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  .top > * { animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
+  .top > *:nth-child(2) { animation-delay: 0.08s; }
+  .top > *:nth-child(3) { animation-delay: 0.18s; }
+  .top > *:nth-child(4) { animation-delay: 0.26s; }
+
+
+  /* ================= Hero + author photo ================= */
+  .hero { width: 100%; max-width: 900px; padding: 0 22px; margin: 0 auto clamp(28px, 4vh, 44px); animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.24s both; }
+  .hero img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 22px; border: 1px solid var(--line); }
+  .hero figcaption { font-size: 12px; color: rgba(255,255,255,0.4); text-align: center; margin-top: 10px; }
+  .author img.avatar { flex: 0 0 auto; width: 56px; height: 56px; border-radius: 50%; object-fit: cover; object-position: 50% 20%; border: 1px solid rgba(212,183,118,0.35); }
+
+  /* ================= Article ================= */
+  main {
+    width: 100%; max-width: 680px;
+    padding: 0 22px clamp(48px, 8vh, 88px);
+    animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+  }
+  .lede {
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(18px, 2.3vw, 21px); line-height: 1.55;
+    color: rgba(255,255,255,0.72);
+    margin: 0 0 28px;
+  }
+  main p, main li {
+    font-size: 17px; line-height: 1.72;
+    color: var(--ink);
+  }
+  main p { margin: 0 0 18px; }
+  main h2 {
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    font-size: clamp(24px, 3.2vw, 30px); line-height: 1.25;
+    color: #fff;
+    margin: 44px 0 14px;
+  }
+  main h3 {
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.24em; text-indent: 0.24em; text-transform: uppercase;
+    color: rgba(212,183,118,0.8);
+    margin: 40px 0 12px;
+  }
+  main ul { list-style: none; margin: 0 0 18px; }
+  main ul li { padding-left: 20px; position: relative; margin-bottom: 10px; }
+  main ul li::before { content: ""; position: absolute; left: 0; top: 0.72em; width: 8px; height: 1px; background: var(--gold); }
+  main strong { color: #fff; font-weight: 600; }
+  main a { color: rgba(212,183,118,0.92); text-decoration: none; border-bottom: 1px solid rgba(212,183,118,0.35); }
+  main a:hover { border-bottom-color: rgba(212,183,118,0.9); }
+  main a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
+
+  main ol { padding-left: 22px; margin: 0 0 18px; }
+  main ol li { margin-bottom: 10px; }
+  .tablenote { font-size: 13px; color: rgba(255,255,255,0.5); margin: 0 0 18px; }
+  .tablewrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 0 10px; border: 1px solid var(--line); border-radius: 14px; }
+  table { border-collapse: collapse; min-width: 620px; width: 100%; }
+  th, td { text-align: left; vertical-align: top; padding: 12px 14px; font-size: 14px; line-height: 1.5; color: var(--ink); border-bottom: 1px solid var(--line); }
+  th { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(212,183,118,0.8); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: none; }
+
+  .faq { border-top: 1px solid var(--line); margin-top: 8px; }
+  .faq details { border-bottom: 1px solid var(--line); }
+  .faq summary {
+    list-style: none; cursor: pointer;
+    display: flex; align-items: baseline; justify-content: space-between; gap: 18px;
+    padding: 18px 2px;
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    font-size: clamp(17px, 2.3vw, 20px); line-height: 1.4;
+    color: rgba(255,255,255,0.92);
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary .mark { flex: 0 0 auto; align-self: center; width: 20px; height: 20px; position: relative; opacity: 0.55; transition: transform .35s cubic-bezier(0.22,1,0.36,1), opacity .25s ease; }
+  .faq summary .mark::before, .faq summary .mark::after { content: ""; position: absolute; background: var(--gold); top: 50%; left: 50%; }
+  .faq summary .mark::before { width: 14px; height: 1px; transform: translate(-50%, -50%); }
+  .faq summary .mark::after  { width: 1px; height: 14px; transform: translate(-50%, -50%); }
+  .faq details[open] summary .mark { transform: rotate(45deg); opacity: 0.9; }
+  .faq .answer { padding: 0 34px 20px 2px; }
+  .faq .answer p { font-size: 15.5px; line-height: 1.75; color: var(--ink-soft); margin: 0; }
+
+  .sources { margin-top: 44px; padding-top: 22px; border-top: 1px solid var(--line); }
+  .sources ol { padding-left: 22px; }
+  .sources li { font-size: 13.5px; line-height: 1.6; color: rgba(255,255,255,0.55); margin-bottom: 8px; }
+  .sources li a { color: rgba(212,183,118,0.75); border-bottom: none; }
+
+  .author {
+    display: flex; gap: 16px; align-items: flex-start;
+    margin-top: 44px; padding: 20px 22px;
+    border: 1px solid var(--line); border-radius: 22px;
+  }
+  .author .dot { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, rgba(212,183,118,0.95), rgba(212,183,118,0.35) 60%, rgba(212,183,118,0.08)); }
+  .author p { font-size: 14.5px; line-height: 1.6; color: var(--ink-soft); margin: 0; }
+  .author p b { color: rgba(255,255,255,0.85); font-weight: 600; }
+
+  /* ================= Closing CTA + footer ================= */
+  .closing {
+    width: 100%;
+    display: flex; flex-direction: column; align-items: center;
+    gap: clamp(18px, 3vh, 26px);
+    padding: 0 22px clamp(44px, 7vh, 72px);
+    text-align: center;
+  }
+  .closing .lede { margin: 0; font-size: clamp(18px, 2.4vw, 22px); }
+  .cta {
+    position: relative; display: inline-flex; align-items: center; gap: 10px;
+    padding: 15px 30px; border-radius: 999px;
+    font-family: var(--serif);
+    font-size: 17px; font-weight: 500; letter-spacing: 0.04em;
+    color: #fff; text-decoration: none; cursor: pointer;
+    background: rgba(255,255,255,0.10);
+    backdrop-filter: blur(16px) saturate(180%); -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.18);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.45), inset 0 -6px 14px rgba(255,255,255,0.05), 0 10px 34px rgba(0,0,0,0.45);
+    transition: transform .2s ease, background .25s ease;
+  }
+  .cta::before { content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+    background: linear-gradient(180deg, rgba(255,255,255,0.28), rgba(255,255,255,0) 46%); mix-blend-mode: screen; }
+  .cta:hover { background: rgba(255,255,255,0.16); transform: translateY(-1px); }
+  .cta:active { transform: scale(0.985); }
+  .cta:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+  .cta svg { width: 17px; height: 20px; fill: #fff; margin-top: -3px; }
+
+  .legal { font-size: 12px; color: rgba(255,255,255,0.48); text-align: center; padding-bottom: 40px; }
+  .legal a { color: inherit; text-decoration: none; margin: 0 7px; }
+  .legal a:hover { color: rgba(255,255,255,0.75); }
+  .legal a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .top > *, main { animation: none; }
+    .faq summary .mark { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="top">
+    <a class="brand" href="../index.html">Woah</a>
+    <span class="draft">Draft</span>
+    <h1>Apple Watch has a Readiness score now. What does a low one actually mean?</h1>
+    <p class="byline"><span>By <b>Petter Höglander</b></span><span><time datetime="2026-09-17">17 September 2026</time></span><span>9 min read</span></p>
+  </header>
+
+  <!-- HERO: generate blog/img/apple-watch-readiness-score.jpg (ElevenLabs, Petter's yes first), then uncomment.
+  <figure class="hero">
+    <img src="img/apple-watch-readiness-score.jpg" alt="Running shoes by the front door in morning light, an Apple Watch with its screen off on the bench beside them" width="1376" height="774" />
+  </figure>
+  -->
+
+  <main>
+    <article>
+      <p class="lede">Apple Watch has a readiness score now. If you just got a Series 12 or an Ultra 4, you will wake up to a number from 0 to 10 and one of four words: Recover, Pace Yourself, Ready or Go For It.</p>
+
+      <p>So what does a low one mean? Short answer: last night your body looked less recovered than <strong>your own</strong> normal. Less sleep, lower HRV, a higher resting heart rate, a hard session in the legs, or a mix. It does not mean you are unhealthy, and it does not mean you cannot train. It means today is a day to find out why.</p>
+
+      <p>I built a recovery score myself before Apple did, so I have opinions about this. Here is how I would read it.</p>
+
+      <h2>What Apple's Readiness score is made of</h2>
+
+      <p>Readiness combines four things: your recent activity, your training load, your overnight vitals and your sleep. Apple announced it on 9 September 2026, and it arrives with the new watches on 18 September.</p>
+
+      <p>According to <a href="https://support.apple.com/en-gb/guide/watch/flx4gnzby346/watchos" rel="noopener">Apple's own support page</a>, the score looks at:</p>
+
+      <ul>
+        <li><strong>Recent activity:</strong> active calories, workout effort and training load.</li>
+        <li><strong>Overnight vitals:</strong> heart rate, respiratory rate, wrist temperature, HRV and blood oxygen.</li>
+        <li><strong>Sleep:</strong> your recent sleep scores.</li>
+      </ul>
+
+      <p>The four verdicts are fixed bands: <strong>0 to 1 is Recover, 2 to 4 is Pace Yourself, 5 to 7 is Ready, 8 to 10 is Go For It.</strong> Apple says the algorithm was built with data from the Apple Heart and Movement Study, and that the new sensors measure HRV <strong>up to 24 times more often</strong> than before (<a href="https://www.apple.com/newsroom/2026/09/introducing-apple-watch-series-12-with-the-all-new-health-sensing-system/" rel="noopener">Apple Newsroom</a>).</p>
+
+      <p>A few details worth knowing:</p>
+
+      <ul>
+        <li><strong>It needs 7 nights</strong> of sleep tracking in the last 49 before you get a first score.</li>
+        <li><strong>It moves during the day.</strong> Calories burned, naps and your daytime heart rate update it.</li>
+        <li><strong>Apple has not published the weights.</strong> You know what goes in, not how much each part counts.</li>
+        <li><strong>It only runs on Series 12 and Ultra 4.</strong> Not Series 11, not Ultra 3, not SE.</li>
+      </ul>
+
+      <h2>A low score is low compared to you, not to everyone</h2>
+
+      <p>Every serious readiness or recovery score works the same way underneath. It learns your normal, then compares last night with it. A resting heart rate of 58 is great for one person and a warning for another. An HRV of 35 ms can be a good night or a bad one depending on whose wrist it is on.</p>
+
+      <p>That is also why you cannot compare your score with a friend's. Two people can both read "Pace Yourself" for completely different reasons, from completely different numbers.</p>
+
+      <h2>Why a 4 on Apple Watch is not a 40 on WHOOP</h2>
+
+      <p>The scales are not the same, and the words are not the same either. Here is how four of them draw their lines (checked 17 September 2026):</p>
+
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Score</th><th>Scale</th><th>Low</th><th>Middle</th><th>High</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Apple Watch Readiness</strong></td><td>0 to 10</td><td>Recover 0 to 1 · Pace Yourself 2 to 4</td><td>Ready 5 to 7</td><td>Go For It 8 to 10</td></tr>
+            <tr><td><strong>WHOOP Recovery</strong></td><td>0 to 100 %</td><td>Red 0 to 33</td><td>Yellow 34 to 66</td><td>Green 67 to 100</td></tr>
+            <tr><td><strong>Oura Readiness</strong></td><td>0 to 100</td><td>Pay attention under 60 · Fair 60 to 69</td><td>Good 70 to 84</td><td>Optimal 85 to 100</td></tr>
+            <tr><td><strong>Woah recovery score</strong></td><td>0 to 100</td><td>Recover under 50</td><td>Caution 50 to 74</td><td>Ready 75 and up</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="tablenote">Sources: <a href="https://support.apple.com/en-gb/guide/watch/flx4gnzby346/watchos" rel="noopener">Apple Support</a>, <a href="https://developer.whoop.com/docs/whoop-101/" rel="noopener">WHOOP for Developers</a>, <a href="https://support.ouraring.com/hc/en-us/articles/360025589793-Readiness-Score" rel="noopener">Oura Member Care</a>.</p>
+
+      <p>Look at where the lines sit. On Oura, 65 is "Fair". On WHOOP, 65 is yellow, which WHOOP describes as your body maintaining. Apple's bottom band is only two numbers wide. The way I read that, Recover is saved for mornings that really are bad, and most ordinary tired mornings will land in Pace Yourself.</p>
+
+      <p>So if you switch from one device to another, don't read the new number with the old one's eyes. Give it two weeks and learn what your normal looks like on the new scale.</p>
+
+      <h2>What usually pushes the score down</h2>
+
+      <p>Almost always one of these:</p>
+
+      <ol>
+        <li><strong>Sleep.</strong> Short, late, broken or at a different time than usual. In the score I built it is the biggest single input, about half.</li>
+        <li><strong>HRV below your baseline.</strong> Alcohol is the most predictable cause. Stress, a hard session and an infection that has not shown up yet are the others. I wrote a whole piece on <a href="why-is-my-hrv-going-down.html">why HRV goes down</a>.</li>
+        <li><strong>Resting heart rate above your baseline.</strong> Often goes together with low HRV.</li>
+        <li><strong>Training load.</strong> A big session yesterday should lower today's score. That is not a problem, that is training.</li>
+        <li><strong>Temperature and breathing rate.</strong> When both drift up at the same time as your heart rate, your body is often fighting something.</li>
+      </ol>
+
+      <p>The useful move is not to stare at the score. It is to look at <strong>which part</strong> moved. Your HRV, resting heart rate and sleep are all in the Health app, so open them.</p>
+
+      <h2>What to actually do on a low day</h2>
+
+      <p>Ask one question: <strong>was there a reason?</strong></p>
+
+      <ul>
+        <li><strong>Yes</strong> (a hard session, drinks, a short night). Then the score is doing its job, it is just confirming what you already know. Do your day, keep the training easy or short, and fix the reason tonight.</li>
+        <li><strong>No reason, and you feel fine.</strong> Train, but easy. See what tomorrow says. One low morning means very little.</li>
+        <li><strong>No reason, you feel off, and resting heart rate or temperature is up.</strong> Take the rest day. If it is an infection, you will know by tomorrow, and you will be glad you did not do intervals.</li>
+        <li><strong>Low for several mornings in a row.</strong> That is a trend, not a day. Take the whole week down a notch and look for the structural thing: sleep, workload, alcohol, stress.</li>
+      </ul>
+
+      <p>And be realistic about what the score buys you. When researchers pooled eight studies comparing training guided by morning HRV with a fixed plan (199 people), the HRV-guided groups did not get dramatically fitter or faster: the effect on endurance performance was small and not statistically significant. What they did find was <strong>less likelihood of a negative response</strong> to training (<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8507742/" rel="noopener">Manresa-Rocamora et al., 2021</a>). I think that is exactly the right expectation. A readiness score is not going to make you faster. It helps you have fewer bad weeks.</p>
+
+      <h2>Don't let the watch overrule how you feel</h2>
+
+      <p>This is the part I would underline. How you feel is data too, and good data.</p>
+
+      <p>A systematic review of 56 studies on athletes found that subjective measures, like mood, perceived stress and how recovered you feel, tracked training load <strong>more sensitively and more consistently</strong> than objective measures such as heart rate and blood markers, and that the two often did not even agree (<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4789708/" rel="noopener">Saw, Main &amp; Gastin, British Journal of Sports Medicine, 2016</a>).</p>
+
+      <p>So if the watch says Go For It and you feel wrecked, believe yourself. If it says Pace Yourself and you feel great, it is fine to train, just don't set a personal record that day to prove the watch wrong. The score is a second opinion, not the boss.</p>
+
+      <p>Apple says roughly the same thing, to its credit: Readiness does not account for existing conditions or medications, and it should not be the only thing you use to decide whether it is safe to exercise.</p>
+
+      <h2>Apple's choice: a score that moves during the day</h2>
+
+      <p>One design choice is worth pointing out, because it changes how you use it. Apple's score updates through the day as you burn calories, nap, or your daytime heart rate changes. That is closer to "how am I right now".</p>
+
+      <p>In Woah I did the opposite. The score is locked when the night's data arrives, so it is one stable answer for the day, and "Tank right now" is the separate thing that tracks how the day is draining you. I wanted the morning answer to be something you can plan around, not a number that changes its mind at lunch.</p>
+
+      <p>Neither is wrong. They answer different questions. Just know which one you are looking at, so a lower number at 3pm does not worry you.</p>
+
+      <h2>My watch can't run Readiness. Am I missing something?</h2>
+
+      <p>Less than the launch coverage suggests. The new sensor measures HRV more often, and I would expect that to make the score steadier. But the signals themselves, sleep, HRV, resting heart rate, breathing rate, workouts, are things older Apple Watches have been writing to Apple Health for years.</p>
+
+      <p>So you have three options:</p>
+
+      <ol>
+        <li><strong>Do it by hand.</strong> Compare this morning's HRV and resting heart rate with your last 30 days in the Health app. It is slow, but it works.</li>
+        <li><strong>Use a recovery app</strong> that reads Apple Health and does the comparison for you. I compared six of them in <a href="best-recovery-apps-for-apple-watch.html">best recovery apps for Apple Watch</a>.</li>
+        <li><strong>Upgrade.</strong> If you were going to anyway, Readiness is a real reason. I would not buy a watch for it alone.</li>
+      </ol>
+
+      <h2>Where Woah fits</h2>
+
+      <p>Honestly, if you have a Series 12 or an Ultra 4, try Readiness first. It is built in, it costs nothing extra, and for a lot of people a good score on the wrist is all they need.</p>
+
+      <p>Woah is for everyone else, and for people who want more than a score. It works with any Apple Watch, and with Garmin, Oura, Polar and others through Apple Health. It gives you one number in the morning, the reason behind it in plain words, and what to do about it today. Then the long view, your trends over weeks and months, which is where I think the real answers are. The <a href="../faq.html">FAQ</a> explains exactly how the score is built.</p>
+
+      <p>It is still a wellness tool, not a diagnosis. Same as Apple's.</p>
+
+      <h3>Questions people ask</h3>
+      <div class="faq">
+        <details>
+          <summary>What does a low Readiness score on Apple Watch mean?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="answer"><p>It means last night's signals, sleep, HRV, resting heart rate, temperature, breathing and your recent training load, looked less recovered than your own normal. Apple's bands are Recover (0 to 1) and Pace Yourself (2 to 4). Check which input moved before you decide what to do.</p></div>
+        </details>
+        <details>
+          <summary>Which Apple Watch models have the Readiness score?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="answer"><p>Apple Watch Series 12 and Apple Watch Ultra 4, from 18 September 2026. Older models do not get it, because it depends on the new Health Sensing System. You also need at least 7 nights of sleep tracking in the last 49 before the first score.</p></div>
+        </details>
+        <details>
+          <summary>Is Apple&#x27;s Readiness score the same as a WHOOP recovery score?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="answer"><p>Same idea, different scale. Readiness runs from 0 to 10 with four verdicts; WHOOP Recovery runs from 0 to 100 percent with red under 34 and green from 67. Both compare you with your own baseline, and neither number translates directly into the other.</p></div>
+        </details>
+        <details>
+          <summary>Should I skip my workout if my readiness score is low?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="answer"><p>Not automatically. If there was an obvious reason, like a hard session or a short night, train easy or short. If there was no reason and you feel off, or your resting heart rate is up, rest. In research, HRV-guided training mainly reduced bad responses to training rather than making people faster.</p></div>
+        </details>
+        <details>
+          <summary>Can I get a readiness score on an older Apple Watch?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="answer"><p>Not Apple's. But the inputs, sleep, HRV and resting heart rate, are already in Apple Health on older watches, so you can compare them with your 30-day average by hand or use an app that reads Apple Health and does it for you.</p></div>
+        </details>
+      </div>
+
+      <div class="author">
+        <img class="avatar" src="img/petter.jpg" alt="Petter Höglander" width="56" height="56" />
+        <p><b>Petter Höglander</b> builds Woah. Before that he spent years building sleep and fitness apps for some of the biggest apps in the App Store. He wrote the recovery and sleep models Woah runs on, which is why he has opinions about everyone else's.</p>
+      </div>
+
+      <div class="sources">
+        <h3>Sources</h3>
+        <ol>
+          <li>Apple. Use the Readiness app on Apple Watch. Apple Support, read 2026-09-17. <a href="https://support.apple.com/en-gb/guide/watch/flx4gnzby346/watchos" rel="noopener">support.apple.com</a></li>
+          <li>Apple. Introducing Apple Watch Series 12, with the all-new Health Sensing System. Apple Newsroom, 9 September 2026. <a href="https://www.apple.com/newsroom/2026/09/introducing-apple-watch-series-12-with-the-all-new-health-sensing-system/" rel="noopener">apple.com</a></li>
+          <li>WHOOP. WHOOP 101. WHOOP for Developers, read 2026-09-17. <a href="https://developer.whoop.com/docs/whoop-101/" rel="noopener">developer.whoop.com</a></li>
+          <li>Oura. Readiness Score. Oura Member Care, read 2026-09-17. <a href="https://support.ouraring.com/hc/en-us/articles/360025589793-Readiness-Score" rel="noopener">support.ouraring.com</a></li>
+          <li>Saw AE, Main LC, Gastin PB. Monitoring the athlete training response: subjective self-reported measures trump commonly used objective measures: a systematic review. <em>British Journal of Sports Medicine</em>. 2016;50(5):281-291. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4789708/" rel="noopener">pmc.ncbi.nlm.nih.gov</a></li>
+          <li>Manresa-Rocamora A, Sarabia JM, Javaloyes A, Flatt AA, Moya-Ramón M. Heart rate variability-guided training for enhancing cardiac-vagal modulation, aerobic fitness, and endurance performance: a methodological systematic review with meta-analysis. <em>International Journal of Environmental Research and Public Health</em>. 2021;18:10299. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8507742/" rel="noopener">pmc.ncbi.nlm.nih.gov</a></li>
+        </ol>
+      </div>
+    </article>
+  </main>
+
+  <div class="closing">
+    <p class="lede">Woah turns the data your watch already has into one answer every morning, on any Apple Watch.</p>
+    <a class="cta" href="https://apps.apple.com/se/app/woah-recovery/id6776171727" aria-label="Woah on the App Store">
+      <svg viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+      App Store
+    </a>
+  </div>
+
+  <div class="legal">
+    <a href="../index.html">Home</a>
+    <a href="../faq.html">FAQ</a>
+    <a href="../support.html">Support</a>
+    <a href="https://petterhoglander-ai.github.io/woah-legal/privacy.html">Privacy</a>
+    <a href="https://petterhoglander-ai.github.io/woah-legal/terms.html">Terms</a>
+  </div>
+
+<!-- ================= Product analytics — cookieless, EU-hosted =============
+     Same block as the other pages: memory persistence, no cookies, one explicit
+     $pageview, and appstore_click with placement so a click from an article is
+     separable from the landing page. -->
+<script defer src="https://eu-assets.i.posthog.com/static/array.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', function () {
+    if (!window.posthog || !window.posthog.init) return;
+    posthog.init('phc_stdFgfqxUr5uxVDwpu2ee8iGZvsR9QasvRYLbtRyHKSt', {
+      api_host: 'https://eu.i.posthog.com',
+      persistence: 'memory',
+      disable_cookie: true,
+      person_profiles: 'identified_only',
+      autocapture: false,
+      disable_session_recording: true,
+      capture_pageview: false,
+      capture_pageleave: false,
+      loaded: function (ph) { ph.capture('$pageview'); }
+    });
+    document.addEventListener('click', function (e) {
+      var a = e.target && e.target.closest && e.target.closest('a[href*="apps.apple.com"]');
+      if (!a) return;
+      posthog.capture('appstore_click', { placement: 'blog' });
+    });
+  });
+</script>
+</body>
+</html>
