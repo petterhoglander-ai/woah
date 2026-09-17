@@ -426,7 +426,7 @@
 
       <ol>
         <li><strong>Do it by hand.</strong> Compare this morning's HRV and resting heart rate with your last 30 days in the Health app. It is slow, but it works.</li>
-        <li><strong>Use a recovery app</strong> that reads Apple Health and does the comparison for you. I compared six of them in <a href="best-recovery-apps-for-apple-watch.html">best recovery apps for Apple Watch</a>.</li>
+        <li><strong>Use a recovery app</strong> that reads Apple Health and does the comparison for you. <a href="https://apps.apple.com/se/app/woah-recovery/id6776171727" data-pos="recovery_app_step">Woah</a> is the one I built, and the score is free. I compared six of them, Woah included, in <a href="best-recovery-apps-for-apple-watch.html">best recovery apps for Apple Watch</a>.</li>
         <li><strong>Upgrade.</strong> If you were going to anyway, Readiness is a real reason. I would not buy a watch for it alone.</li>
       </ol>
 
@@ -434,7 +434,13 @@
 
       <p>Honestly, if you have a Series 12 or an Ultra 4, try Readiness first. It is built in, it costs nothing extra, and for a lot of people a good score on the wrist is all they need.</p>
 
-      <p>Woah is for everyone else, and for people who want more than a score. It works with any Apple Watch, and with Garmin, Oura, Polar and others through Apple Health. It gives you one number in the morning, the reason behind it in plain words, and what to do about it today. Then the long view, your trends over weeks and months, which is where I think the real answers are. The <a href="../faq.html">FAQ</a> explains exactly how the score is built.</p>
+      <p>But Readiness gives you a number for today. It does not show you what that number has been doing for the last three months, or what moved it. If that is the part you are curious about, Woah reads the same Apple Health data your Series 12 writes, so you can run both side by side and see where they agree.</p>
+
+      <p>For every other watch, Woah is the readiness score you do not have yet. It works with any Apple Watch, and with Garmin, Oura, Polar and others through Apple Health. Every morning you get one recovery score, locked for the day, and every chart behind it: sleep, HRV and resting heart rate against your own normal, trends over weeks and months.</p>
+
+      <p><strong>All of that is free.</strong> Everything Woah calculates on your phone costs nothing. What you pay for is the written part: the plain-words read on why today looks the way it does, and the coach. The <a href="../faq.html">FAQ</a> explains exactly how the score is built.</p>
+
+      <p><a class="cta" data-pos="where_woah_fits" href="https://apps.apple.com/se/app/woah-recovery/id6776171727">Try Woah free on the App Store</a></p>
 
       <p>It is still a wellness tool, not a diagnosis. Same as Apple's.</p>
 
@@ -519,7 +525,7 @@
     document.addEventListener('click', function (e) {
       var a = e.target && e.target.closest && e.target.closest('a[href*="apps.apple.com"]');
       if (!a) return;
-      posthog.capture('appstore_click', { placement: 'blog' });
+      posthog.capture('appstore_click', { placement: 'blog', article: 'apple-watch-readiness-score', link_position: a.getAttribute('data-pos') || 'closing' });
     });
   });
 </script>
