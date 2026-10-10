@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<!-- DRAFT: remove the robots meta and the .draft label on publish -->
+<meta name="robots" content="noindex,nofollow" />
+<title>How to Read Your HRV on Apple Watch: SDNN vs RMSSD</title>
+<meta name="description" content="Where to find HRV on Apple Watch, what SDNN means, why Series 12 shows a new Recovery HRV, and why Garmin, Oura and WHOOP never send theirs." />
+<meta name="author" content="Petter Höglander" />
+<meta name="theme-color" content="#000000" />
+<meta name="apple-itunes-app" content="app-id=6776171727" />
+<link rel="canonical" href="https://woah-recovery.app/blog/how-to-read-hrv-on-apple-watch.html" />
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png" />
+<link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+<meta property="og:title" content="How to read your HRV on Apple Watch (and why it changed when you got a new one)" />
+<meta property="og:description" content="Where to find HRV on Apple Watch, what SDNN means, why Series 12 shows a new Recovery HRV, and why Garmin, Oura and WHOOP never send theirs." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://woah-recovery.app/blog/how-to-read-hrv-on-apple-watch.html" />
+<meta property="og:image" content="https://woah-recovery.app/blog/img/how-to-read-hrv-on-apple-watch.jpg" />
+<meta property="article:published_time" content="2026-10-10" />
+<meta property="article:author" content="Petter Höglander" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "@id": "https://woah-recovery.app/blog/how-to-read-hrv-on-apple-watch.html#article",
+   "headline": "How to read your HRV on Apple Watch (and why it changed when you got a new one)",
+   "description": "Where to find HRV on Apple Watch, what SDNN means, why Series 12 shows a new Recovery HRV, and why Garmin, Oura and WHOOP never send theirs.",
+   "image": "https://woah-recovery.app/blog/img/how-to-read-hrv-on-apple-watch.jpg",
+   "datePublished": "2026-10-10",
+   "dateModified": "2026-10-10",
+   "author": {
+    "@type": "Person",
+    "name": "Petter Höglander",
+    "url": "https://woah-recovery.app/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Woah",
+    "url": "https://woah-recovery.app/",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://woah-recovery.app/icon-192.png"
+    }
+   },
+   "mainEntityOfPage": "https://woah-recovery.app/blog/how-to-read-hrv-on-apple-watch.html",
+   "inLanguage": "en"
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Is Apple Watch HRV SDNN or RMSSD?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "The HRV in the Health app is SDNN, and it always has been. Series 12 and Ultra 4 also show Recovery HRV in the Heart Rate app, which reviewers report is RMSSD, and iOS 27 added an RMSSD type to HealthKit. Keep the two apart: they are different calculations with different normal values."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Why is my Apple Watch HRV lower than my Oura or WHOOP?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Different formula, different timing. Apple Watch reports SDNN from short spot readings, Oura and WHOOP report RMSSD averaged over the night. In one study Apple Watch also read about 8 ms lower than a chest strap on average. Compare each device only with itself."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Why did my HRV change when I upgraded my Apple Watch?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Usually because the measurement changed, not you. Series 12 and Ultra 4 measure HRV up to 24 times more often and add a separate Recovery HRV. Note the date you switched, don't compare old and new numbers, and give a new baseline two to four weeks."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Do Garmin, Oura and WHOOP write HRV to Apple Health?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Not as of October 2026. All three sync sleep and heart rate to Apple Health but keep their HRV in their own apps, so any app reading Apple Health gets no HRV from them. If you see HRV in Health while wearing one, check the data source."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "What is a good HRV on Apple Watch?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "The one that is normal for you. Healthy people range widely, and most published charts use RMSSD, not the SDNN your watch shows. Your own 30-day average, read from night readings, is the only reference worth using."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+<style>
+  @font-face {
+    font-family: "Literata";
+    font-style: italic;
+    font-weight: 200 700;
+    font-display: swap;
+    src: url("../fonts/literata-italic.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+2013-2014, U+2018-201D;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --gold: #D4B776;
+    --bg: #000;
+    --serif: "New York", "Literata", ui-serif, Georgia, serif;
+    --line: rgba(255,255,255,0.10);
+    --ink: rgba(255,255,255,0.86);
+    --ink-soft: rgba(255,255,255,0.62);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: #fff;
+    font-family: -apple-system, "SF Pro Text", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100svh;
+    display: flex; flex-direction: column; align-items: center;
+    overflow-x: hidden;
+  }
+
+  /* ================= Header ================= */
+  .top {
+    position: relative; width: 100%;
+    display: flex; flex-direction: column; align-items: center;
+    gap: clamp(14px, 2.2vh, 20px);
+    padding: clamp(56px, 10vh, 110px) 22px clamp(28px, 5vh, 48px);
+    text-align: center;
+  }
+  .top::before {
+    content: ""; position: absolute; left: 50%; top: 40%;
+    width: min(88vw, 720px); aspect-ratio: 1;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(212,183,118,0.06), rgba(212,183,118,0.02) 42%, transparent 68%);
+    pointer-events: none;
+  }
+  .brand {
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.44em; text-indent: 0.44em;
+    color: var(--gold); text-transform: uppercase;
+    text-decoration: none;
+  }
+  .brand:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+  .draft {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.3em; text-indent: 0.3em;
+    text-transform: uppercase; color: rgba(255,255,255,0.45);
+    border: 1px solid rgba(255,255,255,0.18); border-radius: 999px;
+    padding: 6px 12px 6px 14px;
+  }
+  h1 {
+    font-family: var(--serif); font-style: italic; font-weight: 300;
+    font-size: clamp(32px, 5.6vw, 52px);
+    line-height: 1.12; letter-spacing: -0.015em;
+    max-width: 20ch;
+  }
+  .byline {
+    font-size: 13px; letter-spacing: 0.02em;
+    color: rgba(255,255,255,0.5);
+  }
+  .byline b { font-weight: 600; color: rgba(255,255,255,0.72); }
+  .byline span + span::before { content: "·"; margin: 0 8px; color: rgba(255,255,255,0.3); }
+
+  @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  .top > * { animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
+  .top > *:nth-child(2) { animation-delay: 0.08s; }
+  .top > *:nth-child(3) { animation-delay: 0.18s; }
+  .top > *:nth-child(4) { animation-delay: 0.26s; }
+
+
+  /* ================= Hero + author photo ================= */
+  .hero { width: 100%; max-width: 900px; padding: 0 22px; margin: 0 auto clamp(28px, 4vh, 44px); animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.24s both; }
+  .hero img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 22px; border: 1px solid var(--line); }
+  .hero figcaption { font-size: 12px; color: rgba(255,255,255,0.4); text-align: center; margin-top: 10px; }
+  .author img.avatar { flex: 0 0 auto; width: 56px; height: 56px; border-radius: 50%; object-fit: cover; object-position: 50% 20%; border: 1px solid rgba(212,183,118,0.35); }
+
+  /* ================= Article ================= */
+  main {
+    width: 100%; max-width: 680px;
+    padding: 0 22px clamp(48px, 8vh, 88px);
+    animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+  }
+  .lede {
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(18px, 2.3vw, 21px); line-height: 1.55;
+    color: rgba(255,255,255,0.72);
+    margin: 0 0 28px;
+  }
+  main p, main li {
+    font-size: 17px; line-height: 1.72;
+    color: var(--ink);
+  }
+  main p { margin: 0 0 18px; }
+  main h2 {
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    font-size: clamp(24px, 3.2vw, 30px); line-height: 1.25;
+    color: #fff;
+    margin: 44px 0 14px;
+  }
+  main h3 {
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.24em; text-indent: 0.24em; text-transform: uppercase;
+    color: rgba(212,183,118,0.8);
+    margin: 40px 0 12px;
+  }
+  main ul { list-style: none; margin: 0 0 18px; }
+  main ul li { padding-left: 20px; position: relative; margin-bottom: 10px; }
+  main ul li::before { content: ""; position: absolute; left: 0; top: 0.72em; width: 8px; height: 1px; background: var(--gold); }
+  main strong { color: #fff; font-weight: 600; }
+  main a { color: rgba(212,183,118,0.92); text-decoration: none; border-bottom: 1px solid rgba(212,183,118,0.35); }
+  main a:hover { border-bottom-color: rgba(212,183,118,0.9); }
+  main a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
+
+  main ol { padding-left: 22px; margin: 0 0 18px; }
+  main ol li { margin-bottom: 10px; }
+  .tablenote { font-size: 13px; color: rgba(255,255,255,0.5); margin: 0 0 18px; }
+  .tablewrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 0 10px; border: 1px solid var(--line); border-radius: 14px; }
+  table { border-collapse: collapse; min-width: 620px; width: 100%; }
+  th, td { text-align: left; vertical-align: top; padding: 12px 14px; font-size: 14px; line-height: 1.5; color: var(--ink); border-bottom: 1px solid var(--line); }
+  th { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(212,183,118,0.8); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: none; }
+
+  .faq { border-top: 1px solid var(--line); margin-top: 8px; }
+  .faq details { border-bottom: 1px solid var(--line); }
+  .faq summary {
+    list-style: none; cursor: pointer;
+    display: flex; align-items: baseline; justify-content: space-between; gap: 18px;
+    padding: 18px 2px;
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    font-size: clamp(17px, 2.3vw, 20px); line-height: 1.4;
+    color: rgba(255,255,255,0.92);
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary .mark { flex: 0 0 auto; align-self: center; width: 20px; height: 20px; position: relative; opacity: 0.55; transition: transform .35s cubic-bezier(0.22,1,0.36,1), opacity .25s ease; }
+  .faq summary .mark::before, .faq summary .mark::after { content: ""; position: absolute; background: var(--gold); top: 50%; left: 50%; }
+  .faq summary .mark::before { width: 14px; height: 1px; transform: translate(-50%, -50%); }
+  .faq summary .mark::after  { width: 1px; height: 14px; transform: translate(-50%, -50%); }
+  .faq details[open] summary .mark { transform: rotate(45deg); opacity: 0.9; }
+  .faq .answer { padding: 0 34px 20px 2px; }
+  .faq .answer p { font-size: 15.5px; line-height: 1.75; color: var(--ink-soft); margin: 0; }
+
+  .sources { margin-top: 44px; padding-top: 22px; border-top: 1px solid var(--line); }
+  .sources ol { padding-left: 22px; }
+  .sources li { font-size: 13.5px; line-height: 1.6; color: rgba(255,255,255,0.55); margin-bottom: 8px; }
+  .sources li a { color: rgba(212,183,118,0.75); border-bottom: none; }
+
+  .author {
+    display: flex; gap: 16px; align-items: flex-start;
+    margin-top: 44px; padding: 20px 22px;
+    border: 1px solid var(--line); border-radius: 22px;
+  }
+  .author .dot { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, rgba(212,183,118,0.95), rgba(212,183,118,0.35) 60%, rgba(212,183,118,0.08)); }
+  .author p { font-size: 14.5px; line-height: 1.6; color: var(--ink-soft); margin: 0; }
+  .author p b { color: rgba(255,255,255,0.85); font-weight: 600; }
+
+  /* ================= Closing CTA + footer ================= */
+  .closing {
+    width: 100%;
+    display: flex; flex-direction: column; align-items: center;
+    gap: clamp(18px, 3vh, 26px);
+    padding: 0 22px clamp(44px, 7vh, 72px);
+    text-align: center;
+  }
+  .closing .lede { margin: 0; font-size: clamp(18px, 2.4vw, 22px); }
+  .cta {
+    position: relative; display: inline-flex; align-items: center; gap: 10px;
+    padding: 15px 30px; border-radius: 999px;
+    font-family: var(--serif);
+    font-size: 17px; font-weight: 500; letter-spacing: 0.04em;
+    color: #fff; text-decoration: none; cursor: pointer;
+    background: rgba(255,255,255,0.10);
+    backdrop-filter: blur(16px) saturate(180%); -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.18);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.45), inset 0 -6px 14px rgba(255,255,255,0.05), 0 10px 34px rgba(0,0,0,0.45);
+    transition: transform .2s ease, background .25s ease;
+  }
+  .cta::before { content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+    background: linear-gradient(180deg, rgba(255,255,255,0.28), rgba(255,255,255,0) 46%); mix-blend-mode: screen; }
+  .cta:hover { background: rgba(255,255,255,0.16); transform: translateY(-1px); }
+  .cta:active { transform: scale(0.985); }
+  .cta:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+  .cta svg { width: 17px; height: 20px; fill: #fff; margin-top: -3px; }
+
+  .legal { font-size: 12px; color: rgba(255,255,255,0.48); text-align: center; padding-bottom: 40px; }
+  .legal a { color: inherit; text-decoration: none; margin: 0 7px; }
+  .legal a:hover { color: rgba(255,255,255,0.75); }
+  .legal a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .top > *, main { animation: none; }
+    .faq summary .mark { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="top">
+    <a class="brand" href="../index.html">Woah</a>
+    <span class="draft">Draft · not published</span>
+    <h1>How to read your HRV on Apple Watch (and why it changed when you got a new one)</h1>
+    <p class="byline"><span>By <b>Petter Höglander</b></span><span><time datetime="2026-10-10">10 October 2026</time></span><span>8 min read</span></p>
+  </header>
+
+  <!-- HERO: generate blog/img/how-to-read-hrv-on-apple-watch.jpg (ElevenLabs, Petter's yes first), then uncomment.
+  <figure class="hero">
+    <img src="img/how-to-read-hrv-on-apple-watch.jpg" alt="Two Apple Watches, an older and a newer one, with their screens off on a wooden desk next to a mug of coffee" width="1376" height="774" />
+  </figure>
+  -->
+
+  <main>
+    <article>
+      <p class="lede">Open the Health app on your iPhone, tap Browse, then Heart, then Heart Rate Variability. The number there is in milliseconds, it is called SDNN, and it comes from short readings your watch takes while you are still. Read it against your own last 30 days, look at night readings and weekly averages, and never compare it with anyone else's number.</p>
+
+      <p>That is basically the whole guide. The rest is why, and it matters more than it sounds, because the number you see depends a lot on which watch took it and how.</p>
+
+      <h2>Where to find your HRV on Apple Watch</h2>
+
+      <p>In the Health app: <strong>Browse → Heart → Heart Rate Variability.</strong> At the top you can switch between day, week, month, six months and year. Week and month are the useful ones. The day view is mostly noise.</p>
+
+      <p>On the watch itself: if you have a <strong>Series 12 or Ultra 4</strong>, open the Heart Rate app and turn the Digital Crown to <strong>Recovery HRV</strong>. That one is new, and I'll come back to it, because it is not the same number as the one in the Health app.</p>
+
+      <h2>What the number actually is</h2>
+
+      <p>HRV is the small variation in time between your heartbeats. Your heart does not beat like a metronome. At 60 beats a minute, one gap might be 0.95 seconds and the next 1.05. More variation usually means your body is in rest-and-recover mode. Less means it is busy with something: training, alcohol, stress, a cold on the way.</p>
+
+      <p>The confusing part is that there are two common ways to turn those gaps into one number.</p>
+
+      <ul>
+        <li><strong>SDNN</strong> looks at how spread out all the gaps are during the reading. This is what Apple Watch has always written to Apple Health.</li>
+        <li><strong>RMSSD</strong> looks at how much each gap differs from the one right before it. This is what WHOOP, Oura and Garmin use, and it mostly reflects the rest-and-recover side of your nervous system (the parasympathetic, or vagal, part). In the big <a href="https://www.frontiersin.org/articles/10.3389/fpubh.2017.00258/full" rel="noopener">overview of HRV metrics by Shaffer and Ginsberg (2017)</a>, RMSSD is described as the main short-term measure of exactly that.</li>
+      </ul>
+
+      <p>Same heartbeats, two different calculations, two different numbers. Both in milliseconds, which is why people compare them. They shouldn't.</p>
+
+      <h2>Why your Apple Watch HRV is not your friend's Oura number</h2>
+
+      <p>Three reasons, and any one of them is enough.</p>
+
+      <ol>
+        <li><strong>Different formula.</strong> SDNN and RMSSD are not the same thing, so 35 ms on one is not 35 ms on the other.</li>
+        <li><strong>Different moment.</strong> Older Apple Watches take a short reading every few hours (Engadget's Series 12 review puts it at every two to four hours). A ring that averages your whole night is measuring something much steadier than a spot reading taken whenever your wrist happened to be still.</li>
+        <li><strong>Different person.</strong> Even with the same device, a 30 can be a great night for one person and a bad one for another.</li>
+      </ol>
+
+      <p>And the watch is not a lab. When O'Grady and colleagues compared Apple Watch Series 9 and Ultra 2 with a chest strap in 39 adults over two weeks (<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11478500/" rel="noopener">Sensors, 2024</a>), the watch read HRV <strong>8.3 ms lower</strong> on average, with an average error of about <strong>29 %</strong>. Resting heart rate, on the other hand, was almost spot on: a difference of <strong>0.08 bpm</strong>. Their conclusion was the right one: fine for trends and changes over time, not for absolute values.</p>
+
+      <p>So I would trust your Apple Watch HRV to tell you that something moved. I would not trust it to tell you what your "real" HRV is. And I would trust your resting heart rate more than both.</p>
+
+      <h2>The surprise: Garmin, Oura and WHOOP don't put their HRV in Apple Health</h2>
+
+      <p>This one catches a lot of people. If you wear a Garmin, an Oura ring or a WHOOP and sync it to Apple Health, you get your sleep, heart rate and workouts there. <strong>You don't get their HRV.</strong> At the time of writing:</p>
+
+      <ul>
+        <li><strong>Oura</strong> lists active energy, heart rate, mindful minutes and sleep in <a href="https://ouraring.com/blog/apple-health/" rel="noopener">its own Apple Health guide</a>. HRV is not on the list.</li>
+        <li><strong>WHOOP</strong> writes resting heart rate and other metrics, but not HRV. DC Rainmaker noticed this back in 2022, and the reason given was the formula: WHOOP's RMSSD would land in Apple's SDNN field and look like a different number.</li>
+        <li><strong>Garmin</strong> keeps its overnight HRV Status inside Garmin Connect. It syncs steps, workouts, heart rate and sleep to Apple Health, but not that.</li>
+      </ul>
+
+      <p>So if you see HRV in the Health app and you wear a Garmin, scroll to the bottom of the HRV page and check where it comes from. It is probably an old Apple Watch, or a bridge app someone installed. And it means every app that reads Apple Health, mine included, gets no HRV from those three devices. That is not a bug in the app. The number simply never arrives.</p>
+
+      <h2>Why did my HRV change when I got a new Apple Watch?</h2>
+
+      <p>Mostly because the new watch measures differently, not because you changed.</p>
+
+      <p>With the <strong>Series 12 and Ultra 4</strong>, Apple changed two things:</p>
+
+      <ol>
+        <li><strong>Far more readings.</strong> HRV is now measured as often as every five minutes while you are still, which <a href="https://www.apple.com/newsroom/2026/09/introducing-apple-watch-series-12-with-the-all-new-health-sensing-system/" rel="noopener">Apple says</a> is up to 24 times more often than before. A daily value made of dozens of readings is steadier than one built from a handful. I would also expect the level to shift a bit, simply because the watch now catches moments the old one never sampled.</li>
+        <li><strong>A second number.</strong> Recovery HRV sits next to the old one. Apple's support page doesn't name the formula, but <a href="https://www.engadget.com/2260989/apple-watch-series-12-review-hrv-new-health-sensing-gesture/" rel="noopener">Engadget's review</a> says it is RMSSD, and iOS 27 added an RMSSD type to HealthKit next to the old SDNN one. It was the only new measurement type in that release, which tells you something.</li>
+      </ol>
+
+      <p>So if your HRV jumped 15 ms the week you upgraded, maybe nothing happened to you at all.</p>
+
+      <p>What I would do, whether you upgraded your Apple Watch or switched from a ring or a band:</p>
+
+      <ul>
+        <li><strong>Write down the date you switched.</strong> Everything before it is a different measurement.</li>
+        <li><strong>Don't compare Recovery HRV with your old HRV numbers.</strong> Treat it as a new metric with its own normal.</li>
+        <li><strong>Give it two to four weeks</strong> before you trust a new baseline. Any 30-day average will be half old watch, half new watch for the first month.</li>
+      </ul>
+
+      <p>I wrote more about this kind of switch, from the score side, in <a href="apple-watch-readiness-score.html">why a 4 on Apple Watch is not a 40 on WHOOP</a>.</p>
+
+      <h2>How I read HRV, four rules</h2>
+
+      <p><strong>1. Night, not day.</strong> A daytime reading depends on what you were just doing. Sitting in a meeting, walking up stairs, finishing a coffee. Night readings are the ones you can compare from one day to the next.</p>
+
+      <p><strong>2. A week beats a morning.</strong> HRV is noisy. When Plews and colleagues followed elite endurance athletes (<a href="https://pubmed.ncbi.nlm.nih.gov/23852425/" rel="noopener">Sports Medicine, 2013</a>), single-day values were too jumpy to guide anything, and the 7-day rolling average was what actually tracked how they adapted to training. In the Health app, the week view does most of this for you.</p>
+
+      <p><strong>3. You against your own 30 days.</strong> One morning below your normal: ignore it. Three in a row: something is going on. Two weeks or more: something structural, like sleep, workload, alcohol or an illness you haven't shaken. I went through the usual causes, and what to do about each, in <a href="why-is-my-hrv-going-down.html">why is my HRV going down</a>.</p>
+
+      <p><strong>4. Read it together with resting heart rate.</strong> HRV down and resting heart rate up on the same morning, with no hard workout or drinks to explain it, is the signal I take seriously. Either one alone, much less.</p>
+
+      <h2>What I would stop doing</h2>
+
+      <p>Stop comparing yourself to age charts. The ranges are so wide that they tell you almost nothing, and they are usually RMSSD charts anyway, so they don't even match the number your watch shows.</p>
+
+      <p>Stop trying to raise your HRV. It is a thermometer, not a goal. Fix sleep, drink less, train sensibly, and it follows.</p>
+
+      <p>And if you just got a Series 12: more readings is great for anything that calculates a score. It is not great for you if you check every one of them.</p>
+
+      <h2>Where Woah fits</h2>
+
+      <p>This is the part of HRV that decided how I built Woah.</p>
+
+      <p>Woah reads the SDNN series in Apple Health, because it is the one every Apple Watch writes and the one with years of history behind it. It takes a reading from inside last night's sleep, not one from the afternoon, and compares it with your own last 30 days. A falling 3-day trend lowers how high the score can go. HRV is about a third of the recovery score. Sleep is about half.</p>
+
+      <p>And for the Garmin, Oura and WHOOP case above, where no HRV ever reaches Apple Health: Woah still works. The score is built from your sleep, resting heart rate and breathing rate instead, and you can rate your stress from 1 to 5 in the evening so the next morning's score has something in HRV's place. I would rather say that out loud than pretend the HRV is there.</p>
+
+      <p>If you have a Series 12 or Ultra 4, Apple's own <a href="apple-watch-readiness-score.html">Readiness score</a> uses all of this too, and I'd try it. Woah's score and every chart behind it are free. What you pay for is the written part and the coach. The <a href="../faq.html">FAQ</a> explains exactly how the score is built.</p>
+
+      <h3>Questions people ask</h3>
+      <div class="faq">
+        <details>
+          <summary>Is Apple Watch HRV SDNN or RMSSD?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="answer"><p>The HRV in the Health app is SDNN, and it always has been. Series 12 and Ultra 4 also show Recovery HRV in the Heart Rate app, which reviewers report is RMSSD, and iOS 27 added an RMSSD type to HealthKit. Keep the two apart: they are different calculations with different normal values.</p></div>
+        </details>
+        <details>
+          <summary>Why is my Apple Watch HRV lower than my Oura or WHOOP?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="answer"><p>Different formula, different timing. Apple Watch reports SDNN from short spot readings, Oura and WHOOP report RMSSD averaged over the night. In one study Apple Watch also read about 8 ms lower than a chest strap on average. Compare each device only with itself.</p></div>
+        </details>
+        <details>
+          <summary>Why did my HRV change when I upgraded my Apple Watch?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="answer"><p>Usually because the measurement changed, not you. Series 12 and Ultra 4 measure HRV up to 24 times more often and add a separate Recovery HRV. Note the date you switched, don't compare old and new numbers, and give a new baseline two to four weeks.</p></div>
+        </details>
+        <details>
+          <summary>Do Garmin, Oura and WHOOP write HRV to Apple Health?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="answer"><p>Not as of October 2026. All three sync sleep and heart rate to Apple Health but keep their HRV in their own apps, so any app reading Apple Health gets no HRV from them. If you see HRV in Health while wearing one, check the data source.</p></div>
+        </details>
+        <details>
+          <summary>What is a good HRV on Apple Watch?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="answer"><p>The one that is normal for you. Healthy people range widely, and most published charts use RMSSD, not the SDNN your watch shows. Your own 30-day average, read from night readings, is the only reference worth using.</p></div>
+        </details>
+      </div>
+
+      <div class="author">
+        <img class="avatar" src="img/petter.jpg" alt="Petter Höglander" width="56" height="56" />
+        <p><b>Petter Höglander</b> builds Woah. Before that he spent years building sleep and fitness apps for some of the biggest apps in the App Store. He wrote the recovery and sleep models Woah runs on, which is why he has opinions about everyone else's.</p>
+      </div>
+
+      <div class="sources">
+        <h3>Sources</h3>
+        <ol>
+          <li>Apple. Monitor your heart rate with Apple Watch. Apple Support, read 2026-10-10. <a href="https://support.apple.com/en-us/120277" rel="noopener">support.apple.com</a></li>
+          <li>Apple. Introducing Apple Watch Series 12 with the all-new Health Sensing System. Apple Newsroom, September 2026. <a href="https://www.apple.com/newsroom/2026/09/introducing-apple-watch-series-12-with-the-all-new-health-sensing-system/" rel="noopener">apple.com</a></li>
+          <li>Engadget. Apple Watch Series 12 review: Catching up and catching heat. 2026. <a href="https://www.engadget.com/2260989/apple-watch-series-12-review-hrv-new-health-sensing-gesture/" rel="noopener">engadget.com</a></li>
+          <li>Apple Developer. heartRateVariabilityRMSSD (HealthKit). <a href="https://developer.apple.com/documentation/healthkit/hkquantitytypeidentifier/heartratevariabilityrmssd" rel="noopener">developer.apple.com</a></li>
+          <li>Shaffer F, Ginsberg JP. An overview of heart rate variability metrics and norms. <em>Frontiers in Public Health</em>. 2017;5:258. <a href="https://www.frontiersin.org/articles/10.3389/fpubh.2017.00258/full" rel="noopener">frontiersin.org</a></li>
+          <li>O'Grady B, et al. The validity of Apple Watch Series 9 and Ultra 2 for serial measurements of heart rate variability and resting heart rate. <em>Sensors</em>. 2024. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11478500/" rel="noopener">pmc.ncbi.nlm.nih.gov</a></li>
+          <li>Plews DJ, Laursen PB, Stanley J, Kilding AE, Buchheit M. Training adaptation and heart rate variability in elite endurance athletes. <em>Sports Medicine</em>. 2013;43(9):773-781. <a href="https://pubmed.ncbi.nlm.nih.gov/23852425/" rel="noopener">pubmed.ncbi.nlm.nih.gov</a></li>
+          <li>Oura. Connect Oura and Apple Health. The Pulse blog, read 2026-10-10. <a href="https://ouraring.com/blog/apple-health/" rel="noopener">ouraring.com</a></li>
+          <li>DC Rainmaker. WHOOP exporting to Apple Health: here's how it actually works. April 2022. <a href="https://www.dcrainmaker.com/2022/04/exporting-health-actually.html" rel="noopener">dcrainmaker.com</a></li>
+          <li>Constant. Does Garmin write HRV to Apple Health? Updated 22 July 2026. <a href="https://trainconstant.com/blog/garmin-apple-health" rel="noopener">trainconstant.com</a></li>
+        </ol>
+      </div>
+    </article>
+  </main>
+
+  <div class="closing">
+    <p class="lede">Woah turns the data your watch already has into one answer every morning, on any Apple Watch.</p>
+    <a class="cta" href="https://apps.apple.com/se/app/woah-recovery/id6776171727" aria-label="Woah on the App Store">
+      <svg viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+      App Store
+    </a>
+  </div>
+
+  <div class="legal">
+    <a href="../index.html">Home</a>
+    <a href="../faq.html">FAQ</a>
+    <a href="../support.html">Support</a>
+    <a href="https://petterhoglander-ai.github.io/woah-legal/privacy.html">Privacy</a>
+    <a href="https://petterhoglander-ai.github.io/woah-legal/terms.html">Terms</a>
+  </div>
+
+<!-- ================= Product analytics — cookieless, EU-hosted =============
+     Same block as the other pages: memory persistence, no cookies, one explicit
+     $pageview, and appstore_click with placement so a click from an article is
+     separable from the landing page. -->
+<script defer src="https://eu-assets.i.posthog.com/static/array.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', function () {
+    if (!window.posthog || !window.posthog.init) return;
+    posthog.init('phc_stdFgfqxUr5uxVDwpu2ee8iGZvsR9QasvRYLbtRyHKSt', {
+      api_host: 'https://eu.i.posthog.com',
+      persistence: 'memory',
+      disable_cookie: true,
+      person_profiles: 'identified_only',
+      autocapture: false,
+      disable_session_recording: true,
+      capture_pageview: false,
+      capture_pageleave: false,
+      loaded: function (ph) { ph.capture('$pageview'); }
+    });
+    document.addEventListener('click', function (e) {
+      var a = e.target && e.target.closest && e.target.closest('a[href*="apps.apple.com"]');
+      if (!a) return;
+      posthog.capture('appstore_click', { placement: 'blog', article: 'how-to-read-hrv-on-apple-watch', link_position: a.getAttribute('data-pos') || 'closing' });
+    });
+  });
+</script>
+</body>
+</html>
