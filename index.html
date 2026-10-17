@@ -13,7 +13,6 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,600;6..72,700&display=swap" />
 <meta property="og:title" content="Woah — finally understand your wearable data" />
 <meta property="og:description" content="One clear recovery score every morning. Actionable insight, made for you." />
 <meta property="og:type" content="website" />
@@ -135,7 +134,6 @@
     /* Plate gradient sampled from the App Store screenshots: night navy → dusk */
     --plate: linear-gradient(180deg, #071c37 0%, #0d2b47 22%, #2c4762 48%, #5b6678 66%, #938987 82%, #c0a88e 100%);
     --line: rgba(255,255,255,0.10);
-    --glass-border: 1px solid rgba(255,255,255,0.08); /* one frame for the nav, the hero plate and every card */
     --ease: cubic-bezier(0.22, 1, 0.36, 1);
     --shot-w: clamp(150px, 18vw, 208px);
     --shots: 3; /* visible tiles; widened by the breakpoints below, never past 5 */
@@ -150,55 +148,12 @@
     overflow-x: hidden;
   }
 
-  /* ================= Background video — the backmost layer.
-     Fixed, muted, looping; sits behind the orb (both z-index 0, video first
-     in the DOM so it paints underneath). A dark scrim keeps text legible. */
-  .bg-video {
-    position: fixed; inset: 0; z-index: 0;
-    pointer-events: none; overflow: hidden;
-    background: var(--bg); /* fallback while the video loads / if it fails */
-  }
-  .bg-video video {
-    width: 100%; height: 100%; object-fit: cover; display: block;
-  }
-  .bg-video::after {
-    content: ""; position: absolute; inset: 0;
-    background: linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.20));
-  }
-
   /* Everything readable stacks above the orb — and never shrinks: the body is
      a flex column, and default flex-shrink would compress sections into the
      viewport instead of letting the page scroll. */
   .topbar, .hero, .pillars, .reviews, .faq-section, .legal { position: relative; z-index: 1; flex-shrink: 0; }
 
-  /* ================= Top bar — a floating pill, like the hero plate below it */
-  .topbar {
-    width: min(100% - 32px, 1180px);
-    margin-top: 16px;
-    display: flex; align-items: center; gap: 28px;
-    padding: 10px 10px 10px 18px;
-    border-radius: 999px;
-    background: rgba(18,20,26,0.72);
-    backdrop-filter: blur(16px) saturate(160%); -webkit-backdrop-filter: blur(16px) saturate(160%);
-    border: var(--glass-border);
-  }
-  /* Sticky: the bar rides along the whole page. Must come after the shared
-     position: relative rule for the page layers. */
-  .topbar { position: sticky; top: 16px; z-index: 10; }
-  .logo { display: inline-flex; align-items: center; gap: 10px; color: #fff; text-decoration: none;
-    font-weight: 700; font-size: 18px; letter-spacing: -0.01em; }
-  .logo img { width: 30px; height: 30px; border-radius: 8px; display: block; }
-  .topbar nav { display: flex; gap: 26px; }
-  .topbar nav a { color: rgba(255,255,255,0.78); text-decoration: none; font-size: 15px; font-weight: 500; }
-  .topbar nav a:hover { color: #fff; }
-  .nav-rating { margin-left: auto; display: inline-flex; align-items: center; gap: 8px;
-    color: rgba(255,255,255,0.78); text-decoration: none; font-size: 14px; font-weight: 500; white-space: nowrap; }
-  .nav-rating:hover { color: #fff; }
-  .nav-rating .stars svg { width: 13px; height: 13px; }
-  @media (max-width: 860px) { .nav-rating { display: none; } .topbar .get { margin-left: auto; } }
-  .topbar .get { padding: 13px 24px; font-size: 17px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.45); }
-  .topbar a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 999px; }
-  @media (max-width: 680px) { .topbar nav { display: none; } }
+  /* Top bar, background video and --glass-border: shared, in site.css */
 
   /* ================= Hero — one rounded plate in the App Store screenshots' tones */
   .hero {
@@ -344,7 +299,7 @@
   .dots button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 6px; }
 
   /* ---- App Store CTA — Liquid Glass pill ---- */
-  .cta, .topbar .get {
+  .cta {
     position: relative; display: inline-flex; align-items: center; gap: 10px;
     border-radius: 999px;
     font-family: var(--serif);
@@ -357,14 +312,12 @@
     transition: transform .2s ease, background .25s ease;
   }
   .cta { padding: 15px 30px; font-size: 17px; }
-  .cta::before, .topbar .get::before { content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+  .cta::before { content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
     background: linear-gradient(180deg, rgba(255,255,255,0.28), rgba(255,255,255,0) 46%); mix-blend-mode: screen; }
-  .cta:hover, .topbar .get:hover { background: rgba(255,255,255,0.16); transform: translateY(-1px); }
+  .cta:hover { background: rgba(255,255,255,0.16); transform: translateY(-1px); }
   .cta:active { transform: scale(0.985); }
   .cta:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
   .cta svg { width: 17px; height: 20px; fill: #fff; margin-top: -3px; }
-  .topbar .get { gap: 8px; }
-  .topbar .get svg { width: 16px; height: 19px; fill: #fff; margin-top: -3px; }
 
   /* ---- QR popover: desktop-only, revealed on hover/focus of the CTA.
      Centred below the button, big enough to scan from across the room. ---- */
@@ -653,6 +606,8 @@
     .rev-viewport { -webkit-mask-image: none; mask-image: none; }
   }
 </style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,600;6..72,700&display=swap" />
+<link rel="stylesheet" href="/site.css" />
 </head>
 <body>
   <script>document.documentElement.classList.add('js');</script>
@@ -669,14 +624,14 @@
     <a class="logo" href="/"><img src="icon-192.png" alt="" width="30" height="30" />Woah</a>
     <nav aria-label="Site">
       <a href="#pillars">How it works</a>
-      <a href="faq.html">FAQ</a>
-      <a href="blog/">Blog</a>
+      <a href="/faq.html">FAQ</a>
+      <a href="/blog/">Blog</a>
     </nav>
-    <a class="nav-rating" href="https://apps.apple.com/se/app/woah-recovery/id6776171727?see-all=reviews" aria-label="Rated 4.9 out of 5 on the App Store">
+    <a class="nav-rating" href="https://apps.apple.com/se/app/woah-recovery/id6776171727?see-all=reviews" data-placement="nav" aria-label="Rated 4.9 out of 5 on the App Store">
       <span class="stars" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#star"/></svg><svg viewBox="0 0 24 24"><use href="#star"/></svg><svg viewBox="0 0 24 24"><use href="#star"/></svg><svg viewBox="0 0 24 24"><use href="#star"/></svg><svg viewBox="0 0 24 24"><use href="#star"/></svg></span>
       <span>4.9 on the App Store</span>
     </a>
-    <a class="get" href="https://apps.apple.com/se/app/woah-recovery/id6776171727"><svg viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>Try it for free</a>
+    <a class="get" href="https://apps.apple.com/se/app/woah-recovery/id6776171727" data-placement="nav"><svg viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>Try it for free</a>
   </div>
 
   <header class="hero">

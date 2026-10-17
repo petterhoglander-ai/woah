@@ -1,0 +1,153 @@
+/* =====================================================================
+   site.css — the parts every woah-recovery.app page shares: the type,
+   the background video, the sticky top bar and the glass plates.
+   Linked AFTER each page's own <style>, so these rules win where they
+   overlap. Page-specific layout stays in the page.
+   ===================================================================== */
+
+:root {
+  --display: "Newsreader", "New York", Georgia, serif; /* = App Store screenshot headlines */
+  --sans: "Inter", -apple-system, "SF Pro Text", system-ui, sans-serif;
+  --glass-bg: rgba(8,8,8,0.55);
+  --glass-border: 1px solid rgba(255,255,255,0.08); /* one frame for the bar, the plates and every card */
+  --plate-radius: clamp(28px, 4vw, 44px);
+}
+
+body { font-family: var(--sans); }
+
+/* ================= Background video — the backmost layer ================= */
+.bg-video {
+  position: fixed; inset: 0; z-index: 0;
+  pointer-events: none; overflow: hidden;
+  background: #000; /* fallback while the video loads / if it fails */
+}
+.bg-video video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.bg-video::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.20));
+}
+
+/* ================= Top bar — sticky, rides along the whole page ================= */
+.topbar {
+  position: sticky; top: 16px; z-index: 10; flex-shrink: 0;
+  width: min(100% - 32px, 1180px);
+  margin-top: 16px;
+  display: flex; align-items: center; gap: 28px;
+  padding: 10px 10px 10px 18px;
+  border-radius: 999px;
+  background: rgba(18,20,26,0.72);
+  backdrop-filter: blur(16px) saturate(160%); -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: var(--glass-border);
+}
+.topbar .logo { display: inline-flex; align-items: center; gap: 10px; color: #fff; text-decoration: none;
+  font-weight: 700; font-size: 18px; letter-spacing: -0.01em; }
+.topbar .logo img { width: 30px; height: 30px; border-radius: 8px; display: block; }
+.topbar nav { display: flex; gap: 26px; }
+.topbar nav a { color: rgba(255,255,255,0.78); text-decoration: none; font-size: 15px; font-weight: 500; }
+.topbar nav a:hover, .topbar nav a[aria-current="page"] { color: #fff; }
+.topbar a:focus-visible { outline: 2px solid #D4B776; outline-offset: 3px; border-radius: 999px; }
+
+.nav-rating { margin-left: auto; display: inline-flex; align-items: center; gap: 8px;
+  color: rgba(255,255,255,0.78); text-decoration: none; font-size: 14px; font-weight: 500; white-space: nowrap; }
+.nav-rating:hover { color: #fff; }
+.nav-rating .stars { display: inline-flex; gap: 3px; }
+.nav-rating .stars svg { width: 13px; height: 13px; fill: #D4B776; display: block; }
+
+/* Liquid Glass pill — same recipe as the page CTAs */
+.topbar .get {
+  position: relative; display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 24px; border-radius: 999px;
+  font-family: "New York", "Literata", ui-serif, Georgia, serif;
+  font-size: 17px; font-weight: 500; letter-spacing: 0.04em;
+  color: #fff; text-decoration: none; white-space: nowrap;
+  background: rgba(255,255,255,0.10);
+  backdrop-filter: blur(16px) saturate(180%); -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.45);
+  transition: transform .2s ease, background .25s ease;
+}
+.topbar .get::before { content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+  background: linear-gradient(180deg, rgba(255,255,255,0.28), rgba(255,255,255,0) 46%); mix-blend-mode: screen; }
+.topbar .get:hover { background: rgba(255,255,255,0.16); transform: translateY(-1px); }
+.topbar .get svg { width: 16px; height: 19px; fill: #fff; margin-top: -3px; }
+
+@media (max-width: 860px) { .nav-rating { display: none; } .topbar .get { margin-left: auto; } }
+@media (max-width: 680px) { .topbar nav { display: none; } }
+
+/* ================= Glass plate ================= */
+.plate {
+  width: min(100% - 32px, 1180px);
+  margin-top: 16px;
+  border-radius: var(--plate-radius);
+  background: var(--glass-bg);
+  backdrop-filter: blur(22px) saturate(160%); -webkit-backdrop-filter: blur(22px) saturate(160%);
+  border: var(--glass-border);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.45);
+}
+
+/* =====================================================================
+   Sub-pages (FAQ, blog index, articles) — body.sub-page.
+   Header, main and the closing CTA each become a plate; the content
+   keeps its reading column (--col) inside the wide plate.
+   ===================================================================== */
+.sub-page .top, .sub-page main, .sub-page .closing { position: relative; z-index: 1; flex-shrink: 0; }
+.sub-page .legal { position: relative; z-index: 1; margin-top: 28px; }
+
+.sub-page .top {
+  padding: clamp(48px, 8vh, 96px) 22px clamp(36px, 5vh, 56px);
+  overflow: hidden;
+}
+.sub-page .top::before { display: none; }
+.sub-page .top .brand { display: none; }
+
+.sub-page h1 {
+  font-family: var(--display); font-style: normal; font-weight: 700;
+  font-size: clamp(40px, 6.6vw, 76px);
+  line-height: 1.02; letter-spacing: -0.02em;
+  max-width: 16ch;
+}
+.sub-page.article h1 { font-size: clamp(34px, 5.2vw, 60px); max-width: 20ch; }
+.sub-page .top .sub {
+  font-family: var(--sans); font-style: normal;
+  font-size: clamp(17px, 2vw, 20px); line-height: 1.5;
+  color: rgba(255,255,255,0.82);
+}
+
+.sub-page main {
+  max-width: none;
+  padding: clamp(40px, 6vh, 72px) max(22px, calc((100% - var(--col, 720px)) / 2)) clamp(40px, 6vh, 72px);
+}
+.sub-page.article main { --col: 680px; }
+.sub-page.blog-index main { --col: 940px; }
+
+/* Article hero image now lives at the foot of the header plate */
+.sub-page .top figure.hero { max-width: 900px; padding: 0; margin: clamp(8px, 2vh, 20px) auto 0; }
+.sub-page .top figure.hero img { border: var(--glass-border); }
+
+.sub-page main h2,
+.sub-page .faq-title {
+  font-family: var(--display); font-style: normal; font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+/* Blog index cards — the homepage's inner card style */
+.sub-page .post a {
+  background: rgba(8,8,8,0.70);
+  border: var(--glass-border);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.45);
+}
+.sub-page .post a:hover { border-color: rgba(255,255,255,0.22); }
+/* the img's height attribute otherwise beats aspect-ratio and stands the photo 768px tall */
+.sub-page .post img { height: auto; }
+
+/* Article author box — inner card */
+.sub-page .author { background: rgba(8,8,8,0.55); border: var(--glass-border); }
+
+.sub-page .closing {
+  padding: clamp(40px, 6vh, 72px) 22px;
+  margin-bottom: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-video video { display: none; } /* static backdrop only */
+}
