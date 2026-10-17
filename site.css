@@ -114,8 +114,10 @@ body { font-family: var(--sans); }
 }
 
 .sub-page main {
+  /* % in padding resolves against the BODY, not the plate: subtract from the
+     plate's own width (min(100% - 32px, 1180px)) or wide windows squeeze the column. */
   max-width: none;
-  padding: clamp(40px, 6vh, 72px) max(22px, calc((100% - var(--col, 720px)) / 2)) clamp(40px, 6vh, 72px);
+  padding: clamp(40px, 6vh, 72px) max(22px, calc((min(100% - 32px, 1180px) - var(--col, 720px)) / 2)) clamp(40px, 6vh, 72px);
 }
 .sub-page.article main { --col: 680px; }
 .sub-page.blog-index main { --col: 940px; }
