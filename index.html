@@ -262,7 +262,11 @@
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    padding-block: 10px;
+    /* Room below for the tiles' shadows: a scroller clips its overflow, and a
+       shadow cut off by it reads as a hard edge under the gallery. The
+       negative margin gives the space back to the layout. */
+    padding-block: 10px 56px;
+    margin-bottom: -46px;
   }
   .track::-webkit-scrollbar { display: none; }
   /* Tail spacer: without it the last tile can never reach the left edge, so
@@ -451,7 +455,8 @@
     display: flex; align-items: stretch;
     gap: var(--rev-gap);
     width: max-content;
-    padding: 12px 0;
+    padding: 12px 0 60px; /* room for the cards' shadows inside the clipped viewport */
+    margin-bottom: -48px;
     animation: roll 62s linear infinite;
   }
   /* -50% is half the track (5 cards + 4.5 gaps); the extra half-gap lands the
