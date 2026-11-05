@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<!-- DRAFT: remove the robots meta and the .draft label on publish -->
+<meta name="robots" content="noindex,nofollow" />
+<title>Apple Watch VO₂max: Why It's Low and How to Raise It</title>
+<meta name="description" content="What Apple Watch VO₂max (Cardio Fitness) means, what's normal for your age, why it suddenly drops, and the training that actually raises it." />
+<meta name="author" content="Petter Höglander" />
+<meta name="theme-color" content="#000000" />
+<meta name="apple-itunes-app" content="app-id=6776171727" />
+<link rel="canonical" href="https://woah-recovery.app/blog/apple-watch-vo2-max.html" />
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png" />
+<link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+<meta property="og:title" content="VO₂max on Apple Watch: what the number means, why it's probably low, and how to raise it" />
+<meta property="og:description" content="What Apple Watch VO₂max (Cardio Fitness) means, what's normal for your age, why it suddenly drops, and the training that actually raises it." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://woah-recovery.app/blog/apple-watch-vo2-max.html" />
+<meta property="og:image" content="https://woah-recovery.app/og-image.png" />
+<meta property="article:published_time" content="2026-11-05" />
+<meta property="article:author" content="Petter Höglander" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "@id": "https://woah-recovery.app/blog/apple-watch-vo2-max.html#article",
+   "headline": "VO₂max on Apple Watch: what the number means, why it's probably low, and how to raise it",
+   "description": "What Apple Watch VO₂max (Cardio Fitness) means, what's normal for your age, why it suddenly drops, and the training that actually raises it.",
+   "image": "https://woah-recovery.app/og-image.png",
+   "datePublished": "2026-11-05",
+   "dateModified": "2026-11-05",
+   "author": {
+    "@type": "Person",
+    "name": "Petter Höglander",
+    "url": "https://woah-recovery.app/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Woah",
+    "url": "https://woah-recovery.app/",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://woah-recovery.app/icon-192.png"
+    }
+   },
+   "mainEntityOfPage": "https://woah-recovery.app/blog/apple-watch-vo2-max.html",
+   "inLanguage": "en"
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Where do I find VO₂max on Apple Watch?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "In the Health app on your iPhone, under Heart, then Cardio Fitness. It needs a day of wear and a few Outdoor Walk, Outdoor Run or Hiking workouts on fairly flat ground before the first estimate appears."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Is Apple Watch VO₂max accurate?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "It is consistent, but often low. Apple's own validation found an average error of 1.4 ml/kg/min against another estimate, while an independent 2025 study against a real treadmill test found the watch read about 6 ml/kg/min low on average, with about 13% error. Use it for the trend over months."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Why did my Apple Watch VO₂max drop suddenly?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Most sudden drops are the measurement: a recalculation of earlier estimates after an iOS update, outdated weight or age in Health, a heart-rate-limiting medication that isn't entered, heat, caffeine, hills or easier sessions. A real drop is possible too, since two to three weeks of inactivity can lower VO₂max a lot."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "What is a good VO₂max for my age?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "In the US FRIEND registry, the median is 48.0 for men and 37.6 for women in their 20s, falling to 32.6 and 23.4 in their 50s. Other countries have higher averages, so the most useful comparison is your own number three months ago."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "How fast can you improve VO₂max?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Training programmes of 6 to 12 weeks usually raise VO₂max by 5 to 10%. In one study, four 4-minute intervals at 90 to 95% of max heart rate, three times a week, raised it 7.2% in eight weeks."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+<style>
+  @font-face {
+    font-family: "Literata";
+    font-style: italic;
+    font-weight: 200 700;
+    font-display: swap;
+    src: url("../fonts/literata-italic.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+2013-2014, U+2018-201D;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --gold: #D4B776;
+    --bg: #000;
+    --serif: "New York", "Literata", ui-serif, Georgia, serif;
+    --line: rgba(255,255,255,0.10);
+    --ink: rgba(255,255,255,0.86);
+    --ink-soft: rgba(255,255,255,0.62);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: #fff;
+    font-family: -apple-system, "SF Pro Text", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100svh;
+    display: flex; flex-direction: column; align-items: center;
+    overflow-x: hidden;
+  }
+
+  /* ================= Header ================= */
+  .top {
+    position: relative; width: 100%;
+    display: flex; flex-direction: column; align-items: center;
+    gap: clamp(14px, 2.2vh, 20px);
+    padding: clamp(56px, 10vh, 110px) 22px clamp(28px, 5vh, 48px);
+    text-align: center;
+  }
+  .top::before {
+    content: ""; position: absolute; left: 50%; top: 40%;
+    width: min(88vw, 720px); aspect-ratio: 1;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(212,183,118,0.06), rgba(212,183,118,0.02) 42%, transparent 68%);
+    pointer-events: none;
+  }
+  .brand {
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.44em; text-indent: 0.44em;
+    color: var(--gold); text-transform: uppercase;
+    text-decoration: none;
+  }
+  .brand:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+  .draft {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.3em; text-indent: 0.3em;
+    text-transform: uppercase; color: rgba(255,255,255,0.45);
+    border: 1px solid rgba(255,255,255,0.18); border-radius: 999px;
+    padding: 6px 12px 6px 14px;
+  }
+  h1 {
+    font-family: var(--serif); font-style: italic; font-weight: 300;
+    font-size: clamp(32px, 5.6vw, 52px);
+    line-height: 1.12; letter-spacing: -0.015em;
+    max-width: 20ch;
+  }
+  .byline {
+    font-size: 13px; letter-spacing: 0.02em;
+    color: rgba(255,255,255,0.5);
+  }
+  .byline b { font-weight: 600; color: rgba(255,255,255,0.72); }
+  .byline span + span::before { content: "·"; margin: 0 8px; color: rgba(255,255,255,0.3); }
+
+  @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  .top > * { animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
+  .top > *:nth-child(2) { animation-delay: 0.08s; }
+  .top > *:nth-child(3) { animation-delay: 0.18s; }
+  .top > *:nth-child(4) { animation-delay: 0.26s; }
+
+
+  /* ================= Hero + author photo ================= */
+  .hero { width: 100%; max-width: 900px; padding: 0 22px; margin: 0 auto clamp(28px, 4vh, 44px); animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.24s both; }
+  .hero img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 22px; border: 1px solid var(--line); }
+  .hero figcaption { font-size: 12px; color: rgba(255,255,255,0.4); text-align: center; margin-top: 10px; }
+  .author img.avatar { flex: 0 0 auto; width: 56px; height: 56px; border-radius: 50%; object-fit: cover; object-position: 50% 20%; border: 1px solid rgba(212,183,118,0.35); }
+
+  /* ================= Article ================= */
+  main {
+    width: 100%; max-width: 680px;
+    padding: 0 22px clamp(48px, 8vh, 88px);
+    animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+  }
+  .lede {
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(18px, 2.3vw, 21px); line-height: 1.55;
+    color: rgba(255,255,255,0.72);
+    margin: 0 0 28px;
+  }
+  main p, main li {
+    font-size: 17px; line-height: 1.72;
+    color: var(--ink);
+  }
+  main p { margin: 0 0 18px; }
+  main h2 {
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    font-size: clamp(24px, 3.2vw, 30px); line-height: 1.25;
+    color: #fff;
+    margin: 44px 0 14px;
+  }
+  main h3 {
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.24em; text-indent: 0.24em; text-transform: uppercase;
+    color: rgba(212,183,118,0.8);
+    margin: 40px 0 12px;
+  }
+  main ul { list-style: none; margin: 0 0 18px; }
+  main ul li { padding-left: 20px; position: relative; margin-bottom: 10px; }
+  main ul li::before { content: ""; position: absolute; left: 0; top: 0.72em; width: 8px; height: 1px; background: var(--gold); }
+  main strong { color: #fff; font-weight: 600; }
+  main a { color: rgba(212,183,118,0.92); text-decoration: none; border-bottom: 1px solid rgba(212,183,118,0.35); }
+  main a:hover { border-bottom-color: rgba(212,183,118,0.9); }
+  main a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
+
+  main ol { padding-left: 22px; margin: 0 0 18px; }
+  main ol li { margin-bottom: 10px; }
+  .tablenote { font-size: 13px; color: rgba(255,255,255,0.5); margin: 0 0 18px; }
+  .tablewrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 0 10px; border: 1px solid var(--line); border-radius: 14px; }
+  table { border-collapse: collapse; min-width: 620px; width: 100%; }
+  th, td { text-align: left; vertical-align: top; padding: 12px 14px; font-size: 14px; line-height: 1.5; color: var(--ink); border-bottom: 1px solid var(--line); }
+  th { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(212,183,118,0.8); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: none; }
+
+  .faq { border-top: 1px solid var(--line); margin-top: 8px; }
+  .faq details { border-bottom: 1px solid var(--line); }
+  .faq summary {
+    list-style: none; cursor: pointer;
+    display: flex; align-items: baseline; justify-content: space-between; gap: 18px;
+    padding: 18px 2px;
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    font-size: clamp(17px, 2.3vw, 20px); line-height: 1.4;
+    color: rgba(255,255,255,0.92);
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary .mark { flex: 0 0 auto; align-self: center; width: 20px; height: 20px; position: relative; opacity: 0.55; transition: transform .35s cubic-bezier(0.22,1,0.36,1), opacity .25s ease; }
+  .faq summary .mark::before, .faq summary .mark::after { content: ""; position: absolute; background: var(--gold); top: 50%; left: 50%; }
+  .faq summary .mark::before { width: 14px; height: 1px; transform: translate(-50%, -50%); }
+  .faq summary .mark::after  { width: 1px; height: 14px; transform: translate(-50%, -50%); }
+  .faq details[open] summary .mark { transform: rotate(45deg); opacity: 0.9; }
+  .faq .answer { padding: 0 34px 20px 2px; }
+  .faq .answer p { font-size: 15.5px; line-height: 1.75; color: var(--ink-soft); margin: 0; }
+
+  .sources { margin-top: 44px; padding-top: 22px; border-top: 1px solid var(--line); }
+  .sources ol { padding-left: 22px; }
+  .sources li { font-size: 13.5px; line-height: 1.6; color: rgba(255,255,255,0.55); margin-bottom: 8px; }
+  .sources li a { color: rgba(212,183,118,0.75); border-bottom: none; }
+
+  .author {
+    display: flex; gap: 16px; align-items: flex-start;
+    margin-top: 44px; padding: 20px 22px;
+    border: 1px solid var(--line); border-radius: 22px;
+  }
+  .author .dot { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, rgba(212,183,118,0.95), rgba(212,183,118,0.35) 60%, rgba(212,183,118,0.08)); }
+  .author p { font-size: 14.5px; line-height: 1.6; color: var(--ink-soft); margin: 0; }
+  .author p b { color: rgba(255,255,255,0.85); font-weight: 600; }
+
+  /* ================= Closing CTA + footer ================= */
+  .closing {
+    width: 100%;
+    display: flex; flex-direction: column; align-items: center;
+    gap: clamp(18px, 3vh, 26px);
+    padding: 0 22px clamp(44px, 7vh, 72px);
+    text-align: center;
+  }
+  .closing .lede { margin: 0; font-size: clamp(18px, 2.4vw, 22px); }
+  .cta {
+    position: relative; display: inline-flex; align-items: center; gap: 10px;
+    padding: 15px 30px; border-radius: 999px;
+    font-family: var(--serif);
+    font-size: 17px; font-weight: 500; letter-spacing: 0.04em;
+    color: #fff; text-decoration: none; cursor: pointer;
+    background: rgba(255,255,255,0.10);
+    backdrop-filter: blur(16px) saturate(180%); -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.18);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.45), inset 0 -6px 14px rgba(255,255,255,0.05), 0 10px 34px rgba(0,0,0,0.45);
+    transition: transform .2s ease, background .25s ease;
+  }
+  .cta::before { content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+    background: linear-gradient(180deg, rgba(255,255,255,0.28), rgba(255,255,255,0) 46%); mix-blend-mode: screen; }
+  .cta:hover { background: rgba(255,255,255,0.16); transform: translateY(-1px); }
+  .cta:active { transform: scale(0.985); }
+  .cta:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+  .cta svg { width: 17px; height: 20px; fill: #fff; margin-top: -3px; }
+
+  .legal { font-size: 12px; color: rgba(255,255,255,0.48); text-align: center; padding-bottom: 40px; }
+  .legal a { color: inherit; text-decoration: none; margin: 0 7px; }
+  .legal a:hover { color: rgba(255,255,255,0.75); }
+  .legal a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .top > *, main { animation: none; }
+    .faq summary .mark { transition: none; }
+  }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,600;6..72,700&display=swap" />
+<link rel="stylesheet" href="/site.css" />
+</head>
+<body class="sub-page article">
+
+  <!-- Shared chrome (site.css): background video + sticky top bar, same as the home page. -->
+  <div class="bg-video" aria-hidden="true">
+    <video autoplay muted loop playsinline preload="auto" disablepictureinpicture disableremoteplayback>
+      <source src="/bg-video.mp4" type="video/mp4" />
+    </video>
+  </div>
+
+  <div class="topbar">
+    <a class="logo" href="/"><img src="/icon-192.png" alt="" width="30" height="30" />Woah</a>
+    <nav aria-label="Site">
+      <a href="/#pillars">How it works</a>
+      <a href="/faq.html">FAQ</a>
+      <a href="/blog/" aria-current="page">Blog</a>
+    </nav>
+    <a class="nav-rating" href="https://apps.apple.com/se/app/woah-recovery/id6776171727?see-all=reviews" data-placement="nav" data-pos="nav" aria-label="Rated 4.9 out of 5 on the App Store">
+      <span class="stars" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 1.8l3.1 6.5 7 .9-5.1 4.9 1.3 7-6.3-3.4-6.3 3.4 1.3-7L1.9 9.2l7-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 1.8l3.1 6.5 7 .9-5.1 4.9 1.3 7-6.3-3.4-6.3 3.4 1.3-7L1.9 9.2l7-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 1.8l3.1 6.5 7 .9-5.1 4.9 1.3 7-6.3-3.4-6.3 3.4 1.3-7L1.9 9.2l7-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 1.8l3.1 6.5 7 .9-5.1 4.9 1.3 7-6.3-3.4-6.3 3.4 1.3-7L1.9 9.2l7-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 1.8l3.1 6.5 7 .9-5.1 4.9 1.3 7-6.3-3.4-6.3 3.4 1.3-7L1.9 9.2l7-.9z"/></svg></span>
+      <span>4.9 on the App Store</span>
+    </a>
+    <a class="get" href="https://apps.apple.com/se/app/woah-recovery/id6776171727" data-placement="nav" data-pos="nav"><svg viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>Try it for free</a>
+  </div>
+
+
+  <header class="top plate">
+    <span class="draft">Draft · not published</span>
+    <h1>VO₂max on Apple Watch: what the number means, why it's probably low, and how to raise it</h1>
+    <p class="byline"><span>By <b>Petter Höglander</b></span><span><time datetime="2026-11-05">5 November 2026</time></span><span>10 min read</span></p>
+    <!-- Hero: uncomment (and point og:image + JSON-LD image at img/apple-watch-vo2-max.jpg) once Petter has said yes to an ElevenLabs generation (prompt in the article file, section 5)
+    <figure class="hero">
+      <img src="img/apple-watch-vo2-max.jpg" alt="An Apple Watch with its screen off on a wooden park bench next to a water bottle and a running jacket, a gravel path behind" width="1376" height="768" />
+    </figure>
+    -->
+  </header>
+
+  <main class="plate">
+    <article>
+      <p class="lede">VO₂max on Apple Watch, called Cardio Fitness in the Health app, is an estimate of how much oxygen your body can use when you go all out. The watch guesses it from how fast your heart beats at a given pace on outdoor walks, runs and hikes. Read it as a trend, not as a lab result, because for most people it reads a few points low. And it is worth caring about: it is the longevity number you can move the most, often 5 to 10% in a couple of months.</p>
+
+      <p>Below: where it comes from, what a normal number is for your age, how accurate it is, why it suddenly drops, and what actually raises it.</p>
+
+      <h2>How does Apple Watch measure VO₂max?</h2>
+
+      <p>It never measures it. A real VO₂max test is done on a treadmill with a mask over your face, running until you can't anymore. Your watch does something much easier: it looks at your heart rate and your pace during a walk or run that isn't all-out, and predicts what your maximum would be.</p>
+
+      <p>According to <a href="https://www.apple.com/healthcare/docs/site/Using_Apple_Watch_to_Estimate_Cardio_Fitness_with_VO2_max.pdf" rel="noopener">Apple's own white paper</a>, a session counts when:</p>
+      <ul>
+        <li>it's an <strong>Outdoor Walk, Outdoor Run or Hiking</strong> workout (or an outdoor walk the watch picks up on its own),</li>
+        <li>the ground is fairly <strong>flat</strong>, less than a 5% slope,</li>
+        <li>GPS and the heart signal are good,</li>
+        <li>and your heart rate goes up about <strong>30% of the way</strong> from your resting rate to your max.</li>
+      </ul>
+
+      <p>Your first such workout gives you nothing, and the watch needs to have been worn for a day. Indoor workouts, cycling and the gym never count. The number lives in the Health app under Heart, Cardio Fitness, and it runs from 14 to 65 ml/kg/min.</p>
+
+      <p>That last rule matters more than people think. If all you do outdoors is a slow walk, the watch may not have enough to go on.</p>
+
+      <h2>What is a good VO₂max for my age?</h2>
+
+      <p>It depends on your age and sex, and honestly, on which country you compare against. Apple grades you against the US FRIEND registry, which is built from real treadmill tests. These are the middle values from it (<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4919021/" rel="noopener">Kaminsky et al., 2015</a>):</p>
+
+      <div class="tablewrap">
+        <table style="min-width: 0;">
+          <thead>
+            <tr><th>Age</th><th>Men, median</th><th>Women, median</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>20 to 29</td><td>48.0</td><td>37.6</td></tr>
+            <tr><td>30 to 39</td><td>42.4</td><td>30.2</td></tr>
+            <tr><td>40 to 49</td><td>37.8</td><td>26.7</td></tr>
+            <tr><td>50 to 59</td><td>32.6</td><td>23.4</td></tr>
+            <tr><td>60 to 69</td><td>28.2</td><td>20.0</td></tr>
+            <tr><td>70 to 79</td><td>24.4</td><td>18.3</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="tablenote">ml/kg/min, measured on a treadmill. Half the people tested were above this number, half below.</p>
+
+      <p>Apple's "Low" level is the bottom fifth for your age and sex if you are 20 to 59. From 60 it is a fixed line instead: 18 for men and 15 for women, roughly what you need to keep living independently.</p>
+
+      <p>Here's the part nobody mentions. In the same paper, the average man in his 20s tested at about 48 in the US. In a large Norwegian study, it was about 54. So "average" is not a fact about your body. It's a fact about who you are compared with.</p>
+
+      <p>That's why I don't care much about the label. I care about one comparison: you, against you three months ago.</p>
+
+      <h2>How accurate is Apple Watch VO₂max?</h2>
+
+      <p>Good at the trend, not so good at the level. And the two studies that matter say different things for a reason.</p>
+
+      <p><strong>Apple's own validation</strong> (221 people) found the watch was on average 1.4 ml/kg/min off, and very consistent from one estimate to the next. But Apple compared the watch with another submaximal prediction, not with a real all-out test.</p>
+
+      <p><strong>The independent one</strong> did the real test. In <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12080799/" rel="noopener">Lambe and colleagues</a> (PLOS ONE, 2025), 30 people wore an Apple Watch for 5 to 10 days and then ran to exhaustion on a treadmill with a mask. The watch read <strong>6 ml/kg/min lower</strong> on average, with an average error of about <strong>13%</strong>. For some people it was much further off.</p>
+
+      <p>You will read online that Apple Watch overestimates VO₂max. The only independent lab study I could find says the opposite for most people. It's a small study, so I wouldn't treat 6 as a fixed correction. But if your watch says "Below Average" and you feel fit, there's a fair chance you are fitter than it thinks.</p>
+
+      <p>What I would trust: the direction over months, as long as you keep doing the same kind of outdoor sessions.</p>
+
+      <h2>Why did my VO₂max suddenly drop?</h2>
+
+      <p>This is the question I see most, especially since watchOS 26. Before you assume you got unfit, go through this list. Most sudden drops are the measurement, not you.</p>
+      <ol>
+        <li><strong>Apple recalculated your history.</strong> With iOS 26, the Health app can offer to update earlier Cardio Fitness estimates when it thinks they could be more accurate. You get a prompt, and the change can't be undone. People on Apple's forums report moves of a few points both ways after updates. Apple doesn't say what changed.</li>
+        <li><strong>Your Health details are wrong or old.</strong> Age, sex, weight and height all go into the estimate. A weight from three years ago is enough to shift it.</li>
+        <li><strong>You take a medication that limits heart rate and haven't told Health.</strong> For beta blockers and calcium channel blockers this is big: in Apple's data the error dropped from about 12 to under 2 ml/kg/min once the medication was entered. You add it under Health Details.</li>
+        <li><strong>Your heart was working harder for reasons the watch can't see.</strong> Heat, dehydration, a lot of coffee, a trip to altitude. All of them push heart rate up at the same pace, and the watch reads that as lower fitness.</li>
+        <li><strong>The route made you work harder.</strong> Hills, sand, snow, a heavy backpack, pushing a stroller. The watch doesn't know.</li>
+        <li><strong>Your sessions got easier.</strong> If your outdoor walks are slow and your hard training moved indoors, the estimate has less to work with.</li>
+      </ol>
+
+      <p>And sometimes it is you. Fitness drops faster than it builds. Apple's own paper notes that inactivity can take VO₂max down by up to 27% in two to three weeks. So a fortnight off with a cold, followed by a lower number, is probably real. The good news is it usually comes back about as fast.</p>
+
+      <h2>How do I get more readings, and better ones?</h2>
+      <ul>
+        <li>Start an <strong>Outdoor Walk or Outdoor Run</strong> workout instead of just going for a walk.</li>
+        <li>Pick a <strong>flat route</strong> and use the <strong>same one</strong> most of the time, so the number compares like with like.</li>
+        <li>Get your heart rate up properly at least once a week. A brisk walk where talking takes some effort is enough for most people.</li>
+        <li>Wear the watch through the day, not just for workouts.</li>
+        <li>Keep Health Details up to date.</li>
+      </ul>
+
+      <p>If you use Garmin: on my own Garmin, its VO₂max never reached Apple Health. Garmin shows it in Garmin Connect, but apps that read Apple Health won't see it.</p>
+
+      <h2>How do you actually raise VO₂max?</h2>
+
+      <p>Hard intervals, mostly. This is one of the clearer findings in exercise science.</p>
+
+      <p>In a classic study by <a href="https://pubmed.ncbi.nlm.nih.gov/17414804/" rel="noopener">Helgerud and colleagues</a> (2007), 40 moderately trained men trained three times a week for eight weeks. Every group did the same total amount of work, just at different intensities. The group doing <strong>4 × 4 minutes</strong> at 90 to 95% of max heart rate, with 3 minutes easy in between, improved VO₂max by <strong>7.2%</strong>, from 55.5 to 60.4. The groups doing long easy runs or steady threshold runs didn't improve significantly.</p>
+
+      <p>Apple's paper sums up the wider research the same way: programmes of 6 to 12 weeks usually give <strong>5 to 10%</strong>, and high-intensity intervals give the most.</p>
+
+      <p>What I would do, if you don't train much today:</p>
+      <ul>
+        <li><strong>One interval session a week.</strong> 4 × 4 minutes where talking is hard, 3 minutes easy between. Uphill walking works if running doesn't.</li>
+        <li><strong>Everything else easy.</strong> Walks, easy runs, cycling. They don't move the watch number much, but they build the base that makes the hard session possible.</li>
+        <li><strong>Give it eight weeks</strong> before you judge it. One run tells you nothing.</li>
+      </ul>
+
+      <p>One honest thing: genes explain a lot of how much people respond. Apple's paper cites 20 to 60% of the difference in improvement. If you move less than your friend on the same plan, that's normal, and it's not a reason to stop. The benefit for your health doesn't depend on winning.</p>
+
+      <h2>Why bother?</h2>
+
+      <p>Because it's the strongest longevity number you can change. I ranked it first in <a href="health-metrics-that-matter-for-longevity.html">which health metrics actually matter for longevity</a>, and the reason is not only that fit people live longer. It's that getting fitter seems to count too.</p>
+
+      <p>In a Finnish study (<a href="https://pubmed.ncbi.nlm.nih.gov/27444976/" rel="noopener">Laukkanen et al., 2016</a>), 579 men had a real VO₂max test twice, 11 years apart. For every 1 ml/kg/min they held on to or gained, their risk of death in the following years was <strong>9% lower</strong>. That's observational, so it doesn't prove cause. But it points the same way as everything else.</p>
+
+      <p>And it matters more every decade. In the Baltimore Longitudinal Study of Aging (<a href="https://pubmed.ncbi.nlm.nih.gov/16043637/" rel="noopener">Fleg et al., 2005</a>), VO₂max fell about 3 to 6% per decade in people's 20s and 30s, and more than 20% per decade from their 70s. The fitness you build at 45 is what you have to spend at 75.</p>
+
+      <h2>How I show it in Woah</h2>
+
+      <p>When I built Woah's VO₂max card I had to make a few choices, and I think they apply to reading the number anywhere.</p>
+
+      <p>Woah shows your VO₂max next to where it places you for your age and sex, in five bands: Building, Fair, Average, Strong and Excellent. Five, because the measurement's own error is a few points wide, and a finer scale would pretend to precision the watch doesn't have. For the same reason the percentile is rounded to 5 and never goes beyond "top 5%". Nobody's watch knows they are in the top 2%.</p>
+
+      <p>The bottom band is called Building, not Poor. The person at the bottom is the person with the most to gain, and I don't think a label should make them feel like they failed a test.</p>
+
+      <p>It grades against Cooper Institute and ACSM norms, not FRIEND, so it can place you a little differently than Apple does. Neither is wrong. They compare you with different people.</p>
+
+      <p>And VO₂max is never part of Woah's daily recovery score. It moves over months, the recovery score answers a question about today, and mixing the two would make both less honest. It sits in "Heart, answered", it's free, and if your watch hasn't made an estimate yet, the card says so and tells you how to get one. Asking the coach what to do about it is the paid part. The <a href="../faq.html">FAQ</a> has the details.</p>
+
+      <h3>Questions people ask</h3>
+      <div class="faq">
+        <details>
+          <summary>Where do I find VO₂max on Apple Watch?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="answer"><p>In the Health app on your iPhone, under Heart, then Cardio Fitness. It needs a day of wear and a few Outdoor Walk, Outdoor Run or Hiking workouts on fairly flat ground before the first estimate appears.</p></div>
+        </details>
+        <details>
+          <summary>Is Apple Watch VO₂max accurate?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="answer"><p>It is consistent, but often low. Apple's own validation found an average error of 1.4 ml/kg/min against another estimate, while an independent 2025 study against a real treadmill test found the watch read about 6 ml/kg/min low on average, with about 13% error. Use it for the trend over months.</p></div>
+        </details>
+        <details>
+          <summary>Why did my Apple Watch VO₂max drop suddenly?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="answer"><p>Most sudden drops are the measurement: a recalculation of earlier estimates after an iOS update, outdated weight or age in Health, a heart-rate-limiting medication that isn't entered, heat, caffeine, hills or easier sessions. A real drop is possible too, since two to three weeks of inactivity can lower VO₂max a lot.</p></div>
+        </details>
+        <details>
+          <summary>What is a good VO₂max for my age?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="answer"><p>In the US FRIEND registry, the median is 48.0 for men and 37.6 for women in their 20s, falling to 32.6 and 23.4 in their 50s. Other countries have higher averages, so the most useful comparison is your own number three months ago.</p></div>
+        </details>
+        <details>
+          <summary>How fast can you improve VO₂max?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="answer"><p>Training programmes of 6 to 12 weeks usually raise VO₂max by 5 to 10%. In one study, four 4-minute intervals at 90 to 95% of max heart rate, three times a week, raised it 7.2% in eight weeks.</p></div>
+        </details>
+      </div>
+
+      <div class="author">
+        <img class="avatar" src="img/petter.jpg" alt="Petter Höglander" width="56" height="56" />
+        <p><b>Petter Höglander</b> builds Woah. Before that he spent years building sleep and fitness apps for some of the biggest apps in the App Store. He wrote the recovery, sleep and longevity models Woah runs on, including how the VO₂max card grades you.</p>
+      </div>
+
+      <div class="sources">
+        <h3>Sources</h3>
+        <ol>
+          <li>Apple. Using Apple Watch to Estimate Cardio Fitness with VO2 max. White paper, May 2021. <a href="https://www.apple.com/healthcare/docs/site/Using_Apple_Watch_to_Estimate_Cardio_Fitness_with_VO2_max.pdf" rel="noopener">Apple (PDF)</a></li>
+          <li>Apple Support. Track your cardio fitness levels. <a href="https://support.apple.com/en-us/108790" rel="noopener">Apple Support</a></li>
+          <li>Kaminsky LA, Arena R, Myers J. Reference standards for cardiorespiratory fitness measured with cardiopulmonary exercise testing: data from the Fitness Registry and the Importance of Exercise National Database. Mayo Clinic Proceedings. 2015;90(11):1515-1523. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4919021/" rel="noopener">PMC</a></li>
+          <li>Lambe R, O'Grady B, Baldwin M, Doherty C. Investigating the accuracy of Apple Watch VO2 max measurements: a validation study. PLOS ONE. 2025;20(5):e0323741. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12080799/" rel="noopener">PMC</a></li>
+          <li>Helgerud J, et al. Aerobic high-intensity intervals improve VO2max more than moderate training. Medicine &amp; Science in Sports &amp; Exercise. 2007;39(4):665-671. <a href="https://pubmed.ncbi.nlm.nih.gov/17414804/" rel="noopener">PubMed</a></li>
+          <li>Laukkanen JA, et al. Long-term change in cardiorespiratory fitness and all-cause mortality: a population-based follow-up study. Mayo Clinic Proceedings. 2016;91(9):1183-1188. <a href="https://pubmed.ncbi.nlm.nih.gov/27444976/" rel="noopener">PubMed</a></li>
+          <li>Fleg JL, et al. Accelerated longitudinal decline of aerobic capacity in healthy older adults. Circulation. 2005;112(5):674-682. <a href="https://pubmed.ncbi.nlm.nih.gov/16043637/" rel="noopener">PubMed</a></li>
+        </ol>
+      </div>
+    </article>
+  </main>
+
+  <div class="closing plate">
+    <p class="lede">Woah reads the VO₂max your watch already has and tells you where it places you, without pretending to more precision than it has.</p>
+    <a class="cta" href="https://apps.apple.com/se/app/woah-recovery/id6776171727" aria-label="Woah on the App Store">
+      <svg viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+      App Store
+    </a>
+  </div>
+
+  <div class="legal">
+    <a href="../index.html">Home</a>
+    <a href="../faq.html">FAQ</a>
+    <a href="../support.html">Support</a>
+    <a href="https://petterhoglander-ai.github.io/woah-legal/privacy.html">Privacy</a>
+    <a href="https://petterhoglander-ai.github.io/woah-legal/terms.html">Terms</a>
+  </div>
+
+<!-- ================= Product analytics — cookieless, EU-hosted =============
+     Same block as the other pages: memory persistence, no cookies, one explicit
+     $pageview, and appstore_click with placement so a click from an article is
+     separable from the landing page. -->
+<script defer src="https://eu-assets.i.posthog.com/static/array.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', function () {
+    if (!window.posthog || !window.posthog.init) return;
+    posthog.init('phc_stdFgfqxUr5uxVDwpu2ee8iGZvsR9QasvRYLbtRyHKSt', {
+      api_host: 'https://eu.i.posthog.com',
+      persistence: 'memory',
+      disable_cookie: true,
+      person_profiles: 'identified_only',
+      autocapture: false,
+      disable_session_recording: true,
+      capture_pageview: false,
+      capture_pageleave: false,
+      loaded: function (ph) { ph.capture('$pageview'); }
+    });
+    document.addEventListener('click', function (e) {
+      var a = e.target && e.target.closest && e.target.closest('a[href*="apps.apple.com"]');
+      if (!a) return;
+      posthog.capture('appstore_click', { placement: 'blog', article: 'apple-watch-vo2-max', link_position: a.getAttribute('data-pos') || 'closing' });
+    });
+  });
+</script>
+</body>
+</html>
