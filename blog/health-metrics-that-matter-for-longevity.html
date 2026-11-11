@@ -532,7 +532,7 @@
     document.addEventListener('click', function (e) {
       var a = e.target && e.target.closest && e.target.closest('a[href*="apps.apple.com"]');
       if (!a) return;
-      posthog.capture('appstore_click', { placement: 'blog', article: 'how-to-read-hrv-on-apple-watch', link_position: a.getAttribute('data-pos') || 'closing' });
+      posthog.capture('appstore_click', { placement: 'blog', article: 'health-metrics-that-matter-for-longevity', link_position: a.getAttribute('data-pos') || 'closing' });
     });
   });
 </script>
